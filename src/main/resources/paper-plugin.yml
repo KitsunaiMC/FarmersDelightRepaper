@@ -1,0 +1,17 @@
+name: FarmersDelightRepaper
+version: ${version}
+main: io.github.moyusowo.farmersdelightrepaper.FarmersDelightRepaper
+api-version: '1.21'
+authors: [ MoYuOwO ]
+description: FarmersDelightRepaper
+dependencies:
+  bootstrap:
+    NeoArtisan:
+      load: BEFORE
+      required: true
+      join-classpath: true
+  server:
+    NeoArtisan:
+      load: BEFORE
+      required: true
+      join-classpath: true
