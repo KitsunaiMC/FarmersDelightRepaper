@@ -1,13 +1,12 @@
 package io.github.moyusowo.farmersdelightrepaper.pot;
 
-import io.github.moyusowo.farmersdelightrepaper.FarmersDelightRepaper;
 import io.github.moyusowo.farmersdelightrepaper.resource.Keys;
 import io.github.moyusowo.neoartisanapi.api.item.ArtisanItem;
 import org.bukkit.NamespacedKey;
 
 import java.util.*;
 
-public class CookingPotRecipe {
+public final class CookingPotRecipe {
 
     private static final Map<CookingPotRecipe, CookingPotGenerator> recipe = new HashMap<>();
 

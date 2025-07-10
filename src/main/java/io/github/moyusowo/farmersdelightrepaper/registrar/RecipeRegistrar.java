@@ -7,16 +7,14 @@ import io.github.moyusowo.neoartisanapi.api.item.ItemGenerator;
 import io.github.moyusowo.neoartisanapi.api.recipe.ArtisanFurnaceRecipe;
 import io.github.moyusowo.neoartisanapi.api.recipe.ArtisanShapedRecipe;
 import io.github.moyusowo.neoartisanapi.api.recipe.ArtisanShapelessRecipe;
-import net.minecraft.world.item.Item;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 
 public final class RecipeRegistrar {
 
     @NeoArtisanAPI.Register
     public static void shapeless() {
         NeoArtisanAPI.getRecipeRegistry().register(
-                ArtisanShapelessRecipe.builder()
+                ArtisanShapelessRecipe.factory().builder()
                         .key(Keys.tomato_seed)
                         .resultGenerator(
                                 ItemGenerator.simpleGenerator(
@@ -28,7 +26,7 @@ public final class RecipeRegistrar {
                         .build()
         );
         NeoArtisanAPI.getRecipeRegistry().register(
-                ArtisanShapelessRecipe.builder()
+                ArtisanShapelessRecipe.factory().builder()
                         .key(Keys.rice)
                         .resultGenerator(
                                 ItemGenerator.simpleGenerator(
@@ -40,7 +38,7 @@ public final class RecipeRegistrar {
                         .build()
         );
         NeoArtisanAPI.getRecipeRegistry().register(
-                ArtisanShapelessRecipe.builder()
+                ArtisanShapelessRecipe.factory().builder()
                         .key(Keys.raw_pasta)
                         .resultGenerator(
                                 ItemGenerator.simpleGenerator(
@@ -58,7 +56,7 @@ public final class RecipeRegistrar {
                         .build()
         );
         NeoArtisanAPI.getRecipeRegistry().register(
-                ArtisanShapelessRecipe.builder()
+                ArtisanShapelessRecipe.factory().builder()
                         .key(FarmersDelightRepaper.create(Keys.raw_pasta.getKey() + "_1"))
                         .resultGenerator(
                                 ItemGenerator.simpleGenerator(
@@ -74,7 +72,7 @@ public final class RecipeRegistrar {
                         .build()
         );
         NeoArtisanAPI.getRecipeRegistry().register(
-                ArtisanShapelessRecipe.builder()
+                ArtisanShapelessRecipe.factory().builder()
                         .key(FarmersDelightRepaper.create(Keys.raw_pasta.getKey() + "_2"))
                         .resultGenerator(
                                 ItemGenerator.simpleGenerator(
@@ -90,7 +88,7 @@ public final class RecipeRegistrar {
                         .build()
         );
         NeoArtisanAPI.getRecipeRegistry().register(
-                ArtisanShapelessRecipe.builder()
+                ArtisanShapelessRecipe.factory().builder()
                         .key(Keys.wheat_dough)
                         .resultGenerator(
                                 ItemGenerator.simpleGenerator(
@@ -111,7 +109,7 @@ public final class RecipeRegistrar {
     @NeoArtisanAPI.Register
     public static void shaped() {
         NeoArtisanAPI.getRecipeRegistry().register(
-                ArtisanShapedRecipe.builder()
+                ArtisanShapedRecipe.factory().builder()
                         .key(Keys.flint_knife)
                         .set(" A ", " B ")
                         .add('A', Material.FLINT.getKey())
@@ -125,7 +123,7 @@ public final class RecipeRegistrar {
                         .build()
         );
         NeoArtisanAPI.getRecipeRegistry().register(
-                ArtisanShapedRecipe.builder()
+                ArtisanShapedRecipe.factory().builder()
                         .key(Keys.iron_knife)
                         .set(" A ", " B ")
                         .add('A', Material.IRON_INGOT.getKey())
@@ -139,7 +137,7 @@ public final class RecipeRegistrar {
                         .build()
         );
         NeoArtisanAPI.getRecipeRegistry().register(
-                ArtisanShapedRecipe.builder()
+                ArtisanShapedRecipe.factory().builder()
                         .key(Keys.golden_knife)
                         .set(" A ", " B ")
                         .add('A', Material.GOLD_INGOT.getKey())
@@ -153,7 +151,7 @@ public final class RecipeRegistrar {
                         .build()
         );
         NeoArtisanAPI.getRecipeRegistry().register(
-                ArtisanShapedRecipe.builder()
+                ArtisanShapedRecipe.factory().builder()
                         .key(Keys.diamond_knife)
                         .set(" A ", " B ")
                         .add('A', Material.DIAMOND.getKey())
@@ -171,7 +169,7 @@ public final class RecipeRegistrar {
     @NeoArtisanAPI.Register
     public static void furnace() {
         NeoArtisanAPI.getRecipeRegistry().register(
-                ArtisanFurnaceRecipe.builder()
+                ArtisanFurnaceRecipe.factory().builder()
                         .key(Keys.raw_chicken_cuts)
                         .inputItemId(Keys.raw_chicken_cuts)
                         .exp(1)

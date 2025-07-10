@@ -17,6 +17,7 @@ public final class FarmersDelightRepaper extends JavaPlugin {
     }
 
     public FarmersDelightRepaper() {
+        super();
         instance = this;
     }
 

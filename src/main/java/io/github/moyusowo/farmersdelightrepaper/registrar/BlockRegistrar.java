@@ -22,7 +22,7 @@ public final class BlockRegistrar {
     @NeoArtisanAPI.Register
     public static void register() {
         NeoArtisanAPI.getBlockRegistry().register(
-                ArtisanTransparentBlock.builder()
+                ArtisanTransparentBlock.factory().builder()
                         .blockId(Keys.cooking_pot)
                         .canBurn(false)
                         .placeSound(
@@ -31,7 +31,7 @@ public final class BlockRegistrar {
                         .guiCreator(new GUIHolder())
                         .states(
                                 List.of(
-                                        ArtisanTransparentBlockState.builder()
+                                        ArtisanTransparentBlockState.factory().builder()
                                                 .appearanceState(
                                                         new TransparentAppearance(
                                                                 TransparentAppearance.LeavesAppearance.OAK_LEAVES,
@@ -54,11 +54,11 @@ public final class BlockRegistrar {
                         .build()
         );
         NeoArtisanAPI.getBlockRegistry().register(
-                ArtisanThinBlock.builder()
+                ArtisanThinBlock.factory().builder()
                         .blockId(Keys.cutting_board)
                         .states(
                                 List.of(
-                                        ArtisanThinBlockState.builder()
+                                        ArtisanThinBlockState.factory().builder()
                                                 .appearanceState(
                                                         new ThinBlockAppearance(
                                                                 ThinBlockAppearance.PressurePlateAppearance.LIGHT_WEIGHTED_PRESSURE_PLATE,

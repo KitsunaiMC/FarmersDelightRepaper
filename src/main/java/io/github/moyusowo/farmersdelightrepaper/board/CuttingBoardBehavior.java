@@ -8,7 +8,6 @@ import io.github.moyusowo.neoartisanapi.api.block.base.ArtisanBlockData;
 import io.github.moyusowo.neoartisanapi.api.block.event.ArtisanBlockBreakEvent;
 import io.github.moyusowo.neoartisanapi.api.block.event.ArtisanBlockLoseSupportEvent;
 import io.github.moyusowo.neoartisanapi.api.block.event.ArtisanBlockPlaceEvent;
-import io.github.moyusowo.neoartisanapi.api.block.storage.ArtisanBlockStorage;
 import io.github.moyusowo.neoartisanapi.api.item.ItemGenerator;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.event.block.BlockBreakBlockEvent;
@@ -73,6 +72,7 @@ public final class CuttingBoardBehavior implements Listener {
     * 空手+右键：无
     * 非空手+右键：没东西就放东西，有东西就切
     * */
+    @SuppressWarnings("UnstableApiUsage")
     @EventHandler
     public static void onInteract(PlayerInteractEvent event) {
         if (event.useInteractedBlock() == Event.Result.DENY) return;

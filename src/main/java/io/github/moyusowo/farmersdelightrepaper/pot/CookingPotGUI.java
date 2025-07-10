@@ -11,7 +11,6 @@ import net.kyori.adventure.sound.Sound;
 import org.bukkit.*;
 import org.bukkit.block.BlockFace;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.HandlerList;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.ItemStack;
@@ -37,8 +36,6 @@ public class CookingPotGUI extends ArtisanBlockGUI {
     private static final NamespacedKey bowl = FarmersDelightRepaper.create("cutting_board.has_bowl");
     private static final NamespacedKey product = FarmersDelightRepaper.create("cutting_board.product");
 
-    private final BukkitRunnable burningTask, soundTask, savingTask, cookingTask;
-
     private static final List<Integer> itemSlot = List.of(
             10, 11, 12,
             19, 20, 21
@@ -47,25 +44,6 @@ public class CookingPotGUI extends ArtisanBlockGUI {
 
     protected CookingPotGUI(Location location) {
         super(FarmersDelightRepaper.getInstance(), 45, TranslatableText.container_cooking_pot, location);
-        FarmersDelightRepaper.getInstance().getLogger().info(location.toString());
-        this.burningTask = generateBurningTask();
-        this.soundTask = generateSoundTask();
-        this.savingTask = generateSavingTask();
-        this.cookingTask = generateCookingTask();
-    }
-
-    @Override
-    protected void setItemInInventory() {
-        inventory.setItem(0, NeoArtisanAPI.getItemRegistry().getItemStack(Keys.cooking_pot_gui_1));
-        for (int i = 0; i < items.length; i++) {
-            inventory.setItem(itemSlot.get(i), getArtisanBlockData().getPersistentDataContainer().getOrDefault(items[i], ItemStackDataType.ITEM_STACK, ItemStack.empty()));
-        }
-        inventory.setItem(bowlSlot, getArtisanBlockData().getPersistentDataContainer().getOrDefault(bowl, ItemStackDataType.ITEM_STACK, ItemStack.empty()));
-        inventory.setItem(resultSlot, getArtisanBlockData().getPersistentDataContainer().getOrDefault(product, ItemStackDataType.ITEM_STACK, ItemStack.empty()));
-        this.soundTask.runTaskTimer(FarmersDelightRepaper.getInstance(), 0L, 20L * 4);
-        this.burningTask.runTaskTimer(FarmersDelightRepaper.getInstance(), 0L, 1L);
-        this.savingTask.runTaskTimer(FarmersDelightRepaper.getInstance(), 20L, 1L);
-        this.cookingTask.runTaskTimer(FarmersDelightRepaper.getInstance(), 0L, 1L);
     }
 
     private BukkitRunnable generateCookingTask() {
@@ -166,12 +144,39 @@ public class CookingPotGUI extends ArtisanBlockGUI {
     }
 
     @Override
-    public void onTerminate() {
-        HandlerList.unregisterAll(this);
-        this.burningTask.cancel();
-        this.soundTask.cancel();
-        this.savingTask.cancel();
-        this.cookingTask.cancel();
+    public void terminate() {
+        final ItemStack[] itemStacks = new ItemStack[6];
+        for (int i = 0; i < 6; i++) {
+            itemStacks[i] = ItemStack.empty();
+        }
+        for (int i = 0; i < 6; i++) {
+            if (getArtisanBlockData().getPersistentDataContainer().has(items[i])) {
+                itemStacks[i] = getArtisanBlockData().getPersistentDataContainer().get(items[i], ItemStackDataType.ITEM_STACK);
+                getArtisanBlockData().getPersistentDataContainer().remove(items[i]);
+            }
+        }
+        for (ItemStack itemStack : itemStacks) {
+            if (!itemStack.isEmpty()) {
+                location.getWorld().dropItemNaturally(
+                        location.add(0, 1, 0),
+                        itemStack
+                );
+            }
+        }
+    }
+
+    @Override
+    protected void init() {
+        inventory.setItem(0, NeoArtisanAPI.getItemRegistry().getItemStack(Keys.cooking_pot_gui_1));
+        for (int i = 0; i < items.length; i++) {
+            inventory.setItem(itemSlot.get(i), getArtisanBlockData().getPersistentDataContainer().getOrDefault(items[i], ItemStackDataType.ITEM_STACK, ItemStack.empty()));
+        }
+        inventory.setItem(bowlSlot, getArtisanBlockData().getPersistentDataContainer().getOrDefault(bowl, ItemStackDataType.ITEM_STACK, ItemStack.empty()));
+        inventory.setItem(resultSlot, getArtisanBlockData().getPersistentDataContainer().getOrDefault(product, ItemStackDataType.ITEM_STACK, ItemStack.empty()));
+        addLifecycleTask(generateSoundTask(), 0L, 20L * 4);
+        addLifecycleTask(generateBurningTask(), 0L, 1L);
+        addLifecycleTask(generateSavingTask(), 20L, 1L);
+        addLifecycleTask(generateCookingTask(), 0L, 1L);
     }
 
     @Override
@@ -257,7 +262,8 @@ public class CookingPotGUI extends ArtisanBlockGUI {
     }
 
     private CookingPotRecipe getInventoryRecipe() {
-        boolean hasBowl = inventory.getItem(bowlSlot) != null && (!inventory.getItem(bowlSlot).isEmpty());
+        ItemStack bowl = inventory.getItem(bowlSlot);
+        boolean hasBowl = bowl != null && (!bowl.isEmpty());
         return new CookingPotRecipe(
                 hasBowl,
                 NeoArtisanAPI.getItemRegistry().getRegistryId(inventory.getItem(itemSlot.get(0))),

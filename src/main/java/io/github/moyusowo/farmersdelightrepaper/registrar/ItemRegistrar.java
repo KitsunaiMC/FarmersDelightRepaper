@@ -4,7 +4,6 @@ import io.github.moyusowo.farmersdelightrepaper.resource.Keys;
 import io.github.moyusowo.farmersdelightrepaper.resource.TranslatableText;
 import io.github.moyusowo.neoartisanapi.api.NeoArtisanAPI;
 import io.github.moyusowo.neoartisanapi.api.item.ArtisanItem;
-import io.github.moyusowo.neoartisanapi.api.item.FoodProperty;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 
@@ -15,37 +14,33 @@ public final class ItemRegistrar {
     @NeoArtisanAPI.Register
     public static void register() {
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.onion)
                         .displayName(TranslatableText.onion)
                         .rawMaterial(Material.BEETROOT)
                         .foodProperty(
-                                new FoodProperty(
-                                        2,
-                                        1.6f,
-                                        true
-                                )
+                                2,
+                                1.6f,
+                                true
                         )
                         .itemModel(Keys.onion)
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.tomato)
                         .displayName(TranslatableText.tomato)
                         .rawMaterial(Material.BEETROOT)
                         .foodProperty(
-                                new FoodProperty(
-                                        1,
-                                        0.6f,
-                                        false
-                                )
+                                1,
+                                0.6f,
+                                false
                         )
                         .itemModel(Keys.tomato)
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.rice)
                         .displayName(TranslatableText.rice)
                         .rawMaterial(Material.WHEAT)
@@ -53,22 +48,20 @@ public final class ItemRegistrar {
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.cabbage)
                         .displayName(TranslatableText.cabbage)
                         .rawMaterial(Material.BEETROOT)
                         .foodProperty(
-                                new FoodProperty(
-                                        2,
-                                        1.6f,
-                                        false
-                                )
+                                2,
+                                1.6f,
+                                false
                         )
                         .itemModel(Keys.cabbage)
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.rice_panicle)
                         .displayName(TranslatableText.rice_panicle)
                         .rawMaterial(Material.WHEAT)
@@ -76,67 +69,59 @@ public final class ItemRegistrar {
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.tomato_sauce)
                         .displayName(TranslatableText.tomato_sauce)
                         .rawMaterial(Material.MUSHROOM_STEW)
                         .foodProperty(
-                                new FoodProperty(
-                                        2,
-                                        3.2f,
-                                        false
-                                )
+                                2,
+                                3.2f,
+                                false
                         )
                         .itemModel(Keys.tomato_sauce)
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.raw_pasta)
                         .displayName(TranslatableText.raw_pasta)
                         .rawMaterial(Material.CHICKEN)
                         .foodProperty(
-                                new FoodProperty(
-                                        3,
-                                        1.2f,
-                                        false
-                                )
+                                3,
+                                1.2f,
+                                false
                         )
                         .itemModel(Keys.raw_pasta)
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.pumpkin_slice)
                         .displayName(TranslatableText.pumpkin_slice)
                         .rawMaterial(Material.PUMPKIN_PIE)
                         .foodProperty(
-                                new FoodProperty(
-                                        3,
-                                        1.8f,
-                                        false
-                                )
+                                3,
+                                1.8f,
+                                false
                         )
                         .itemModel(Keys.pumpkin_slice)
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.cabbage_leaf)
                         .displayName(TranslatableText.cabbage_leaf)
                         .rawMaterial(Material.BEETROOT)
                         .foodProperty(
-                                new FoodProperty(
-                                        1,
-                                        0.8f,
-                                        false
-                                )
+                                1,
+                                0.8f,
+                                false
                         )
                         .itemModel(Keys.cabbage_leaf)
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.tomato_seed)
                         .displayName(TranslatableText.tomato_seed)
                         .rawMaterial(Material.WHEAT)
@@ -144,7 +129,7 @@ public final class ItemRegistrar {
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.cabbage_seed)
                         .displayName(TranslatableText.cabbage_seed)
                         .rawMaterial(Material.WHEAT)
@@ -152,97 +137,85 @@ public final class ItemRegistrar {
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.minced_beef)
                         .displayName(TranslatableText.minced_beef)
                         .rawMaterial(Material.BEEF)
                         .foodProperty(
-                                new FoodProperty(
-                                        2,
-                                        1.2f,
-                                        false
-                                )
+                                2,
+                                1.2f,
+                                false
                         )
                         .itemModel(Keys.minced_beef)
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.raw_chicken_cuts)
                         .displayName(TranslatableText.raw_chicken_cuts)
                         .rawMaterial(Material.CHICKEN)
                         .foodProperty(
-                                new FoodProperty(
-                                        1,
-                                        0.6f,
-                                        false
-                                )
+                                1,
+                                0.6f,
+                                false
                         )
                         .itemModel(Keys.raw_chicken_cuts)
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.raw_cod_slice)
                         .displayName(TranslatableText.raw_cod_slice)
                         .rawMaterial(Material.COD)
                         .foodProperty(
-                                new FoodProperty(
-                                        1,
-                                        0.2f,
-                                        false
-                                )
+                                1,
+                                0.2f,
+                                false
                         )
                         .itemModel(Keys.raw_cod_slice)
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.raw_salmon_slice)
                         .displayName("生鲑鱼片")
                         .rawMaterial(Material.COD)
                         .foodProperty(
-                                new FoodProperty(
-                                        1,
-                                        0.2f,
-                                        false
-                                )
+                                1,
+                                0.2f,
+                                false
                         )
                         .itemModel(Keys.raw_salmon_slice)
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.wheat_dough)
                         .displayName(TranslatableText.raw_salmon_slice)
                         .rawMaterial(Material.CHICKEN)
                         .foodProperty(
-                                new FoodProperty(
-                                        2,
-                                        1.2f,
-                                        false
-                                )
+                                2,
+                                1.2f,
+                                false
                         )
                         .itemModel(Keys.wheat_dough)
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.raw_bacon)
                         .displayName(TranslatableText.raw_bacon)
                         .rawMaterial(Material.PORKCHOP)
                         .foodProperty(
-                                new FoodProperty(
-                                        2,
-                                        1.2f,
-                                        false
-                                )
+                                2,
+                                1.2f,
+                                false
                         )
                         .itemModel(Keys.raw_bacon)
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.cooking_pot)
                         .rawMaterial(Material.PAPER)
                         .displayName(TranslatableText.cooking_pot)
@@ -251,7 +224,7 @@ public final class ItemRegistrar {
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.cutting_board)
                         .rawMaterial(Material.PAPER)
                         .displayName(TranslatableText.cutting_board)
@@ -260,7 +233,7 @@ public final class ItemRegistrar {
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.flint_knife)
                         .rawMaterial(Material.STONE_SWORD)
                         .displayName(TranslatableText.flint_knife)
@@ -269,7 +242,7 @@ public final class ItemRegistrar {
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.iron_knife)
                         .rawMaterial(Material.IRON_SWORD)
                         .displayName(TranslatableText.iron_knife)
@@ -278,7 +251,7 @@ public final class ItemRegistrar {
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.golden_knife)
                         .rawMaterial(Material.GOLDEN_SWORD)
                         .displayName(TranslatableText.gold_knife)
@@ -287,7 +260,7 @@ public final class ItemRegistrar {
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.diamond_knife)
                         .rawMaterial(Material.DIAMOND_SWORD)
                         .displayName(TranslatableText.diamond_knife)
@@ -296,7 +269,7 @@ public final class ItemRegistrar {
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
-                ArtisanItem.builder()
+                ArtisanItem.factory().builder()
                         .registryId(Keys.netherite_knife)
                         .rawMaterial(Material.NETHERITE_SWORD)
                         .displayName(TranslatableText.netherite_knife)
@@ -310,7 +283,7 @@ public final class ItemRegistrar {
     public static void guiItemRegister() {
         for (NamespacedKey key : Keys.cooking_pot_gui_progress) {
             NeoArtisanAPI.getItemRegistry().registerItem(
-                    ArtisanItem.builder()
+                    ArtisanItem.factory().builder()
                             .registryId(key)
                             .rawMaterial(Material.PAPER)
                             .displayName("")
@@ -320,7 +293,7 @@ public final class ItemRegistrar {
         }
         for (NamespacedKey key : Keys.cooking_pot_gui_fire_progress) {
             NeoArtisanAPI.getItemRegistry().registerItem(
-                    ArtisanItem.builder()
+                    ArtisanItem.factory().builder()
                             .registryId(key)
                             .rawMaterial(Material.PAPER)
                             .displayName("")
