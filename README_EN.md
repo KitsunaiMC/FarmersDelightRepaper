@@ -38,6 +38,7 @@ Full license text available at [LICENSE](LICENSE).
 - [x] Cooking pot recipes and GUI
 - [x] Cutting board recipes (basic implementation)
 - [x] Partial crafting recipes
+- [x] Added config files for configurable items in food, recipes, and drops
 
 **TODO List**:
 - [ ] Add remaining items and recipes from original mod
