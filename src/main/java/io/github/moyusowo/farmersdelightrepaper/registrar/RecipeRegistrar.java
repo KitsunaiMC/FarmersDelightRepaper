@@ -11,6 +11,12 @@ import org.bukkit.Material;
 
 public final class RecipeRegistrar {
 
+    private RecipeRegistrar() {}
+
+    public static void initOnLoad() {
+
+    }
+
     @NeoArtisanAPI.Register
     public static void shapeless() {
         NeoArtisanAPI.getRecipeRegistry().register(

@@ -1,0 +1,6 @@
+kfc_chicken:
+  display_name: <red>肯德基</red><green>吮指原味鸡</green>
+  raw_material: CHICKEN
+  nutrition: 10
+  saturation: 10
+  can_always_eat: false

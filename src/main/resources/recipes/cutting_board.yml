@@ -1,0 +1,5 @@
+cabbage_leaf_1:
+  item: cabbage
+  result:
+    id: cabbage_leaf
+    amount: 2

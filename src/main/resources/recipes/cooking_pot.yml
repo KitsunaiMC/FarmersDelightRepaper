@@ -1,0 +1,9 @@
+tomato_sauce:
+  need_bowl: true
+  items:
+    - cabbage
+    - tomato
+  time: 200
+  result:
+    id: tomato_sauce
+    amount: 2

@@ -1,0 +1,11 @@
+wheat_dough:
+  matrix:
+    - " A "
+    - "BBB"
+    - "   "
+  set:
+    A: minecraft:water_bucket
+    B: minecraft:wheat
+  result:
+    id: wheat_dough
+    amount: 1

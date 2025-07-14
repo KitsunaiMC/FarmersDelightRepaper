@@ -10,6 +10,10 @@ public final class CookingPotRecipe {
 
     private static final Map<CookingPotRecipe, CookingPotGenerator> recipe = new HashMap<>();
 
+    public static void initOnLoad() {
+
+    }
+
     static {
         recipe.put(
                 new CookingPotRecipe(
@@ -23,13 +27,13 @@ public final class CookingPotRecipe {
     private final Set<NamespacedKey> items;
     private final boolean needBowl;
 
-    public CookingPotRecipe(boolean needBowl, NamespacedKey... items) {
+    CookingPotRecipe(boolean needBowl, NamespacedKey... items) {
         this.needBowl = needBowl;
         this.items = new HashSet<>();
         this.items.addAll(Arrays.stream(items).filter(item -> (!(item == null || item.equals(ArtisanItem.EMPTY)))).toList());
     }
 
-    public static CookingPotGenerator matches(
+    static CookingPotGenerator matches(
             CookingPotRecipe r
     ) {
         return recipe.getOrDefault(r, null);

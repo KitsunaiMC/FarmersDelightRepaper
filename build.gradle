@@ -1,28 +1,26 @@
 plugins {
     id 'java'
     id("xyz.jpenilla.run-paper") version "2.3.1"
+    id("com.gradleup.shadow") version "9.0.0-beta9"
 }
 
 group = 'io.github.moyusowo'
 version = '0.7.0-alpha'
 
-repositories {
-    mavenCentral()
-    maven {
-        name = "papermc-repo"
-        url = "https://repo.papermc.io/repository/maven-public/"
-    }
-    maven {
-        name = "sonatype"
-        url = "https://oss.sonatype.org/content/groups/public/"
-    }
-    maven { url 'https://jitpack.io' }
-}
-
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
-    compileOnly('com.github.MoYuSOwO:NeoArtisan:-SNAPSHOT:api')
+    compileOnly('com.github.MoYuSOwO:NeoArtisan:51c6b4a6bf:api')
+    implementation 'org.spongepowered:configurate-core:4.1.2'
+    implementation 'org.spongepowered:configurate-yaml:4.1.2'
 }
+
+shadowJar {
+    relocate 'org.spongepowered.configurate', 'io.github.moyusowo.configurate'
+
+    archiveFileName = "${project.name}-${project.version}.jar"
+}
+
+tasks.build.dependsOn tasks.shadowJar
 
 tasks {
     runServer {

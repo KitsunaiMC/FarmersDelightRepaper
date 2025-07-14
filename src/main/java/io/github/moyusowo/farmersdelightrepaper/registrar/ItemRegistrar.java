@@ -1,18 +1,83 @@
 package io.github.moyusowo.farmersdelightrepaper.registrar;
 
+import io.github.moyusowo.farmersdelightrepaper.FarmersDelightRepaper;
+import io.github.moyusowo.farmersdelightrepaper.config.FoodConfig;
 import io.github.moyusowo.farmersdelightrepaper.resource.Keys;
 import io.github.moyusowo.farmersdelightrepaper.resource.TranslatableText;
 import io.github.moyusowo.neoartisanapi.api.NeoArtisanAPI;
 import io.github.moyusowo.neoartisanapi.api.item.ArtisanItem;
+import io.papermc.paper.datacomponent.item.FoodProperties;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TranslatableComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.spongepowered.configurate.CommentedConfigurationNode;
+import org.spongepowered.configurate.ConfigurateException;
+import org.spongepowered.configurate.serialize.SerializationException;
+import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
+@SuppressWarnings("UnstableApiUsage")
 public final class ItemRegistrar {
+
+    private static final Map<NamespacedKey, FoodConfig> configs = new HashMap<>();
 
     private ItemRegistrar() {}
 
+    public static void initOnLoad() {
+        FarmersDelightRepaper.getInstance().getLogger().info("Loaded Item");
+        File configFile = new File(FarmersDelightRepaper.getInstance().getDataFolder(), "foods.yml");
+        if (!configFile.exists()) FarmersDelightRepaper.getInstance().saveResource("foods.yml", false);
+        YamlConfigurationLoader loader = YamlConfigurationLoader.builder().file(configFile).indent(2).build();
+        final CommentedConfigurationNode topNode;
+        try {
+            topNode = loader.load();
+        } catch (ConfigurateException e) {
+            FarmersDelightRepaper.getInstance().getLogger().severe("error on loading break.yml, " + e);
+            Bukkit.getPluginManager().disablePlugin(FarmersDelightRepaper.getInstance());
+            return;
+        }
+        for (Map.Entry<Object, CommentedConfigurationNode> entry : topNode.childrenMap().entrySet()) {
+            try {
+                FoodConfig foodConfig = entry.getValue().get(FoodConfig.class);
+                if (foodConfig == null) throw new SerializationException("why the hell is null?");
+                final Material material = foodConfig.getRawMaterial();
+                final TranslatableComponent translatable = foodConfig.getTranslatable();
+                final Component displayName = foodConfig.getDisplayName();
+                final FoodProperties foodProperties = foodConfig.getFood();
+                if (material == null) throw new SerializationException("You should fill material!");
+                if (translatable == null && displayName == null) throw new SerializationException("You should fill translatable or displayName!");
+                if (foodProperties == null) throw new SerializationException("You should fill all the food params!");
+                configs.put(FarmersDelightRepaper.create(entry.getKey().toString()), foodConfig);
+            } catch (SerializationException e) {
+                FarmersDelightRepaper.getInstance().getLogger().severe("error on reading " + entry.getKey().toString() + " of foods.yml, " + e);
+            }
+        }
+    }
+
     @NeoArtisanAPI.Register
     public static void register() {
+        for (Map.Entry<NamespacedKey, FoodConfig> entry : configs.entrySet()) {
+            final NamespacedKey key = entry.getKey();
+            final FoodConfig config = entry.getValue();
+            final ArtisanItem.Builder builder = ArtisanItem.factory().builder();
+            assert config.getRawMaterial() != null && config.getFood() != null;
+            builder.registryId(key).rawMaterial(config.getRawMaterial()).foodProperty(config.getFood().nutrition(), config.getFood().saturation(), config.getFood().canAlwaysEat());
+            if (config.getTranslatable() != null) builder.displayName(config.getTranslatable());
+            else {
+                assert config.getDisplayName() != null;
+                builder.displayName(config.getDisplayName());
+            }
+            if (config.getItemModel() != null) {
+                if (config.getItemModel().isEmpty()) builder.itemModel(key);
+                else builder.itemModel(NamespacedKey.fromString(config.getItemModel()));
+            }
+            NeoArtisanAPI.getItemRegistry().registerItem(builder.build());
+        }
         NeoArtisanAPI.getItemRegistry().registerItem(
                 ArtisanItem.factory().builder()
                         .registryId(Keys.onion)
@@ -288,6 +353,7 @@ public final class ItemRegistrar {
                             .rawMaterial(Material.PAPER)
                             .displayName("")
                             .itemModel(key)
+                            .internalUse()
                             .build()
             );
         }
@@ -298,6 +364,7 @@ public final class ItemRegistrar {
                             .rawMaterial(Material.PAPER)
                             .displayName("")
                             .itemModel(key)
+                            .internalUse()
                             .build()
             );
         }

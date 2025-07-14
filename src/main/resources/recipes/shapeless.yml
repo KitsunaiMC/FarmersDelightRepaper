@@ -1,0 +1,6 @@
+tomato_seed:
+  items:
+    - tomato
+  result:
+    id: tomato_seed
+    amount: 1

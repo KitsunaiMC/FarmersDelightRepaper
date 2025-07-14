@@ -38,6 +38,10 @@ public final class CuttingBoardBehavior implements Listener {
 
     private CuttingBoardBehavior() {}
 
+    public static void initOnLoad() {
+
+    }
+
     private static ItemDisplay getItemDisplay(Block block) {
         for (Entity entity : block.getWorld().getNearbyEntities(block.getLocation().add(offset), 0.01, 0.01, 0.01)) {
             if (entity.getType() == EntityType.ITEM_DISPLAY && entity.getScoreboardTags().contains(entityTag)) {
@@ -47,7 +51,7 @@ public final class CuttingBoardBehavior implements Listener {
         return null;
     }
 
-    public static void init() {
+    public static void initOnEnable() {
         Bukkit.getPluginManager().registerEvents(new CuttingBoardBehavior(), FarmersDelightRepaper.getInstance());
         cuttingBoardRecipe.put(Keys.cabbage, ItemGenerator.simpleGenerator(Keys.cabbage_leaf, 2));
     }
