@@ -9,6 +9,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+
 public final class FarmersDelightRepaper extends JavaPlugin {
 
     private static FarmersDelightRepaper instance;
@@ -30,6 +32,14 @@ public final class FarmersDelightRepaper extends JavaPlugin {
     public void onLoad() {
         if (!getDataFolder().exists()) {
             if (!getDataFolder().mkdirs()) {
+                getLogger().severe("internal error on create data folder. plugin disabling...");
+                Bukkit.getPluginManager().disablePlugin(this);
+            }
+        }
+        File recipesFolder = new File(getDataFolder(), "recipes");
+        if (!recipesFolder.exists()) {
+            if (!recipesFolder.mkdirs()) {
+                getLogger().severe("internal error on create recipe folder. plugin disabling...");
                 Bukkit.getPluginManager().disablePlugin(this);
             }
         }

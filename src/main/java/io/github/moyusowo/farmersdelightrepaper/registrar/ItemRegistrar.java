@@ -1,6 +1,7 @@
 package io.github.moyusowo.farmersdelightrepaper.registrar;
 
 import io.github.moyusowo.farmersdelightrepaper.FarmersDelightRepaper;
+import io.github.moyusowo.farmersdelightrepaper.config.ConfigUtil;
 import io.github.moyusowo.farmersdelightrepaper.config.FoodConfig;
 import io.github.moyusowo.farmersdelightrepaper.resource.Keys;
 import io.github.moyusowo.farmersdelightrepaper.resource.TranslatableText;
@@ -29,18 +30,7 @@ public final class ItemRegistrar {
     private ItemRegistrar() {}
 
     public static void initOnLoad() {
-        FarmersDelightRepaper.getInstance().getLogger().info("Loaded Item");
-        File configFile = new File(FarmersDelightRepaper.getInstance().getDataFolder(), "foods.yml");
-        if (!configFile.exists()) FarmersDelightRepaper.getInstance().saveResource("foods.yml", false);
-        YamlConfigurationLoader loader = YamlConfigurationLoader.builder().file(configFile).indent(2).build();
-        final CommentedConfigurationNode topNode;
-        try {
-            topNode = loader.load();
-        } catch (ConfigurateException e) {
-            FarmersDelightRepaper.getInstance().getLogger().severe("error on loading break.yml, " + e);
-            Bukkit.getPluginManager().disablePlugin(FarmersDelightRepaper.getInstance());
-            return;
-        }
+        final CommentedConfigurationNode topNode = ConfigUtil.readYml("foods.yml");
         for (Map.Entry<Object, CommentedConfigurationNode> entry : topNode.childrenMap().entrySet()) {
             try {
                 FoodConfig foodConfig = entry.getValue().get(FoodConfig.class);
@@ -57,6 +47,7 @@ public final class ItemRegistrar {
                 FarmersDelightRepaper.getInstance().getLogger().severe("error on reading " + entry.getKey().toString() + " of foods.yml, " + e);
             }
         }
+        FarmersDelightRepaper.getInstance().getLogger().info("Custom Item Configs loaded");
     }
 
     @NeoArtisanAPI.Register

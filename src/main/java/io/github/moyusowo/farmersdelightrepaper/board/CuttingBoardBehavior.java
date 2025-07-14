@@ -1,6 +1,8 @@
 package io.github.moyusowo.farmersdelightrepaper.board;
 
 import io.github.moyusowo.farmersdelightrepaper.FarmersDelightRepaper;
+import io.github.moyusowo.farmersdelightrepaper.config.ConfigUtil;
+import io.github.moyusowo.farmersdelightrepaper.config.CuttingBoardConfig;
 import io.github.moyusowo.farmersdelightrepaper.resource.Keys;
 import io.github.moyusowo.farmersdelightrepaper.resource.SoundKey;
 import io.github.moyusowo.neoartisanapi.api.NeoArtisanAPI;
@@ -26,7 +28,12 @@ import org.bukkit.util.Transformation;
 import org.bukkit.util.Vector;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
+import org.spongepowered.configurate.CommentedConfigurationNode;
+import org.spongepowered.configurate.ConfigurateException;
+import org.spongepowered.configurate.serialize.SerializationException;
+import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +46,21 @@ public final class CuttingBoardBehavior implements Listener {
     private CuttingBoardBehavior() {}
 
     public static void initOnLoad() {
-
+        final CommentedConfigurationNode topNode = ConfigUtil.readYml("recipes/cutting_board.yml");
+        for (Map.Entry<Object, CommentedConfigurationNode> entry : topNode.childrenMap().entrySet()) {
+            try {
+                CuttingBoardConfig config = entry.getValue().get(CuttingBoardConfig.class);
+                if (config == null) throw new SerializationException("why the hell is null?");
+                final NamespacedKey key = config.getKey();
+                final ItemGenerator itemGenerator = config.getItemGenerator();
+                if (key == null) throw new SerializationException("You should correctly fill item id!");
+                if (itemGenerator == null) throw new SerializationException("You should correctly fill all result params!");
+                cuttingBoardRecipe.put(key, itemGenerator);
+            } catch (SerializationException e) {
+                FarmersDelightRepaper.getInstance().getLogger().severe("error on reading " + entry.getKey().toString() + " of foods.yml, " + e);
+            }
+        }
+        FarmersDelightRepaper.getInstance().getLogger().info("Custom Item Configs loaded");
     }
 
     private static ItemDisplay getItemDisplay(Block block) {
@@ -53,7 +74,6 @@ public final class CuttingBoardBehavior implements Listener {
 
     public static void initOnEnable() {
         Bukkit.getPluginManager().registerEvents(new CuttingBoardBehavior(), FarmersDelightRepaper.getInstance());
-        cuttingBoardRecipe.put(Keys.cabbage, ItemGenerator.simpleGenerator(Keys.cabbage_leaf, 2));
     }
 
     @EventHandler

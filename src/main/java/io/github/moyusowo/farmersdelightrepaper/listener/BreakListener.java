@@ -3,6 +3,7 @@ package io.github.moyusowo.farmersdelightrepaper.listener;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import io.github.moyusowo.farmersdelightrepaper.FarmersDelightRepaper;
+import io.github.moyusowo.farmersdelightrepaper.config.ConfigUtil;
 import io.github.moyusowo.farmersdelightrepaper.config.DropConfig;
 import io.github.moyusowo.neoartisanapi.api.NeoArtisanAPI;
 import org.bukkit.Bukkit;
@@ -28,17 +29,7 @@ public final class BreakListener implements Listener {
     private BreakListener() {}
 
     public static void initOnLoad() {
-        File configFile = new File(FarmersDelightRepaper.getInstance().getDataFolder(), "break.yml");
-        if (!configFile.exists()) FarmersDelightRepaper.getInstance().saveResource("break.yml", false);
-        YamlConfigurationLoader loader = YamlConfigurationLoader.builder().file(configFile).indent(2).build();
-        final CommentedConfigurationNode topNode;
-        try {
-            topNode = loader.load();
-        } catch (ConfigurateException e) {
-            FarmersDelightRepaper.getInstance().getLogger().severe("error on loading break.yml, " + e);
-            Bukkit.getPluginManager().disablePlugin(FarmersDelightRepaper.getInstance());
-            return;
-        }
+        final CommentedConfigurationNode topNode = ConfigUtil.readYml("break.yml");
         for (Map.Entry<Object, CommentedConfigurationNode> entry : topNode.childrenMap().entrySet()) {
             try {
                 DropConfig dropConfig = entry.getValue().get(DropConfig.class);
@@ -51,6 +42,7 @@ public final class BreakListener implements Listener {
                 FarmersDelightRepaper.getInstance().getLogger().severe("error on reading " + entry.getKey().toString() + " of break.yml, " + e);
             }
         }
+        FarmersDelightRepaper.getInstance().getLogger().info("Custom Drops Configs loaded");
     }
 
     public static void initOnEnable() {

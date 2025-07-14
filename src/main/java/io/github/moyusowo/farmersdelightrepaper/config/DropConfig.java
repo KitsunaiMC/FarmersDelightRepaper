@@ -1,5 +1,6 @@
 package io.github.moyusowo.farmersdelightrepaper.config;
 
+import io.github.moyusowo.farmersdelightrepaper.FarmersDelightRepaper;
 import io.github.moyusowo.neoartisanapi.api.NeoArtisanAPI;
 import io.github.moyusowo.neoartisanapi.api.item.ItemGenerator;
 import org.bukkit.Material;
@@ -60,7 +61,8 @@ public final class DropConfig {
     }
 
     public @Nullable ItemGeneratorWithChance getItemGenerator() {
-        final NamespacedKey key = NamespacedKey.fromString(result.id);
+        if (result.id.isEmpty()) return null;
+        final NamespacedKey key = NamespacedKey.fromString(result.id, FarmersDelightRepaper.getInstance());
         if (key == null) return null;
         if (block_material == null) return null;
         if (result.amount <= 0 || result.amount > block_material.getMaxStackSize()) return null;
