@@ -42,7 +42,7 @@ public class CookingPotGUI extends ArtisanBlockGUI {
     );
     private static final int bowlSlot = 33, resultSlot = 15;
 
-    protected CookingPotGUI(Location location) {
+    public CookingPotGUI(Location location) {
         super(FarmersDelightRepaper.getInstance(), 45, TranslatableText.container_cooking_pot, location);
     }
 
@@ -173,10 +173,10 @@ public class CookingPotGUI extends ArtisanBlockGUI {
         }
         inventory.setItem(bowlSlot, getArtisanBlockData().getPersistentDataContainer().getOrDefault(bowl, ItemStackDataType.ITEM_STACK, ItemStack.empty()));
         inventory.setItem(resultSlot, getArtisanBlockData().getPersistentDataContainer().getOrDefault(product, ItemStackDataType.ITEM_STACK, ItemStack.empty()));
-        addLifecycleTask(generateSoundTask(), 0L, 20L * 4);
-        addLifecycleTask(generateBurningTask(), 0L, 1L);
-        addLifecycleTask(generateSavingTask(), 20L, 1L);
-        addLifecycleTask(generateCookingTask(), 0L, 1L);
+        addLifecycleTask(generateSoundTask(), 0L, 20L * 4, false);
+        addLifecycleTask(generateBurningTask(), 0L, 1L, false);
+        addLifecycleTask(generateSavingTask(), 20L, 1L, false);
+        addLifecycleTask(generateCookingTask(), 0L, 1L, false);
     }
 
     @Override

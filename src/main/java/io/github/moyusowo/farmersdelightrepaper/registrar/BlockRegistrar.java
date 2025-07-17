@@ -1,19 +1,16 @@
 package io.github.moyusowo.farmersdelightrepaper.registrar;
 
+import io.github.moyusowo.farmersdelightrepaper.pot.CookingPotGUI;
 import io.github.moyusowo.farmersdelightrepaper.resource.Keys;
-import io.github.moyusowo.farmersdelightrepaper.pot.GUIHolder;
 import io.github.moyusowo.neoartisanapi.api.NeoArtisanAPI;
-import io.github.moyusowo.neoartisanapi.api.block.base.sound.SoundProperty;
-import io.github.moyusowo.neoartisanapi.api.block.thin.ArtisanThinBlock;
-import io.github.moyusowo.neoartisanapi.api.block.thin.ArtisanThinBlockState;
-import io.github.moyusowo.neoartisanapi.api.block.thin.ThinBlockAppearance;
-import io.github.moyusowo.neoartisanapi.api.block.transparent.ArtisanTransparentBlock;
-import io.github.moyusowo.neoartisanapi.api.block.transparent.ArtisanTransparentBlockState;
-import io.github.moyusowo.neoartisanapi.api.block.transparent.TransparentAppearance;
+import io.github.moyusowo.neoartisanapi.api.block.block.ArtisanSimpleBlock;
+import io.github.moyusowo.neoartisanapi.api.block.state.ArtisanLeavesState;
+import io.github.moyusowo.neoartisanapi.api.block.state.ArtisanThinState;
+import io.github.moyusowo.neoartisanapi.api.block.state.appearance.LeavesAppearance;
+import io.github.moyusowo.neoartisanapi.api.block.state.appearance.ThinAppearance;
+import io.github.moyusowo.neoartisanapi.api.block.util.SoundProperty;
 import io.github.moyusowo.neoartisanapi.api.item.ItemGenerator;
 import org.bukkit.Sound;
-
-import java.util.List;
 
 public final class BlockRegistrar {
 
@@ -22,59 +19,54 @@ public final class BlockRegistrar {
     @NeoArtisanAPI.Register
     public static void register() {
         NeoArtisanAPI.getBlockRegistry().register(
-                ArtisanTransparentBlock.factory().builder()
+                ArtisanSimpleBlock.builder()
                         .blockId(Keys.cooking_pot)
-                        .canBurn(false)
                         .placeSound(
                                 SoundProperty.of(Sound.BLOCK_STONE_PLACE)
                         )
-                        .guiCreator(new GUIHolder())
-                        .states(
-                                List.of(
-                                        ArtisanTransparentBlockState.factory().builder()
-                                                .appearanceState(
-                                                        new TransparentAppearance(
-                                                                TransparentAppearance.LeavesAppearance.OAK_LEAVES,
-                                                                1,
-                                                                false,
-                                                                false
+                        .guiCreator(CookingPotGUI::new)
+                        .state(
+                                ArtisanLeavesState.builder()
+                                        .appearance(
+                                                new LeavesAppearance(
+                                                        LeavesAppearance.LeavesMaterial.OAK_LEAVES,
+                                                        1,
+                                                        false,
+                                                        false
+                                                )
+                                        )
+                                        .generators(
+                                                new ItemGenerator[]{
+                                                        ItemGenerator.simpleGenerator(
+                                                                Keys.cooking_pot,
+                                                                1
                                                         )
-                                                )
-                                                .generators(
-                                                        new ItemGenerator[]{
-                                                                ItemGenerator.simpleGenerator(
-                                                                        Keys.cooking_pot,
-                                                                        1
-                                                                )
-                                                        }
-                                                )
-                                                .build()
-                                )
+                                                }
+                                        )
+                                        .build()
                         )
                         .build()
         );
         NeoArtisanAPI.getBlockRegistry().register(
-                ArtisanThinBlock.factory().builder()
+                ArtisanSimpleBlock.builder()
                         .blockId(Keys.cutting_board)
-                        .states(
-                                List.of(
-                                        ArtisanThinBlockState.factory().builder()
-                                                .appearanceState(
-                                                        new ThinBlockAppearance(
-                                                                ThinBlockAppearance.PressurePlateAppearance.LIGHT_WEIGHTED_PRESSURE_PLATE,
-                                                                2
+                        .state(
+                                ArtisanThinState.builder()
+                                        .appearance(
+                                                new ThinAppearance(
+                                                        ThinAppearance.ThinMaterial.LIGHT_WEIGHTED_PRESSURE_PLATE,
+                                                        2
+                                                )
+                                        )
+                                        .generators(
+                                                new ItemGenerator[]{
+                                                        ItemGenerator.simpleGenerator(
+                                                                Keys.cutting_board,
+                                                                1
                                                         )
-                                                )
-                                                .generators(
-                                                        new ItemGenerator[]{
-                                                                ItemGenerator.simpleGenerator(
-                                                                        Keys.cutting_board,
-                                                                        1
-                                                                )
-                                                        }
-                                                )
-                                                .build()
-                                )
+                                                }
+                                        )
+                                        .build()
                         )
                         .placeSound(
                                 SoundProperty.of(Sound.BLOCK_WOOD_PLACE)
