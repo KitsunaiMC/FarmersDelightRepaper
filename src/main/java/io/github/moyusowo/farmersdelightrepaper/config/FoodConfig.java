@@ -42,13 +42,14 @@ public final class FoodConfig {
         itemModel = "false";
     }
 
-    public @Nullable TranslatableComponent getTranslatable() {
+    private @Nullable TranslatableComponent getTranslatable() {
         if (translatableText.isEmpty()) return null;
         if (displayName.isEmpty()) return Component.translatable(translatableText);
         return Component.translatable(translatableText, displayName);
     }
 
     public @Nullable Component getDisplayName() {
+        if (getTranslatable() != null) return getTranslatable();
         if (displayName.isEmpty()) return null;
         return MiniMessage.miniMessage().deserialize(displayName);
     }

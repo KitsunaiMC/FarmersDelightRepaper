@@ -1,6 +1,80 @@
-kfc_chicken:
-  display_name: <red>肯德基</red><green>吮指原味鸡</green>
-  raw_material: CHICKEN
-  nutrition: 10
-  saturation: 10
+tomato_sauce:
+  display_name: 番茄酱
+  translatable_text: item.farmersdelightrepaper.tomato_sauce
+  raw_material: MUSHROOM_STEW
+  nutrition: 2
+  saturation: 3.2
   can_always_eat: false
+  item_model: true
+
+raw_pasta:
+  display_name: 生意面
+  translatable_text: item.farmersdelightrepaper.raw_pasta
+  raw_material: CHICKEN
+  nutrition: 3
+  saturation: 1.2
+  can_always_eat: false
+  item_model: true
+
+pumpkin_slice:
+  display_name: 南瓜片
+  translatable_text: item.farmersdelightrepaper.pumpkin_slice
+  raw_material: PUMPKIN_PIE
+  nutrition: 3
+  saturation: 1.8
+  can_always_eat: false
+  item_model: true
+
+minced_beef:
+  display_name: 牛肉馅
+  translatable_text: item.farmersdelightrepaper.minced_beef
+  raw_material: BEEF
+  nutrition: 2
+  saturation: 1.2
+  can_always_eat: false
+  item_model: true
+
+raw_chicken_cuts:
+  display_name: 生鸡肉丁
+  translatable_text: item.farmersdelightrepaper.chicken_cuts
+  raw_material: CHICKEN
+  nutrition: 1
+  saturation: 0.6
+  can_always_eat: false
+  item_model: true
+
+raw_cod_slice:
+  display_name: 生鳕鱼片
+  translatable_text: item.farmersdelightrepaper.cod_slice
+  raw_material: COD
+  nutrition: 1
+  saturation: 0.2
+  can_always_eat: false
+  item_model: true
+
+raw_salmon_slice:
+  display_name: 生鲑鱼片
+  translatable_text: item.farmersdelightrepaper.salmon_slice
+  raw_material: COD
+  nutrition: 1
+  saturation: 0.2
+  can_always_eat: false
+  item_model: true
+
+wheat_dough:
+  display_name: 面团
+  translatable_text: item.farmersdelightrepaper.wheat_dough
+  raw_material: CHICKEN
+  nutrition: 2
+  saturation: 1.2
+  can_always_eat: false
+  item_model: true
+
+raw_bacon:
+  display_name: 生培根
+  translatable_text: item.farmersdelightrepaper.bacon
+  raw_material: PORKCHOP
+  nutrition: 2
+  saturation: 1.2
+  can_always_eat: false
+  item_model: true

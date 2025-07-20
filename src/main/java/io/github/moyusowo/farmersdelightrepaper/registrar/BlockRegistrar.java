@@ -16,8 +16,7 @@ public final class BlockRegistrar {
 
     private BlockRegistrar() {}
 
-    @NeoArtisanAPI.Register
-    public static void register() {
+    public static void initOnEnable() {
         NeoArtisanAPI.getBlockRegistry().register(
                 ArtisanSimpleBlock.builder()
                         .blockId(Keys.cooking_pot)
@@ -43,8 +42,10 @@ public final class BlockRegistrar {
                                                         )
                                                 }
                                         )
+                                        .hardness(2.0f)
                                         .build()
                         )
+                        .blockEntity()
                         .build()
         );
         NeoArtisanAPI.getBlockRegistry().register(

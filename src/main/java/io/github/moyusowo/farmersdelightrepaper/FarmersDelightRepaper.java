@@ -3,6 +3,7 @@ package io.github.moyusowo.farmersdelightrepaper;
 import io.github.moyusowo.farmersdelightrepaper.board.CuttingBoardBehavior;
 import io.github.moyusowo.farmersdelightrepaper.listener.BreakListener;
 import io.github.moyusowo.farmersdelightrepaper.pot.CookingPotRecipe;
+import io.github.moyusowo.farmersdelightrepaper.registrar.BlockRegistrar;
 import io.github.moyusowo.farmersdelightrepaper.registrar.ItemRegistrar;
 import io.github.moyusowo.farmersdelightrepaper.registrar.RecipeRegistrar;
 import org.bukkit.Bukkit;
@@ -43,8 +44,6 @@ public final class FarmersDelightRepaper extends JavaPlugin {
                 Bukkit.getPluginManager().disablePlugin(this);
             }
         }
-        ItemRegistrar.initOnLoad();
-        RecipeRegistrar.initOnLoad();
         CuttingBoardBehavior.initOnLoad();
         CookingPotRecipe.initOnLoad();
         BreakListener.initOnLoad();
@@ -55,6 +54,9 @@ public final class FarmersDelightRepaper extends JavaPlugin {
         // Plugin startup logic
         CuttingBoardBehavior.initOnEnable();
         BreakListener.initOnEnable();
+        ItemRegistrar.initOnEnable();
+        RecipeRegistrar.initOnEnable();
+        BlockRegistrar.initOnEnable();
     }
 
     @Override

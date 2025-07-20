@@ -1,8 +1,8 @@
 wheat_dough:
   matrix:
     - " A "
-    - "BBB"
-    - "   "
+    - " B "
+    - "B B"
   set:
     A: minecraft:water_bucket
     B: minecraft:wheat

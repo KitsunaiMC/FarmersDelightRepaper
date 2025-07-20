@@ -1,6 +1,35 @@
-tomato_seed:
+raw_pasta_1:
   items:
-    - tomato
+    - minecraft:water_bucket
+    - minecraft:wheat
+    - minecraft:wheat
+    - minecraft:wheat
+    - minecraft:wheat
   result:
-    id: tomato_seed
+    id: raw_pasta
+    amount: 2
+raw_pasta_2:
+  items:
+    - minecraft:water_bucket
+    - minecraft:wheat
+    - minecraft:wheat
+  result:
+    id: raw_pasta
     amount: 1
+raw_pasta_3:
+  items:
+    - minecraft:egg
+    - minecraft:wheat
+    - minecraft:wheat
+  result:
+    id: raw_pasta
+    amount: 1
+wheat_dough:
+  items:
+    - minecraft:water_bucket
+    - minecraft:wheat
+    - minecraft:wheat
+    - minecraft:wheat
+  result:
+    id: wheat_dough
+    amount: 3

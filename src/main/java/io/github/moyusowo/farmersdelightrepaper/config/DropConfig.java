@@ -3,7 +3,6 @@ package io.github.moyusowo.farmersdelightrepaper.config;
 import io.github.moyusowo.farmersdelightrepaper.FarmersDelightRepaper;
 import io.github.moyusowo.neoartisanapi.api.NeoArtisanAPI;
 import io.github.moyusowo.neoartisanapi.api.item.ItemGenerator;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -13,8 +12,8 @@ import org.spongepowered.configurate.objectmapping.meta.Setting;
 
 @ConfigSerializable
 public final class DropConfig {
-    @Setting(value = "block_material")
-    private final Material block_material;
+    @Setting(value = "block_id")
+    private final String block_id;
 
     @Setting(value = "result")
     private final Result result;
@@ -38,7 +37,7 @@ public final class DropConfig {
     }
 
     public DropConfig() {
-        block_material = null;
+        block_id = null;
         result = new Result();
     }
 
@@ -56,16 +55,17 @@ public final class DropConfig {
         }
     }
 
-    public @Nullable Material getMaterial() {
-        return block_material;
+    public @Nullable NamespacedKey getBlockId() {
+        if (block_id == null) return null;
+        return NamespacedKey.fromString(block_id, FarmersDelightRepaper.getInstance());
     }
 
     public @Nullable ItemGeneratorWithChance getItemGenerator() {
         if (result.id.isEmpty()) return null;
         final NamespacedKey key = NamespacedKey.fromString(result.id, FarmersDelightRepaper.getInstance());
         if (key == null) return null;
-        if (block_material == null) return null;
-        if (result.amount <= 0 || result.amount > block_material.getMaxStackSize()) return null;
+        if (block_id == null) return null;
+        if (result.amount <= 0) return null;
         if (result.chance <= 0 || result.chance > 1) return null;
         return new ItemGeneratorWithChance(key, result.amount, result.chance);
     }

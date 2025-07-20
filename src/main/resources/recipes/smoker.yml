@@ -1,7 +1,7 @@
-raw_chicken_cuts_furnace:
+raw_chicken_cuts_smoker:
   item: raw_chicken_cuts
   exp: 1
-  time: 100
+  time: 50
   result:
     id: minecraft:cooked_chicken
     amount: 1

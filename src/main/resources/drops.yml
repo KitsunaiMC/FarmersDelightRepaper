@@ -1,0 +1,18 @@
+wheat_break:
+  block_id: minecraft:wheat
+  result:
+    id: rice_panicle
+    amount: 1
+    chance: 0.06
+short_grass_break:
+  block_id: minecraft:short_grass
+  result:
+    id: rice_panicle
+    amount: 1
+    chance: 0.008
+tall_grass_break:
+  block_id: minecraft:tall_grass
+  result:
+    id: rice_panicle
+    amount: 1
+    chance: 0.016

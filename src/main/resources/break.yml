@@ -1,6 +1,0 @@
-grass_break:
-  block_material: SHORT_GRASS
-  result:
-    id: minecraft:wheat
-    amount: 1
-    chance: 0.5
