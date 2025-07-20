@@ -265,6 +265,7 @@ public final class RecipeRegistrar {
                         .add('B', Material.WOODEN_SHOVEL.getKey())
                         .add('C', Material.IRON_INGOT.getKey())
                         .add('D', Material.WATER_BUCKET.getKey())
+                        .resultGenerator(ItemGenerator.simpleGenerator(Keys.cooking_pot, 1))
                         .build()
         );
     }
@@ -279,6 +280,7 @@ public final class RecipeRegistrar {
                                 .set("ABB", "ABB")
                                 .add('A', Material.STICK.getKey())
                                 .add('B', material.getKey())
+                                .resultGenerator(ItemGenerator.simpleGenerator(Keys.cutting_board, 1))
                                 .build()
                 );
             }

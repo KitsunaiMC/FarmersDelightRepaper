@@ -71,6 +71,7 @@ public final class ItemRegistrar {
                                 true
                         )
                         .itemModel(Keys.onion)
+                        .blockId(Keys.onion)
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
