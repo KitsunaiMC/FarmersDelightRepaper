@@ -11,15 +11,21 @@ public class CookingPotGenerator implements ItemGenerator {
     private final int amount;
     private final NamespacedKey registryId;
     private final int time;
+    private final float exp;
 
-    public CookingPotGenerator(int amount, NamespacedKey registryId, int time) {
+    public CookingPotGenerator(int amount, NamespacedKey registryId, int time, float exp) {
         this.amount = amount;
         this.registryId = registryId;
         this.time = time;
+        this.exp = exp;
     }
 
     public int time() {
         return time;
+    }
+
+    public float exp() {
+        return exp;
     }
 
     @Override

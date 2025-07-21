@@ -1,7 +1,28 @@
-raw_chicken_cuts_furnace:
-  item: raw_chicken_cuts
-  exp: 1
+fried_egg_furnace:
+  item: minecraft:egg
+  exp: 0.35
   time: 100
   result:
-    id: minecraft:cooked_chicken
+    id: fried_egg
+    amount: 1
+beef_patty_furnace:
+  item: minced_beef
+  exp: 0.5
+  time: 150
+  result:
+    id: beef_patty
+    amount: 1
+cooked_cod_slice_furnace:
+  item: raw_cod_slice
+  exp: 0.5
+  time: 150
+  result:
+    id: cooked_cod_slice
+    amount: 1
+cooked_salmon_slice_furnace:
+  item: raw_salmon_slice
+  exp: 0.5
+  time: 150
+  result:
+    id: cooked_salmon_slice
     amount: 1

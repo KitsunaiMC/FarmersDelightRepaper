@@ -35,6 +35,11 @@ public final class Keys {
         diamond_knife = FarmersDelightRepaper.create("diamond_knife"),
         netherite_knife = FarmersDelightRepaper.create("netherite_knife");
 
+    public static final NamespacedKey wild_cabbages = FarmersDelightRepaper.create("wild_cabbages"),
+        wild_onions = FarmersDelightRepaper.create("wild_onions"),
+        wild_rice = FarmersDelightRepaper.create("wild_rice"),
+        wild_tomatoes = FarmersDelightRepaper.create("wild_tomatoes");
+
     public static final Set<NamespacedKey> knife = Set.of(
         flint_knife, iron_knife,golden_knife, diamond_knife, netherite_knife
     );

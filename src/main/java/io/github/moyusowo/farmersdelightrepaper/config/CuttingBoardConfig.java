@@ -7,17 +7,20 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 import org.spongepowered.configurate.objectmapping.meta.Setting;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @ConfigSerializable
 public final class CuttingBoardConfig {
     @Setting(value = "item")
     private final String id;
 
-    @Setting(value = "result")
-    private final Result result;
+    @Setting(value = "results")
+    private final List<Result> results;
 
     public CuttingBoardConfig() {
         id = "";
-        result = new Result();
+        results = new ArrayList<>();
     }
 
     @ConfigSerializable
@@ -34,12 +37,17 @@ public final class CuttingBoardConfig {
         }
     }
 
-    public @Nullable ItemGenerator getItemGenerator() {
-        if (result.id.isEmpty()) return null;
-        final NamespacedKey key = NamespacedKey.fromString(result.id, FarmersDelightRepaper.getInstance());
-        if (key == null) return null;
-        if (result.amount == Integer.MIN_VALUE) return null;
-        return ItemGenerator.simpleGenerator(key, result.amount);
+    public @Nullable List<ItemGenerator> getItemGenerator() {
+        if (results.isEmpty()) return null;
+        final List<ItemGenerator> generators = new ArrayList<>();
+        for (Result result : results) {
+            if (result.id.isEmpty()) return null;
+            final NamespacedKey key = NamespacedKey.fromString(result.id, FarmersDelightRepaper.getInstance());
+            if (key == null) return null;
+            if (result.amount == Integer.MIN_VALUE) return null;
+            generators.add(ItemGenerator.simpleGenerator(key, result.amount));
+        }
+        return generators;
     }
 
     public @Nullable NamespacedKey getKey() {

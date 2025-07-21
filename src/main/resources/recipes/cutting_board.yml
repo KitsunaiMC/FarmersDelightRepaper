@@ -1,5 +1,69 @@
 cabbage_leaf_1:
   item: cabbage
-  result:
-    id: cabbage_leaf
-    amount: 2
+  results:
+    - id: cabbage_leaf
+      amount: 2
+raw_pasta_1:
+  item: wheat_dough
+  results:
+    - id: raw_pasta
+      amount: 1
+pumpkin_slice_1:
+  item: minecraft:pumpkin
+  results:
+    - id: pumpkin_slice
+      amount: 1
+minced_beef_1:
+  item: minecraft:beef
+  results:
+    - id: minced_beef
+      amount: 2
+    - id: minecraft:bone_meal
+      amount: 1
+raw_chicken_cuts_1:
+  item: minecraft:chicken
+  results:
+    - id: raw_chicken_cuts
+      amount: 2
+    - id: minecraft:bone_meal
+      amount: 1
+raw_cod_slice_1:
+  item: minecraft:cod
+  results:
+    - id: raw_cod_slice
+      amount: 2
+    - id: minecraft:bone_meal
+      amount: 1
+raw_salmon_slice_1:
+  item: minecraft:salmon
+  results:
+    - id: raw_salmon_slice
+      amount: 2
+    - id: minecraft:bone_meal
+      amount: 1
+raw_bacon_1:
+  item: minecraft:porkchop
+  results:
+    - id: raw_bacon
+      amount: 2
+    - id: minecraft:bone_meal
+      amount: 1
+cooked_cod_slice_1:
+  item: minecraft:cooked_cod
+  results:
+    - id: cooked_cod_slice
+      amount: 2
+    - id: minecraft:bone_meal
+      amount: 1
+cooked_salmon_slice_1:
+  item: minecraft:cooked_salmon
+  results:
+    - id: cooked_salmon_slice
+      amount: 2
+    - id: minecraft:bone_meal
+      amount: 1
+cake_slice_1:
+  item: minecraft:cake
+  results:
+    - id: cake_slice
+      amount: 7

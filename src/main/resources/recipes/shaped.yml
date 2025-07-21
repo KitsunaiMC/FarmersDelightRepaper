@@ -1,4 +1,4 @@
-wheat_dough:
+wheat_dough_1:
   matrix:
     - " A "
     - " B "
@@ -9,3 +9,52 @@ wheat_dough:
   result:
     id: wheat_dough
     amount: 1
+pie_crust_1:
+  matrix:
+    - "   "
+    - "ABA"
+    - " A "
+  set:
+    A: minecraft:wheat
+    B: minecraft:milk_bucket
+  result:
+    id: pie_crust
+    amount: 1
+apple_pie_slice_1:
+  matrix:
+    - "AAA"
+    - "BBB"
+    - "CDC"
+  set:
+    A: minecraft:wheat
+    B: minecraft:apple
+    C: minecraft:sugar
+    D: pie_crust
+  result:
+    id: apple_pie_slice
+    amount: 7
+sweet_berry_cheesecake_slice_1:
+  matrix:
+    - "AAA"
+    - "AAA"
+    - "CDC"
+  set:
+    A: minecraft:sweet_berries
+    C: minecraft:milk_bucket
+    D: pie_crust
+  result:
+    id: sweet_berry_cheesecake_slice
+    amount: 7
+chocolate_pie_slice_1:
+  matrix:
+    - "AAA"
+    - "BBB"
+    - "CDC"
+  set:
+    A: minecraft:cocoa_beans
+    B: minecraft:milk_bucket
+    C: minecraft:sugar
+    D: pie_crust
+  result:
+    id: chocolate_pie_slice
+    amount: 7

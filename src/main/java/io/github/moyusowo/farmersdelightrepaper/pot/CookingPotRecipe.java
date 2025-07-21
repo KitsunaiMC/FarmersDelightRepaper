@@ -3,7 +3,6 @@ package io.github.moyusowo.farmersdelightrepaper.pot;
 import io.github.moyusowo.farmersdelightrepaper.FarmersDelightRepaper;
 import io.github.moyusowo.farmersdelightrepaper.config.ConfigUtil;
 import io.github.moyusowo.farmersdelightrepaper.config.CookingPotConfig;
-import io.github.moyusowo.farmersdelightrepaper.resource.Keys;
 import io.github.moyusowo.neoartisanapi.api.item.ArtisanItem;
 import org.bukkit.NamespacedKey;
 import org.spongepowered.configurate.CommentedConfigurationNode;
@@ -25,9 +24,10 @@ public final class CookingPotRecipe {
                 final NamespacedKey itemGenerator = config.getItemGeneratorId();
                 final Integer amount = config.getAmount();
                 final Integer time = config.getTime();
+                final Float exp = config.getExp();
                 final boolean needBowl = config.needBowl;
                 if (key == null) throw new SerializationException("You should correctly fill item ids!");
-                if (itemGenerator == null || amount == null) throw new SerializationException("You should correctly fill all result params!");
+                if (itemGenerator == null || amount == null || exp == null) throw new SerializationException("You should correctly fill all result params!");
                 if (time == null) throw new SerializationException("You should fill a valid time value!");
                 recipe.put(
                         new CookingPotRecipe(
@@ -35,7 +35,7 @@ public final class CookingPotRecipe {
                                 key.toArray(new NamespacedKey[0])
                         ),
                         new CookingPotGenerator(
-                                amount, itemGenerator, time
+                                amount, itemGenerator, time, exp
                         )
                 );
             } catch (SerializationException e) {
@@ -43,16 +43,6 @@ public final class CookingPotRecipe {
             }
         }
         FarmersDelightRepaper.getInstance().getLogger().info("Custom CookingPot Recipes loaded");
-    }
-
-    static {
-        recipe.put(
-                new CookingPotRecipe(
-                        true,
-                        Keys.cabbage, Keys.tomato
-                ),
-                new CookingPotGenerator(2, Keys.tomato_sauce, 20 * 10)
-        );
     }
 
     private final Set<NamespacedKey> items;

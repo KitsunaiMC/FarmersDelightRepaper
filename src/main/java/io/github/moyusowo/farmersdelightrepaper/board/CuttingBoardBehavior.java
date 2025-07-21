@@ -1,5 +1,7 @@
 package io.github.moyusowo.farmersdelightrepaper.board;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
 import io.github.moyusowo.farmersdelightrepaper.FarmersDelightRepaper;
 import io.github.moyusowo.farmersdelightrepaper.config.ConfigUtil;
 import io.github.moyusowo.farmersdelightrepaper.config.CuttingBoardConfig;
@@ -28,12 +30,13 @@ import org.joml.Vector3f;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.serialize.SerializationException;
 
-import java.util.HashMap;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 public final class CuttingBoardBehavior implements Listener {
 
-    private static final Map<NamespacedKey, ItemGenerator> cuttingBoardRecipe = new HashMap<>();
+    private static final Multimap<NamespacedKey, ItemGenerator> cuttingBoardRecipe = ArrayListMultimap.create();
     private static final String entityTag = "cutting_board_display";
     private static final Vector offset = new Vector(0.5, 0.0625, 0.5);
 
@@ -46,10 +49,10 @@ public final class CuttingBoardBehavior implements Listener {
                 CuttingBoardConfig config = entry.getValue().get(CuttingBoardConfig.class);
                 if (config == null) throw new SerializationException("why the hell is null?");
                 final NamespacedKey key = config.getKey();
-                final ItemGenerator itemGenerator = config.getItemGenerator();
+                final List<ItemGenerator> itemGenerators = config.getItemGenerator();
                 if (key == null) throw new SerializationException("You should correctly fill item id!");
-                if (itemGenerator == null) throw new SerializationException("You should correctly fill all result params!");
-                cuttingBoardRecipe.put(key, itemGenerator);
+                if (itemGenerators == null) throw new SerializationException("You should correctly fill all result params!");
+                cuttingBoardRecipe.putAll(key, itemGenerators);
             } catch (SerializationException e) {
                 FarmersDelightRepaper.getInstance().getLogger().severe("error on reading " + entry.getKey().toString() + " of cutting_board.yml, " + e);
             }
@@ -97,7 +100,7 @@ public final class CuttingBoardBehavior implements Listener {
         if (event.useInteractedBlock() == Event.Result.DENY || event.useItemInHand() == Event.Result.DENY) return;
         if (event.getClickedBlock() == null || event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
         if (!NeoArtisanAPI.getArtisanBlockStorage().isArtisanBlock(event.getClickedBlock())) return;
-        if (!NeoArtisanAPI.getArtisanBlockStorage().getBlockId(event.getClickedBlock()).equals(Keys.cutting_board)) return;
+        if (!NeoArtisanAPI.getArtisanBlockStorage().getArtisanBlockData(event.getClickedBlock()).blockId().equals(Keys.cutting_board)) return;
         ItemDisplay itemDisplay = getItemDisplay(event.getClickedBlock());
         if (itemDisplay == null) return;
         if (event.getAction().isLeftClick()) {
@@ -129,10 +132,13 @@ public final class CuttingBoardBehavior implements Listener {
             } else if (Keys.knife.contains(NeoArtisanAPI.getItemRegistry().getRegistryId(event.getItem()))) {
                 if (cuttingBoardRecipe.containsKey(NeoArtisanAPI.getItemRegistry().getRegistryId(itemDisplay.getItemStack()))) {
                     event.setCancelled(true);
-                    event.getClickedBlock().getWorld().dropItemNaturally(
-                            event.getClickedBlock().getLocation().toBlockLocation(),
-                            cuttingBoardRecipe.get(NeoArtisanAPI.getItemRegistry().getRegistryId(itemDisplay.getItemStack())).generate()
-                    );
+                    Collection<ItemGenerator> itemGenerators = cuttingBoardRecipe.get(NeoArtisanAPI.getItemRegistry().getRegistryId(itemDisplay.getItemStack()));
+                    for (ItemGenerator itemGenerator : itemGenerators) {
+                        event.getClickedBlock().getWorld().dropItemNaturally(
+                                event.getClickedBlock().getLocation().toBlockLocation(),
+                                itemGenerator.generate()
+                        );
+                    }
                     itemDisplay.setItemStack(null);
                     if (event.getPlayer().getGameMode() != GameMode.CREATIVE) {
                         Integer damage = event.getItem().getData(DataComponentTypes.DAMAGE);

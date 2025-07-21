@@ -6,7 +6,6 @@ tomato_sauce:
   saturation: 3.2
   can_always_eat: false
   item_model: true
-
 raw_pasta:
   display_name: 生意面
   translatable_text: item.farmersdelightrepaper.raw_pasta
@@ -15,7 +14,6 @@ raw_pasta:
   saturation: 1.2
   can_always_eat: false
   item_model: true
-
 pumpkin_slice:
   display_name: 南瓜片
   translatable_text: item.farmersdelightrepaper.pumpkin_slice
@@ -24,7 +22,6 @@ pumpkin_slice:
   saturation: 1.8
   can_always_eat: false
   item_model: true
-
 minced_beef:
   display_name: 牛肉馅
   translatable_text: item.farmersdelightrepaper.minced_beef
@@ -33,7 +30,6 @@ minced_beef:
   saturation: 1.2
   can_always_eat: false
   item_model: true
-
 raw_chicken_cuts:
   display_name: 生鸡肉丁
   translatable_text: item.farmersdelightrepaper.chicken_cuts
@@ -42,7 +38,6 @@ raw_chicken_cuts:
   saturation: 0.6
   can_always_eat: false
   item_model: true
-
 raw_cod_slice:
   display_name: 生鳕鱼片
   translatable_text: item.farmersdelightrepaper.cod_slice
@@ -51,7 +46,6 @@ raw_cod_slice:
   saturation: 0.2
   can_always_eat: false
   item_model: true
-
 raw_salmon_slice:
   display_name: 生鲑鱼片
   translatable_text: item.farmersdelightrepaper.salmon_slice
@@ -60,7 +54,6 @@ raw_salmon_slice:
   saturation: 0.2
   can_always_eat: false
   item_model: true
-
 wheat_dough:
   display_name: 面团
   translatable_text: item.farmersdelightrepaper.wheat_dough
@@ -69,12 +62,443 @@ wheat_dough:
   saturation: 1.2
   can_always_eat: false
   item_model: true
-
 raw_bacon:
   display_name: 生培根
   translatable_text: item.farmersdelightrepaper.bacon
   raw_material: PORKCHOP
   nutrition: 2
   saturation: 1.2
+  can_always_eat: false
+  item_model: true
+fried_egg:
+  display_name: 煎鸡蛋
+  translatable_text: item.farmersdelightrepaper.fried_egg
+  raw_material: COOKED_PORKCHOP
+  nutrition: 4
+  saturation: 3.2
+  can_always_eat: false
+  item_model: true
+beef_patty:
+  display_name: 牛肉饼
+  translatable_text: item.farmersdelightrepaper.beef_patty
+  raw_material: COOKED_BEEF
+  nutrition: 4
+  saturation: 6.4
+  can_always_eat: false
+  item_model: true
+cooked_cod_slice:
+  display_name: 熟鳕鱼片
+  translatable_text: item.farmersdelightrepaper.cooked_cod_slice
+  raw_material: COOKED_COD
+  nutrition: 3
+  saturation: 3
+  can_always_eat: false
+  item_model: true
+cooked_salmon_slice:
+  display_name: 熟鲑鱼片
+  translatable_text: item.farmersdelightrepaper.cooked_salmon_slice
+  raw_material: COOKED_SALMON
+  nutrition: 3
+  saturation: 4.8
+  can_always_eat: false
+  item_model: true
+pie_crust:
+  display_name: 馅饼酥皮
+  translatable_text: item.farmersdelightrepaper.pie_crust
+  raw_material: PUMPKIN_PIE
+  nutrition: 2
+  saturation: 0.8
+  can_always_eat: false
+  item_model: true
+cake_slice: #20s speed lacking
+  display_name: 蛋糕切片
+  translatable_text: item.farmersdelightrepaper.cake_slice
+  raw_material: PUMPKIN_PIE
+  nutrition: 2
+  saturation: 0.4
+  can_always_eat: false
+  item_model: true
+apple_pie_slice: #30s speed lacking
+  display_name: 苹果派切片
+  translatable_text: item.farmersdelightrepaper.apple_pie_slice
+  raw_material: PUMPKIN_PIE
+  nutrition: 3
+  saturation: 1.8
+  can_always_eat: false
+  item_model: true
+sweet_berry_cheesecake_slice: #30s speed lacking
+  display_name: 甜浆果芝士派切片
+  translatable_text: item.farmersdelightrepaper.sweet_berry_cheesecake_slice
+  raw_material: PUMPKIN_PIE
+  nutrition: 3
+  saturation: 1.8
+  can_always_eat: false
+  item_model: true
+chocolate_pie_slice: #30s speed lacking
+  display_name: 巧克力派切片
+  translatable_text: item.farmersdelightrepaper.chocolate_pie_slice
+  raw_material: PUMPKIN_PIE
+  nutrition: 3
+  saturation: 1.8
+  can_always_eat: false
+  item_model: true
+sweet_berry_cookie:
+  display_name: 甜浆果曲奇
+  translatable_text: item.farmersdelightrepaper.sweet_berry_cookie
+  raw_material: COOKIE
+  nutrition: 2
+  saturation: 0.6
+  can_always_eat: false
+  item_model: true
+honey_cookie:
+  display_name: 蜂蜜曲奇
+  translatable_text: item.farmersdelightrepaper.honey_cookie
+  raw_material: COOKIE
+  nutrition: 2
+  saturation: 0.4
+  can_always_eat: false
+  item_model: true
+mixed_salad:
+  display_name: 混合沙拉
+  translatable_text: item.farmersdelightrepaper.mixed_salad
+  raw_material: MUSHROOM_STEW
+  nutrition: 6
+  saturation: 7.2
+  can_always_eat: false
+  item_model: true
+barbecue_stick:
+  display_name: 烧烤串
+  translatable_text: item.farmersdelightrepaper.barbecue_stick
+  raw_material: COOKED_BEEF
+  nutrition: 8
+  saturation: 15
+  can_always_eat: false
+  item_model: true
+egg_sandwich:
+  display_name: 鸡蛋三明治
+  translatable_text: item.farmersdelightrepaper.egg_sandwich
+  raw_material: BREAD
+  nutrition: 8
+  saturation: 12.8
+  can_always_eat: false
+  item_model: true
+chicken_sandwich:
+  display_name: 鸡肉三明治
+  translatable_text: item.farmersdelightrepaper.chicken_sandwich
+  raw_material: BREAD
+  nutrition: 10
+  saturation: 16
+  can_always_eat: false
+  item_model: true
+hamburger: #力量I
+  display_name: 汉堡包
+  translatable_text: item.farmersdelightrepaper.hamburger
+  raw_material: BREAD
+  nutrition: 11
+  saturation: 17.6
+  can_always_eat: false
+  item_model: true
+dumplings:
+  display_name: 饺子
+  translatable_text: item.farmersdelightrepaper.dumplings
+  raw_material: BREAD
+  nutrition: 8
+  saturation: 12.8
+  can_always_eat: false
+  item_model: true
+stuffed_potato:
+  display_name: 填馅马铃薯
+  translatable_text: item.farmersdelightrepaper.stuffed_potato
+  raw_material: BAKED_POTATO
+  nutrition: 10
+  saturation: 14
+  can_always_eat: false
+  item_model: true
+stuffed_pumpkin: #舒适
+  display_name: 碗装填馅南瓜
+  translatable_text: item.farmersdelightrepaper.stuffed_pumpkin
+  raw_material: MUSHROOM_STEW
+  nutrition: 14
+  saturation: 21
+  can_always_eat: false
+  item_model: true
+cooked_rice: #舒适
+  display_name: 米饭
+  translatable_text: item.farmersdelightrepaper.cooked_rice
+  raw_material: MUSHROOM_STEW
+  nutrition: 6
+  saturation: 4.8
+  can_always_eat: false
+  item_model: true
+beef_stew: #舒适
+  display_name: 牛肉炖
+  translatable_text: item.farmersdelightrepaper.beef_stew
+  raw_material: MUSHROOM_STEW
+  nutrition: 12
+  saturation: 19.2
+  can_always_eat: false
+  item_model: true
+chicken_soup: #舒适
+  display_name: 鸡肉汤
+  translatable_text: item.farmersdelightrepaper.chicken_soup
+  raw_material: MUSHROOM_STEW
+  nutrition: 14
+  saturation: 21
+  can_always_eat: false
+  item_model: true
+vegetable_soup: #舒适
+  display_name: 蔬菜汤
+  translatable_text: item.farmersdelightrepaper.vegetable_soup
+  raw_material: MUSHROOM_STEW
+  nutrition: 12
+  saturation: 19.2
+  can_always_eat: false
+  item_model: true
+fish_stew:
+  display_name: 鱼肉炖
+  translatable_text: item.farmersdelightrepaper.fish_stew
+  raw_material: MUSHROOM_STEW
+  nutrition: 12
+  saturation: 19.2
+  can_always_eat: false
+  item_model: true
+fried_rice: #滋养
+  display_name: 炒饭
+  translatable_text: item.farmersdelightrepaper.fried_rice
+  raw_material: MUSHROOM_STEW
+  nutrition: 14
+  saturation: 21
+  can_always_eat: false
+  item_model: true
+pumpkin_soup: #舒适
+  display_name: 南瓜汤
+  translatable_text: item.farmersdelightrepaper.pumpkin_soup
+  raw_material: MUSHROOM_STEW
+  nutrition: 14
+  saturation: 21
+  can_always_eat: false
+  item_model: true
+baked_cod_stew: #舒适
+  display_name: 烘焙鳕鱼炖
+  translatable_text: item.farmersdelightrepaper.baked_cod_stew
+  raw_material: MUSHROOM_STEW
+  nutrition: 14
+  saturation: 21
+  can_always_eat: false
+  item_model: true
+honey_glazed_ham: #滋养
+  display_name: 盘装蜜汁火腿
+  translatable_text: item.farmersdelightrepaper.honey_glazed_ham
+  raw_material: MUSHROOM_STEW
+  nutrition: 14
+  saturation: 21
+  can_always_eat: false
+  item_model: true
+pasta_with_meatballs: #滋养
+  display_name: 肉丸意面
+  translatable_text: item.farmersdelightrepaper.pasta_with_meatballs
+  raw_material: MUSHROOM_STEW
+  nutrition: 12
+  saturation: 19.2
+  can_always_eat: false
+  item_model: true
+pasta_with_mutton_chop: #滋养
+  display_name: 羊排意面
+  translatable_text: item.farmersdelightrepaper.pasta_with_mutton_chop
+  raw_material: MUSHROOM_STEW
+  nutrition: 12
+  saturation: 19.2
+  can_always_eat: false
+  item_model: true
+vegetable_noodles: #滋养
+  display_name: 蔬菜面
+  translatable_text: item.farmersdelightrepaper.vegetable_noodles
+  raw_material: MUSHROOM_STEW
+  nutrition: 14
+  saturation: 21
+  can_always_eat: false
+  item_model: true
+steak_and_potatoes: #滋养
+  display_name: 牛排配土豆
+  translatable_text: item.farmersdelightrepaper.steak_and_potatoes
+  raw_material: MUSHROOM_STEW
+  nutrition: 12
+  saturation: 19.2
+  can_always_eat: false
+  item_model: true
+ratatouille: #滋养
+  display_name: 蔬菜杂烩
+  translatable_text: item.farmersdelightrepaper.ratatouille
+  raw_material: MUSHROOM_STEW
+  nutrition: 10
+  saturation: 12
+  can_always_eat: false
+  item_model: true
+squid_ink_pasta: #滋养
+  display_name: 鱿鱼墨面
+  translatable_text: item.farmersdelightrepaper.squid_ink_pasta
+  raw_material: MUSHROOM_STEW
+  nutrition: 14
+  saturation: 21
+  can_always_eat: false
+  item_model: true
+grilled_salmon: #滋养
+  display_name: 香烤鲑鱼
+  translatable_text: item.farmersdelightrepaper.grilled_salmon
+  raw_material: MUSHROOM_STEW
+  nutrition: 14
+  saturation: 21
+  can_always_eat: false
+  item_model: true
+cooked_chicken_cuts:
+  display_name: 熟鸡肉丁
+  translatable_text: item.farmersdelightrepaper.cooked_chicken_cuts
+  raw_material: COOKED_CHICKEN
+  nutrition: 3
+  saturation: 3.6
+  can_always_eat: false
+  item_model: true
+cooked_bacon:
+  display_name: 熟培根
+  translatable_text: item.farmersdelightrepaper.cooked_bacon
+  raw_material: COOKED_PORKCHOP
+  nutrition: 4
+  saturation: 6.4
+  can_always_eat: false
+  item_model: true
+melon_popsicle:
+  display_name: 西瓜冰棍
+  translatable_text: item.farmersdelightrepaper.melon_popsicle
+  raw_material: MELON_SLICE
+  nutrition: 1
+  saturation: 1.2
+  can_always_eat: true
+  item_model: true
+fruit_salad: #生命恢复
+  display_name: 水果沙拉
+  translatable_text: item.farmersdelightrepaper.fruit_salad
+  raw_material: MUSHROOM_STEW
+  nutrition: 6
+  saturation: 7.2
+  can_always_eat: false
+  item_model: true
+bacon_sandwich:
+  display_name: 培根三明治
+  translatable_text: item.farmersdelightrepaper.bacon_sandwich
+  raw_material: BREAD
+  nutrition: 10
+  saturation: 16
+  can_always_eat: false
+  item_model: true
+roast_chicken:
+  display_name: 盘装烤鸡
+  translatable_text: item.farmersdelightrepaper.roast_chicken
+  raw_material: MUSHROOM_STEW
+  nutrition: 14
+  saturation: 21
+  can_always_eat: false
+  item_model: true
+mutton_chops:
+  display_name: 生羊排
+  translatable_text: item.farmersdelightrepaper.mutton_chops
+  raw_material: MUTTON
+  nutrition: 2
+  saturation: 0.6
+  can_always_eat: false
+  item_model: true
+cooked_mutton_chops:
+  display_name: 熟羊排
+  translatable_text: item.farmersdelightrepaper.cooked_mutton_chops
+  raw_material: COOKED_MUTTON
+  nutrition: 3
+  saturation: 4.8
+  can_always_eat: false
+  item_model: true
+mutton_wrap: #滋养
+  display_name: 羊肉卷饼
+  translatable_text: item.farmersdelightrepaper.mutton_wrap
+  raw_material: BREAD
+  nutrition: 10
+  saturation: 16
+  can_always_eat: false
+  item_model: true
+cabbage_rolls:
+  display_name: 卷心菜卷
+  translatable_text: item.farmersdelightrepaper.cabbage_rolls
+  raw_material: BREAD
+  nutrition: 5
+  saturation: 5
+  can_always_eat: false
+  item_model: true
+noodle_soup:
+  display_name: 面条汤
+  translatable_text: item.farmersdelightrepaper.noodle_soup
+  raw_material: MUSHROOM_STEW
+  nutrition: 14
+  saturation: 21
+  can_always_eat: false
+  item_model: true
+bacon_and_eggs: #滋养
+  display_name: 培根鸡蛋
+  translatable_text: item.farmersdelightrepaper.bacon_and_eggs
+  raw_material: MUSHROOM_STEW
+  nutrition: 10
+  saturation: 12
+  can_always_eat: false
+  item_model: true
+roasted_mutton_chops: #滋养
+  display_name: 烤羊排
+  translatable_text: item.farmersdelightrepaper.roasted_mutton_chops
+  raw_material: MUSHROOM_STEW
+  nutrition: 14
+  saturation: 21
+  can_always_eat: false
+  item_model: true
+salmon_roll:
+  display_name: 鲑鱼寿司
+  translatable_text: item.farmersdelightrepaper.salmon_roll
+  raw_material: BREAD
+  nutrition: 7
+  saturation: 9.8
+  can_always_eat: false
+  item_model: true
+cod_roll:
+  display_name: 鳕鱼寿司
+  translatable_text: item.farmersdelightrepaper.cod_roll
+  raw_material: BREAD
+  nutrition: 7
+  saturation: 8.4
+  can_always_eat: false
+  item_model: true
+kelp_roll:
+  display_name: 海带寿司卷
+  translatable_text: item.farmersdelightrepaper.kelp_roll
+  raw_material: BREAD
+  nutrition: 12
+  saturation: 14.4
+  can_always_eat: false
+  item_model: true
+kelp_roll_slice:
+  display_name: 海带寿司
+  translatable_text: item.farmersdelightrepaper.kelp_roll_slice
+  raw_material: BREAD
+  nutrition: 6
+  saturation: 6
+  can_always_eat: false
+  item_model: true
+bone_broth: #舒适
+  display_name: 大骨汤
+  translatable_text: item.farmersdelightrepaper.bone_broth
+  raw_material: MUSHROOM_STEW
+  nutrition: 8
+  saturation: 11.2
+  can_always_eat: false
+  item_model: true
+mushroom_rice: #滋养
+  display_name: 蘑菇饭
+  translatable_text: item.farmersdelightrepaper.mushroom_rice
+  raw_material: MUSHROOM_STEW
+  nutrition: 12
+  saturation: 19.2
   can_always_eat: false
   item_model: true

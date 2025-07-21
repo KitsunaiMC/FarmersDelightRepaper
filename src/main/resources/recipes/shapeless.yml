@@ -33,3 +33,73 @@ wheat_dough:
   result:
     id: wheat_dough
     amount: 3
+rice_1:
+  items:
+    - rice_panicle
+  result:
+    id: rice
+    amount: 1
+sweet_berry_cookie_1:
+  items:
+    - minecraft:wheat
+    - minecraft:wheat
+    - minecraft:sweet_berries
+  result:
+    id: sweet_berry_cookie
+    amount: 8
+honey_cookie_1:
+  items:
+    - minecraft:wheat
+    - minecraft:wheat
+    - minecraft:honey_bottle
+  result:
+    id: honey_cookie
+    amount: 8
+mixed_salad_1:
+  items:
+    - cabbage
+    - tomato
+    - onion
+    - minecraft:beetroot
+    - minecraft:bowl
+  result:
+    id: mixed_salad
+    amount: 1
+barbecue_stick:
+  items:
+    - tomato
+    - onion
+    - minecraft:cooked_beef
+    - minecraft:cooked_chicken
+    - minecraft:stick
+    - minecraft:stick
+  result:
+    id: barbecue_stick
+    amount: 2
+egg_sandwich_1:
+  items:
+    - fried_egg
+    - fried_egg
+    - minecraft:bread
+  result:
+    id: egg_sandwich
+    amount: 1
+chicken_sandwich_1:
+  items:
+    - minecraft:bread
+    - minecraft:cooked_chicken
+    - cabbage
+    - minecraft:carrot
+  result:
+    id: chicken_sandwich
+    amount: 1
+hamburger_1:
+  items:
+    - minecraft:bread
+    - beef_patty
+    - cabbage
+    - tomato
+    - onion
+  result:
+    id: hamburger
+    amount: 1

@@ -1,9 +1,22 @@
-tomato_sauce:
+tomato_sauce_1:
   need_bowl: true
   items:
-    - cabbage
     - tomato
-  time: 200
+    - tomato
+  time: 100
+  exp: 0.1
   result:
     id: tomato_sauce
+    amount: 1
+dumplings_1:
+  need_bowl: false
+  items:
+    - raw_pasta
+    - cabbage
+    - onion
+    - raw_bacon
+  time: 200
+  exp: 0.35
+  result:
+    id: dumplings
     amount: 2

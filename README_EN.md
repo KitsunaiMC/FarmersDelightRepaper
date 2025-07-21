@@ -32,17 +32,18 @@ Full license text available at [LICENSE](LICENSE).
 ## 🚧 Development Progress
 
 **Current Version Features**:
-- [x] Basic crop system
+- [x] Basic crop system(onion, cabbage, tomato)
 - [x] Block and item management
 - [x] Corresponding client resource pack
 - [x] Cooking pot recipes and GUI
 - [x] Cutting board recipes (basic implementation)
 - [x] Partial crafting recipes
-- [x] Added config files for configurable items in food, recipes, and drops
+- [x] Added config files for configurable items in food and recipes
+- [x] Added Generator to generate wild crop
 
 **TODO List**:
-- [ ] Add remaining items and recipes from original mod
-- [ ] Improve crop system
+- [ ] Add remaining items and recipes from original mod (doing...)
+- [ ] Improve crop system, add rice crop
 - [ ] Enhance knife and cutting board behaviors
 - [ ] ~~Find bugs~~ Write unit tests
 

@@ -24,11 +24,15 @@ public class CookingPotConfig {
     @Setting(value = "result")
     private final Result result;
 
+    @Setting(value = "exp")
+    private final float exp;
+
     public CookingPotConfig() {
         items = new ArrayList<>();
         needBowl = false;
-        time = Integer.MIN_VALUE;
+        time = -Integer.MAX_VALUE;
         result = new Result();
+        exp = -Float.MAX_VALUE;
     }
 
     @ConfigSerializable
@@ -48,6 +52,11 @@ public class CookingPotConfig {
     public @Nullable NamespacedKey getItemGeneratorId() {
         if (result.id.isEmpty()) return null;
         return NamespacedKey.fromString(result.id, FarmersDelightRepaper.getInstance());
+    }
+
+    public @Nullable Float getExp() {
+        if (exp < 0) return null;
+        return exp;
     }
 
     public @Nullable Integer getAmount() {

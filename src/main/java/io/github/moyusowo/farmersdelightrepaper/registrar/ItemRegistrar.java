@@ -135,6 +135,7 @@ public final class ItemRegistrar {
                         .displayName(TranslatableText.tomato_seed)
                         .rawMaterial(Material.WHEAT)
                         .itemModel(Keys.tomato_seed)
+                        .blockId(Keys.tomato)
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
@@ -143,6 +144,7 @@ public final class ItemRegistrar {
                         .displayName(TranslatableText.cabbage_seed)
                         .rawMaterial(Material.WHEAT)
                         .itemModel(Keys.cabbage_seed)
+                        .blockId(Keys.cabbage)
                         .build()
         );
         NeoArtisanAPI.getItemRegistry().registerItem(
