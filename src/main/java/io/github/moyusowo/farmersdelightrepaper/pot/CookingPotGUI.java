@@ -51,7 +51,6 @@ public class CookingPotGUI extends ArtisanBlockGUI {
         return new BukkitRunnable() {
             @Override
             public void run() {
-                assert getArtisanBlockData().getPersistentDataContainer() != null;
                 final int timeValue = getArtisanBlockData().getPersistentDataContainer().getOrDefault(time, PersistentDataType.INTEGER, 0);
                 final CookingPotRecipe r = getInventoryRecipe();
                 final CookingPotGenerator g = CookingPotRecipe.matches(r);
@@ -89,7 +88,6 @@ public class CookingPotGUI extends ArtisanBlockGUI {
         return new BukkitRunnable() {
             @Override
             public void run() {
-                assert getArtisanBlockData().getPersistentDataContainer() != null;
                 final boolean isBurningValue = getArtisanBlockData().getPersistentDataContainer().getOrDefault(isBurning, PersistentDataType.BOOLEAN, false);
                 final int progressValue = getArtisanBlockData().getPersistentDataContainer().getOrDefault(progress, PersistentDataType.INTEGER, 0);
                 if (isBurningValue) {
@@ -125,7 +123,6 @@ public class CookingPotGUI extends ArtisanBlockGUI {
         return new BukkitRunnable() {
             @Override
             public void run() {
-                assert getArtisanBlockData().getPersistentDataContainer() != null;
                 if (location.getBlock().getRelative(BlockFace.DOWN).getType() == Material.CAMPFIRE ||
                     location.getBlock().getRelative(BlockFace.DOWN).getType() == Material.FIRE) {
                     getArtisanBlockData().getPersistentDataContainer().set(isBurning, PersistentDataType.BOOLEAN, true);
@@ -150,7 +147,6 @@ public class CookingPotGUI extends ArtisanBlockGUI {
 
     @Override
     public void terminate() {
-        assert getArtisanBlockData().getPersistentDataContainer() != null;
         final ItemStack[] itemStacks = new ItemStack[6];
         for (int i = 0; i < 6; i++) {
             itemStacks[i] = ItemStack.empty();
@@ -173,7 +169,6 @@ public class CookingPotGUI extends ArtisanBlockGUI {
 
     @Override
     protected void init() {
-        assert getArtisanBlockData().getPersistentDataContainer() != null;
         inventory.setItem(0, NeoArtisanAPI.getItemRegistry().getItemStack(Keys.cooking_pot_gui_1));
         for (int i = 0; i < items.length; i++) {
             inventory.setItem(itemSlot.get(i), getArtisanBlockData().getPersistentDataContainer().getOrDefault(items[i], ItemStackDataType.ITEM_STACK, ItemStack.empty()));
@@ -189,7 +184,6 @@ public class CookingPotGUI extends ArtisanBlockGUI {
     @Override
     @EventHandler
     public void onClick(InventoryClickEvent event) {
-        assert getArtisanBlockData().getPersistentDataContainer() != null;
         if (event.getClickedInventory() == null) return;
         if (!(event.getInventory().getHolder(false) instanceof CookingPotGUI)) return;
         if (event.getClickedInventory().getHolder(false) instanceof CookingPotGUI) {
@@ -251,7 +245,6 @@ public class CookingPotGUI extends ArtisanBlockGUI {
     private BukkitRunnable generateSavingTask() {
         return new BukkitRunnable() {
             private void saveItems() {
-                assert getArtisanBlockData().getPersistentDataContainer() != null;
                 for (int i = 0; i < itemSlot.size(); i++) {
                     ItemStack itemStack = inventory.getItem(itemSlot.get(i));
                     if (itemStack != null) getArtisanBlockData().getPersistentDataContainer().set(items[i], ItemStackDataType.ITEM_STACK, itemStack);
@@ -260,7 +253,6 @@ public class CookingPotGUI extends ArtisanBlockGUI {
             }
 
             private void saveBowl() {
-                assert getArtisanBlockData().getPersistentDataContainer() != null;
                 ItemStack itemStack = inventory.getItem(bowlSlot);
                 if (itemStack != null) getArtisanBlockData().getPersistentDataContainer().set(bowl, ItemStackDataType.ITEM_STACK, itemStack.clone());
                 else getArtisanBlockData().getPersistentDataContainer().remove(bowl);

@@ -103,3 +103,124 @@ hamburger_1:
   result:
     id: hamburger
     amount: 1
+stuffed_potato_1:
+  items:
+    - minecraft:baked_potato
+    - beef_patty
+    - minecraft:carrot
+    - minecraft:milk_bucket
+  result:
+    id: stuffed_potato
+    amount: 1
+honey_glazed_ham_1:
+  items:
+    - minecraft:sweet_berries
+    - minecraft:sweet_berries
+    - minecraft:sweet_berries
+    - minecraft:sweet_berries
+    - minecraft:honey_bottle
+    - minecraft:cooked_porkchop
+    - cooked_rice
+    - cooked_rice
+    - minecraft:bowl
+  result:
+    id: honey_glazed_ham
+    amount: 4
+steak_and_potatoes_1:
+  items:
+    - minecraft:baked_potato
+    - minecraft:cooked_beef
+    - minecraft:bowl
+    - onion
+    - cooked_rice
+  result:
+    id: steak_and_potatoes
+    amount: 1
+nether_salad_1:
+  items:
+    - minecraft:crimson_fungus
+    - minecraft:warped_fungus
+    - minecraft:bowl
+  result:
+    id: nether_salad
+    amount: 1
+fruit_salad_1:
+  items:
+    - minecraft:apple
+    - minecraft:melon_slice
+    - minecraft:melon_slice
+    - minecraft:sweet_berries
+    - minecraft:sweer_berries
+    - pumpkin_slice
+    - minecraft:bowl
+  result:
+    id: fruit_salad
+    amount: 1
+bacon_sandwich_1:
+  items:
+    - minecraft:bread
+    - cooked_bacon
+    - cabbage_leaf
+    - tomato
+  result:
+    id: bacon_sandwich
+    amount: 1
+roast_chicken_1:
+  items:
+    - onion
+    - minecraft:egg
+    - minecraft:bread
+    - minecraft:carrot
+    - minecraft:carrot
+    - minecraft:baked_potato
+    - minecraft:baked_potato
+    - minecraft:cooked_chicken
+    - minecraft:bowl
+  result:
+    id: roast_chicken
+    amount: 4
+mutton_wrap_1:
+  items:
+    - minecraft:bread
+    - cooked_mutton_chops
+    - cabbage_leaf
+    - onion
+  result:
+    id: mutton_wrap
+    amount: 1
+bacon_and_eggs_1:
+  items:
+    - cooked_bacon
+    - cooked_bacon
+    - minecraft:bowl
+    - fried_egg
+    - fried_egg
+  result:
+    id: bacon_and_eggs
+    amount: 1
+roasted_mutton_chops_1:
+  items:
+    - cooked_mutton_chops
+    - minecraft:beetroot
+    - minecraft:bowl
+    - cooked_rice
+    - tomato
+  result:
+    id: roasted_mutton_chops
+    amount: 1
+salmon_roll_1:
+  items:
+    - raw_salmon_slice
+    - raw_salmon_slice
+    - cooked_rice
+  result:
+    id: salmon_roll
+    amount: 1
+cod_roll_1:
+  items:
+    - raw_cod_slice
+    - raw_cod_slice
+    - cooked_rice
+  result:
+    id: cod_roll
+    amount: 1

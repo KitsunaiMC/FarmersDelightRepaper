@@ -12,7 +12,7 @@ dumplings_1:
   need_bowl: false
   items:
     - raw_pasta
-    - cabbage
+    - cabbage_leaf
     - onion
     - raw_bacon
   time: 200
@@ -20,3 +20,320 @@ dumplings_1:
   result:
     id: dumplings
     amount: 2
+dumplings_2:
+  need_bowl: false
+  items:
+    - raw_pasta
+    - cabbage_leaf
+    - onion
+    - minced_beef
+  time: 200
+  exp: 0.35
+  result:
+    id: dumplings
+    amount: 2
+dumplings_3:
+  need_bowl: false
+  items:
+    - raw_pasta
+    - cabbage_leaf
+    - onion
+    - raw_chicken_cuts
+  time: 200
+  exp: 0.35
+  result:
+    id: dumplings
+    amount: 2
+dumplings_4:
+  need_bowl: false
+  items:
+    - raw_pasta
+    - cabbage_leaf
+    - onion
+    - minecraft:brown_mushroom
+  time: 200
+  exp: 0.35
+  result:
+    id: dumplings
+    amount: 2
+stuffed_pumpkin_1:
+  need_bowl: true
+  items:
+    - rice
+    - onion
+    - minecraft:brown_mushroom
+    - minecraft:potato
+    - minecraft:pumpkin
+    - cabbage_leaf
+  time: 400
+  exp: 0.5
+  result:
+    id: stuffed_pumpkin
+    amount: 4
+cooked_rice_1:
+  need_bowl: true
+  items:
+    - rice
+  time: 100
+  exp: 0.1
+  result:
+    id: cooked_rice
+    amount: 1
+beef_stew_1:
+  need_bowl: true
+  items:
+    - minced_beef
+    - minecraft:carrot
+    - minecraft:potato
+  time: 200
+  exp: 0.35
+  result:
+    id: beef_stew
+    amount: 1
+chicken_soup_1:
+  need_bowl: true
+  items:
+    - raw_chicken_cuts
+    - minecraft:carrot
+    - cabbage_leaf
+    - onion
+  time: 200
+  exp: 0.35
+  result:
+    id: chicken_soup
+    amount: 1
+vegetable_soup_1:
+  need_bowl: true
+  items:
+    - minecraft:carrot
+    - minecraft:potato
+    - minecraft:beetroot
+    - cabbage_leaf
+  time: 200
+  exp: 0.35
+  result:
+    id: vegetable_soup
+    amount: 1
+fish_stew_1:
+  need_bowl: true
+  items:
+    - raw_cod_slice
+    - tomato_sauce
+    - onion
+  time: 200
+  exp: 0.35
+  result:
+    id: fish_stew
+    amount: 1
+fish_stew_2:
+  need_bowl: true
+  items:
+    - raw_salmon_slice
+    - tomato_sauce
+    - onion
+  time: 200
+  exp: 0.35
+  result:
+    id: fish_stew
+    amount: 1
+fried_rice_1:
+  need_bowl: true
+  items:
+    - rice
+    - minecraft:egg
+    - minecraft:carrot
+    - onion
+  time: 200
+  exp: 0.35
+  result:
+    id: fried_rice
+    amount: 1
+pumpkin_soup_1:
+  need_bowl: true
+  items:
+    - pumpkin_slice
+    - cabbage_leaf
+    - raw_bacon
+    - minecraft:milk_bucket
+  time: 200
+  exp: 0.35
+  result:
+    id: pumpkin_soup
+    amount: 1
+baked_cod_stew_1:
+  need_bowl: true
+  items:
+    - raw_cod_slice
+    - minecraft:potato
+    - minecraft:egg
+    - tomato
+  time: 200
+  exp: 0.35
+  result:
+    id: baked_cod_stew
+    amount: 1
+pasta_with_meatballs_1:
+  need_bowl: true
+  items:
+    - minced_beef
+    - raw_pasta
+    - tomato_sauce
+  time: 200
+  exp: 0.35
+  result:
+    id: pasta_with_meatballs
+    amount: 1
+pasta_with_mutton_chop_1:
+  need_bowl: true
+  items:
+    - mutton_chops
+    - raw_pasta
+    - tomato_sauce
+  time: 200
+  exp: 0.35
+  result:
+    id: pasta_with_mutton_chop
+    amount: 1
+vegetable_noodles_1:
+  need_bowl: true
+  items:
+    - minecraft:carrot
+    - minecraft:brown_mushroom
+    - raw_pasta
+    - cabbage_leaf
+    - onion
+  time: 200
+  exp: 0.35
+  result:
+    id: vegetable_noodles
+    amount: 1
+ratatouille_1:
+  need_bowl: true
+  items:
+    - tomato
+    - onion
+    - minecraft:beetroot
+    - cabbage_leaf
+  time: 200
+  exp: 0.35
+  result:
+    id: ratatouille
+    amount: 1
+squid_ink_pasta_1:
+  need_bowl: true
+  items:
+    - raw_cod_slice
+    - raw_pasta
+    - tomato
+    - minecraft:ink_sac
+  time: 200
+  exp: 0.35
+  result:
+    id: squid_ink_pasta
+    amount: 1
+squid_ink_pasta_2:
+  need_bowl: true
+  items:
+    - raw_salmon_slice
+    - raw_pasta
+    - tomato
+    - minecraft:ink_sac
+  time: 200
+  exp: 0.35
+  result:
+    id: squid_ink_pasta
+    amount: 1
+cabbage_rolls_1:
+  need_bowl: false
+  items:
+    - cabbage_leaf
+    - minecraft:carrot
+  time: 100
+  exp: 0.1
+  result:
+    id: cabbage_rolls
+    amount: 1
+cabbage_rolls_2:
+  need_bowl: false
+  items:
+    - cabbage_leaf
+    - minced_beef
+  time: 100
+  exp: 0.1
+  result:
+    id: cabbage_rolls
+    amount: 1
+cabbage_rolls_3:
+  need_bowl: false
+  items:
+    - cabbage_leaf
+    - raw_cod_slice
+  time: 100
+  exp: 0.1
+  result:
+    id: cabbage_rolls
+    amount: 1
+cabbage_rolls_4:
+  need_bowl: false
+  items:
+    - cabbage_leaf
+    - raw_salmon_slice
+  time: 100
+  exp: 0.1
+  result:
+    id: cabbage_rolls
+    amount: 1
+cabbage_rolls_5:
+  need_bowl: false
+  items:
+    - cabbage_leaf
+    - raw_chicken_cuts
+  time: 100
+  exp: 0.1
+  result:
+    id: cabbage_rolls
+    amount: 1
+cabbage_rolls_6:
+  need_bowl: false
+  items:
+    - cabbage_leaf
+    - raw_bacon
+  time: 100
+  exp: 0.1
+  result:
+    id: cabbage_rolls
+    amount: 1
+noodle_soup_1:
+  need_bowl: true
+  items:
+    - raw_pasta
+    - fried_egg
+    - minecraft:dried_kelp
+    - raw_bacon
+  time: 200
+  exp: 0.35
+  result:
+    id: noodle_soup
+    amount: 1
+bone_broth_1:
+  need_bowl: true
+  items:
+    - minecraft:bone
+    - minecraft:brown_mushroom
+  time: 200
+  exp: 0.35
+  result:
+    id: bone_broth
+    amount: 1
+mushroom_rice_1:
+  need_bowl: true
+  items:
+    - minecraft:brown_mushroom
+    - minecraft:red_mushroom
+    - rice
+    - minecraft:carrot
+  time: 200
+  exp: 0.35
+  result:
+    id: mushroom_rice
+    amount: 1

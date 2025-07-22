@@ -40,6 +40,7 @@ Full license text available at [LICENSE](LICENSE).
 - [x] Partial crafting recipes
 - [x] Added config files for configurable items in food and recipes
 - [x] Added Generator to generate wild crop
+- [x] Add almost all food and their recipes from original mod (maybe something would be different)
 
 **TODO List**:
 - [ ] Add remaining items and recipes from original mod (doing...)

@@ -67,3 +67,32 @@ cake_slice_1:
   results:
     - id: cake_slice
       amount: 7
+cooked_chicken_cuts_1:
+  item: minecraft:cooked_chicken
+  results:
+    - id: cooked_chicken_cuts
+      amount: 2
+    - id: minecraft:bone_meal
+      amount: 1
+cooked_bacon_1:
+  item: minecraft:cooked_porkchop
+  results:
+    - id: cooked_bacon
+      amount: 2
+    - id: minecraft:bone_meal
+      amount: 1
+mutton_chops_1:
+  item: minecraft:mutton
+  result:
+    - id: mutton_chops
+      amount: 2
+cooked_mutton_chops_1:
+  items: minecraft:cooked_mutton
+  result:
+    - id: cooked_mutton_chops
+      amount: 2
+kelp_roll_slice_1:
+  items: kelp_roll
+  result:
+    - id: kelp_roll_slice
+      amount: 1

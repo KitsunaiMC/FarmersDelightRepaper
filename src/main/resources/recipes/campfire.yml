@@ -26,3 +26,17 @@ cooked_salmon_slice_campfire:
   result:
     id: cooked_salmon_slice
     amount: 1
+cooked_chicken_cuts_campfire:
+  item: raw_chicken_cuts
+  exp: 0.5
+  time: 220
+  result:
+    id: cooked_chicken_cuts
+    amount: 1
+cooked_bacon_campfire:
+  item: raw_bacon
+  exp: 0.5
+  time: 150
+  result:
+    id: cooked_bacon
+    amount: 1

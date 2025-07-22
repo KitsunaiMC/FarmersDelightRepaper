@@ -58,3 +58,27 @@ chocolate_pie_slice_1:
   result:
     id: chocolate_pie_slice
     amount: 7
+melon_popsicle_1:
+  matrix:
+    - " AA"
+    - "BAA"
+    - "CB "
+  set:
+    A: minecraft:melon_slice
+    B: minecraft:ice
+    C: minecraft:stick
+  result:
+    id: melon_popsicle
+    amount: 1
+kelp_roll_1:
+  matrix:
+    - "ABA"
+    - "CCC"
+    - "   "
+  set:
+    A: cooked_rice
+    B: minecraft:carrot
+    C: minecraft:dried_kelp
+  result:
+    id: kelp_roll
+    amount: 1
