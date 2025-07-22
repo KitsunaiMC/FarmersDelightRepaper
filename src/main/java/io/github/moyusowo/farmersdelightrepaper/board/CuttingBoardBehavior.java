@@ -98,7 +98,7 @@ public final class CuttingBoardBehavior implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
         if (event.useInteractedBlock() == Event.Result.DENY || event.useItemInHand() == Event.Result.DENY) return;
-        if (event.getClickedBlock() == null || event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
+        if (event.getClickedBlock() == null) return;
         if (!NeoArtisanAPI.getArtisanBlockStorage().isArtisanBlock(event.getClickedBlock())) return;
         if (!NeoArtisanAPI.getArtisanBlockStorage().getArtisanBlockData(event.getClickedBlock()).blockId().equals(Keys.cutting_board)) return;
         ItemDisplay itemDisplay = getItemDisplay(event.getClickedBlock());

@@ -45,13 +45,14 @@ public final class CookingPotRecipe {
         FarmersDelightRepaper.getInstance().getLogger().info("Custom CookingPot Recipes loaded");
     }
 
-    private final Set<NamespacedKey> items;
+    private final List<NamespacedKey> items;
     private final boolean needBowl;
 
     CookingPotRecipe(boolean needBowl, NamespacedKey... items) {
         this.needBowl = needBowl;
-        this.items = new HashSet<>();
+        this.items = new ArrayList<>();
         this.items.addAll(Arrays.stream(items).filter(item -> (!(item == null || item.equals(ArtisanItem.EMPTY)))).toList());
+        this.items.sort((k1, k2) -> String.CASE_INSENSITIVE_ORDER.compare(k1.asString(), k2.asString()));
     }
 
     static CookingPotGenerator matches(
@@ -64,7 +65,12 @@ public final class CookingPotRecipe {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        return items.equals(((CookingPotRecipe) o).items) && needBowl == ((CookingPotRecipe) o).needBowl;
+        if (items.size() != ((CookingPotRecipe) o).items.size()) return false;
+        if (needBowl != ((CookingPotRecipe) o).needBowl) return false;
+        for (int i = 0; i < items.size(); i++) {
+            if (!items.get(i).equals(((CookingPotRecipe) o).items.get(i))) return false;
+        }
+        return true;
     }
 
     @Override
