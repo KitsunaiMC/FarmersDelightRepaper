@@ -83,16 +83,16 @@ cooked_bacon_1:
       amount: 1
 mutton_chops_1:
   item: minecraft:mutton
-  result:
+  results:
     - id: mutton_chops
       amount: 2
 cooked_mutton_chops_1:
-  items: minecraft:cooked_mutton
-  result:
+  item: minecraft:cooked_mutton
+  results:
     - id: cooked_mutton_chops
       amount: 2
 kelp_roll_slice_1:
-  items: kelp_roll
-  result:
+  item: kelp_roll
+  results:
     - id: kelp_roll_slice
       amount: 1
