@@ -1,6 +1,8 @@
 raw_pasta_1:
   items:
-    - minecraft:water_bucket
+    -
+      - minecraft:water_bucket
+      - tag:water_container
     - minecraft:wheat
     - minecraft:wheat
     - minecraft:wheat

@@ -14,7 +14,10 @@ import org.bukkit.NamespacedKey;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.serialize.SerializationException;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @SuppressWarnings("UnstableApiUsage")
 public final class ItemRegistrar {
@@ -32,6 +35,7 @@ public final class ItemRegistrar {
                 final Component displayName = foodConfig.getDisplayName();
                 final FoodProperties foodProperties = foodConfig.getFood();
                 final String itemModel = foodConfig.getItemModel();
+                final Set<String> tags = foodConfig.getTags();
                 final NamespacedKey key;
                 if (itemModel == null) key = null;
                 else if (itemModel.isEmpty()) key = FarmersDelightRepaper.create(entry.getKey().toString());
@@ -50,6 +54,7 @@ public final class ItemRegistrar {
                                         foodProperties.canAlwaysEat()
                                 )
                                 .itemModel(key)
+                                .tags(tags)
                                 .build()
                 );
             } catch (SerializationException e) {

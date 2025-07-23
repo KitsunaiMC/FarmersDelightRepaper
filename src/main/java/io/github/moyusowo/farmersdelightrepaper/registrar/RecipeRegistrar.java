@@ -1,19 +1,25 @@
 package io.github.moyusowo.farmersdelightrepaper.registrar;
 
+import com.google.common.collect.Multimap;
 import io.github.moyusowo.farmersdelightrepaper.FarmersDelightRepaper;
-import io.github.moyusowo.farmersdelightrepaper.config.ConfigUtil;
-import io.github.moyusowo.farmersdelightrepaper.config.FurnaceLikeConfig;
-import io.github.moyusowo.farmersdelightrepaper.config.ShapedRecipeConfig;
-import io.github.moyusowo.farmersdelightrepaper.config.ShapelessConfig;
+import io.github.moyusowo.farmersdelightrepaper.board.CuttingBoardRecipe;
+import io.github.moyusowo.farmersdelightrepaper.config.*;
+import io.github.moyusowo.farmersdelightrepaper.pot.CookingPotRecipe;
 import io.github.moyusowo.farmersdelightrepaper.resource.Keys;
 import io.github.moyusowo.neoartisanapi.api.NeoArtisanAPI;
 import io.github.moyusowo.neoartisanapi.api.item.ItemGenerator;
 import io.github.moyusowo.neoartisanapi.api.recipe.*;
+import io.github.moyusowo.neoartisanapi.api.recipe.choice.Choice;
+import io.github.moyusowo.neoartisanapi.api.recipe.choice.ItemChoice;
+import io.github.moyusowo.neoartisanapi.api.recipe.choice.MultiChoice;
+import io.github.moyusowo.neoartisanapi.api.recipe.choice.TagChoice;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.serialize.SerializationException;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +37,8 @@ public final class RecipeRegistrar {
         onCampfire();
         onSmoker();
         onShapeless();
+        onCutting();
+        onCooking();
     }
 
     private static void onShapeless() {
@@ -39,16 +47,26 @@ public final class RecipeRegistrar {
             try {
                 ShapelessConfig config = entry.getValue().get(ShapelessConfig.class);
                 if (config == null) throw new SerializationException("why the hell is null?");
-                final List<NamespacedKey> key = config.getKeys();
+                final List<List<NamespacedKey>> keys = config.getKeys();
                 final ItemGenerator itemGenerator = config.getItemGenerator();
-                if (key == null) throw new SerializationException("You should correctly fill item ids");
+                if (keys == null) throw new SerializationException("You should correctly fill item ids");
                 if (itemGenerator == null) throw new SerializationException("You should correctly fill all result params!");
+                ArtisanShapelessRecipe.Builder builder = ArtisanShapelessRecipe.builder()
+                        .key(FarmersDelightRepaper.create(entry.getKey().toString()))
+                        .resultGenerator(itemGenerator);
+                for (List<NamespacedKey> choices : keys) {
+                    final List<Choice> c = new ArrayList<>();
+                    for (NamespacedKey choice : choices) {
+                        if (choice.getNamespace().equals("tag")) {
+                            c.add(new TagChoice(choice.getKey()));
+                        } else {
+                            c.add(new ItemChoice(choice));
+                        }
+                    }
+                    builder.add(new MultiChoice(c));
+                }
                 NeoArtisanAPI.getRecipeRegistry().register(
-                        ArtisanShapelessRecipe.builder()
-                                .key(FarmersDelightRepaper.create(entry.getKey().toString()))
-                                .add(key.toArray(new NamespacedKey[0]))
-                                .resultGenerator(itemGenerator)
-                                .build()
+                        builder.build()
                 );
             } catch (SerializationException e) {
                 FarmersDelightRepaper.getInstance().getLogger().severe("error on reading " + entry.getKey().toString() + " of shapeless.yml, " + e);
@@ -63,21 +81,29 @@ public final class RecipeRegistrar {
             try {
                 FurnaceLikeConfig config = entry.getValue().get(FurnaceLikeConfig.class);
                 if (config == null) throw new SerializationException("why the hell is null?");
-                final NamespacedKey key = config.getKey();
+                final List<NamespacedKey> keys = config.getKeys();
                 final ItemGenerator itemGenerator = config.getItemGenerator();
                 final Integer time = config.getTime();
                 final Float exp = config.getExp();
-                if (key == null) throw new SerializationException("You should correctly fill item id!");
+                if (keys == null) throw new SerializationException("You should correctly fill item id!");
                 if (itemGenerator == null) throw new SerializationException("You should correctly fill all result params!");
                 if (time == null) throw new SerializationException("You should fill a valid time value!");
                 if (exp == null) throw new SerializationException("You should fill a valid exp value!");
+                final List<Choice> choices = new ArrayList<>();
+                for (NamespacedKey key : keys) {
+                    if (key.getNamespace().equals("tag")) {
+                        choices.add(new TagChoice(key.getKey()));
+                    } else {
+                        choices.add(new ItemChoice(key));
+                    }
+                }
                 NeoArtisanAPI.getRecipeRegistry().register(
                         ArtisanFurnaceRecipe.builder()
                                 .key(FarmersDelightRepaper.create(entry.getKey().toString()))
                                 .resultGenerator(itemGenerator)
                                 .exp(exp)
                                 .cookTime(time)
-                                .inputItemId(key)
+                                .input(new MultiChoice(choices))
                                 .build()
                 );
             } catch (SerializationException e) {
@@ -93,21 +119,29 @@ public final class RecipeRegistrar {
             try {
                 FurnaceLikeConfig config = entry.getValue().get(FurnaceLikeConfig.class);
                 if (config == null) throw new SerializationException("why the hell is null?");
-                final NamespacedKey key = config.getKey();
+                final List<NamespacedKey> keys = config.getKeys();
                 final ItemGenerator itemGenerator = config.getItemGenerator();
                 final Integer time = config.getTime();
                 final Float exp = config.getExp();
-                if (key == null) throw new SerializationException("You should correctly fill item id!");
+                if (keys == null) throw new SerializationException("You should correctly fill item id!");
                 if (itemGenerator == null) throw new SerializationException("You should correctly fill all result params!");
                 if (time == null) throw new SerializationException("You should fill a valid time value!");
                 if (exp == null) throw new SerializationException("You should fill a valid exp value!");
+                final List<Choice> choices = new ArrayList<>();
+                for (NamespacedKey key : keys) {
+                    if (key.getNamespace().equals("tag")) {
+                        choices.add(new TagChoice(key.getKey()));
+                    } else {
+                        choices.add(new ItemChoice(key));
+                    }
+                }
                 NeoArtisanAPI.getRecipeRegistry().register(
                         ArtisanCampfireRecipe.builder()
                                 .key(FarmersDelightRepaper.create(entry.getKey().toString()))
                                 .resultGenerator(itemGenerator)
                                 .exp(exp)
                                 .cookTime(time)
-                                .inputItemId(key)
+                                .input(new MultiChoice(choices))
                                 .build()
                 );
             } catch (SerializationException e) {
@@ -123,21 +157,29 @@ public final class RecipeRegistrar {
             try {
                 FurnaceLikeConfig config = entry.getValue().get(FurnaceLikeConfig.class);
                 if (config == null) throw new SerializationException("why the hell is null?");
-                final NamespacedKey key = config.getKey();
+                final List<NamespacedKey> keys = config.getKeys();
                 final ItemGenerator itemGenerator = config.getItemGenerator();
                 final Integer time = config.getTime();
                 final Float exp = config.getExp();
-                if (key == null) throw new SerializationException("You should correctly fill item id!");
+                if (keys == null) throw new SerializationException("You should correctly fill item id!");
                 if (itemGenerator == null) throw new SerializationException("You should correctly fill all result params!");
                 if (time == null) throw new SerializationException("You should fill a valid time value!");
                 if (exp == null) throw new SerializationException("You should fill a valid exp value!");
+                final List<Choice> choices = new ArrayList<>();
+                for (NamespacedKey key : keys) {
+                    if (key.getNamespace().equals("tag")) {
+                        choices.add(new TagChoice(key.getKey()));
+                    } else {
+                        choices.add(new ItemChoice(key));
+                    }
+                }
                 NeoArtisanAPI.getRecipeRegistry().register(
                         ArtisanSmokingRecipe.builder()
                                 .key(FarmersDelightRepaper.create(entry.getKey().toString()))
                                 .resultGenerator(itemGenerator)
                                 .exp(exp)
                                 .cookTime(time)
-                                .inputItemId(key)
+                                .input(new MultiChoice(choices))
                                 .build()
                 );
             } catch (SerializationException e) {
@@ -154,20 +196,109 @@ public final class RecipeRegistrar {
                 ShapedRecipeConfig config = entry.getValue().get(ShapedRecipeConfig.class);
                 if (config == null) throw new SerializationException("why the hell is null?");
                 final String[] matrix = config.getMatrix();
-                final Map<Character, NamespacedKey> ingredients = config.getIngredientKeys();
+                final Multimap<Character, NamespacedKey> ingredients = config.getIngredientKeys();
                 final ItemGenerator itemGenerator = config.getItemGenerator();
                 if (matrix == null) throw new SerializationException("You should correctly fill matrix!");
                 if (ingredients == null) throw new SerializationException("You should correctly fill ingredients!");
                 if (itemGenerator == null) throw new SerializationException("You should correctly fill all result params!");
                 ArtisanShapedRecipe.Builder builder = ArtisanShapedRecipe.builder();
                 builder.key(FarmersDelightRepaper.create(entry.getKey().toString())).set(matrix[0], matrix[1], matrix[2]).resultGenerator(itemGenerator);
-                ingredients.forEach(builder::add);
+                for (Character c : ingredients.keySet()) {
+                    final List<Choice> choices = new ArrayList<>();
+                    final Collection<NamespacedKey> keys = ingredients.get(c);
+                    for (NamespacedKey key : keys) {
+                        if (key.namespace().equals("tag")) {
+                            choices.add(new TagChoice(key.getKey()));
+                        } else {
+                            choices.add(new ItemChoice(key));
+                        }
+                    }
+                    builder.add(c, new MultiChoice(choices));
+                }
                 NeoArtisanAPI.getRecipeRegistry().register(builder.build());
             } catch (SerializationException e) {
                 FarmersDelightRepaper.getInstance().getLogger().severe("error on reading " + entry.getKey().toString() + " of smoker.yml, " + e);
             }
         }
         FarmersDelightRepaper.getInstance().getLogger().info("Custom Smoker Recipes loaded");
+    }
+
+    private static void onCutting() {
+        final CommentedConfigurationNode topNode = ConfigUtil.readYml("recipes/cutting_board.yml");
+        for (Map.Entry<Object, CommentedConfigurationNode> entry : topNode.childrenMap().entrySet()) {
+            try {
+                CuttingBoardConfig config = entry.getValue().get(CuttingBoardConfig.class);
+                if (config == null) throw new SerializationException("why the hell is null?");
+                final List<NamespacedKey> keys = config.getKeys();
+                final List<ItemGenerator> itemGenerators = config.getItemGenerators();
+                if (keys == null) throw new SerializationException("You should correctly fill item id!");
+                if (itemGenerators == null) throw new SerializationException("You should correctly fill all result params!");
+                final List<Choice> choices = new ArrayList<>();
+                keys.forEach(
+                        key -> {
+                            if (key.getNamespace().equals("tag")) {
+                                choices.add(new TagChoice(key.getKey()));
+                            } else {
+                                choices.add(new ItemChoice(key));
+                            }
+                        }
+                );
+                NeoArtisanAPI.getRecipeRegistry().register(
+                        new CuttingBoardRecipe(
+                                NamespacedKey.fromString(entry.getKey().toString(), FarmersDelightRepaper.getInstance()),
+                                new MultiChoice(choices),
+                                itemGenerators
+                        )
+                );
+            } catch (SerializationException e) {
+                FarmersDelightRepaper.getInstance().getLogger().severe("error on reading " + entry.getKey().toString() + " of cutting_board.yml, " + e);
+            }
+        }
+        FarmersDelightRepaper.getInstance().getLogger().info("Custom CuttingBoard Recipes loaded");
+    }
+
+    private static void onCooking() {
+        final CommentedConfigurationNode topNode = ConfigUtil.readYml("recipes/cooking_pot.yml");
+        for (Map.Entry<Object, CommentedConfigurationNode> entry : topNode.childrenMap().entrySet()) {
+            try {
+                CookingPotConfig config = entry.getValue().get(CookingPotConfig.class);
+                if (config == null) throw new SerializationException("why the hell is null?");
+                final List<List<NamespacedKey>> keys = config.getKeys();
+                final ItemGenerator itemGenerator = config.getItemGenerator();
+                final Integer time = config.getTime();
+                final Float exp = config.getExp();
+                final boolean needBowl = config.needBowl;
+                if (keys == null) throw new SerializationException("You should correctly fill item ids!");
+                if (itemGenerator == null) throw new SerializationException("You should correctly fill all result params!");
+                if (time == null) throw new SerializationException("You should fill a valid time value!");
+                if (exp == null) throw new SerializationException("You should fill a valid exp value!");
+                final List<Choice> choices = new ArrayList<>();
+                for (final List<NamespacedKey> choicesKey : keys) {
+                    final List<Choice> c = new ArrayList<>();
+                    for (final NamespacedKey choice : choicesKey) {
+                        if (choice.getNamespace().equals("tag")) {
+                            c.add(new TagChoice(choice.getKey()));
+                        } else {
+                            c.add(new ItemChoice(choice));
+                        }
+                    }
+                    choices.add(new MultiChoice(c));
+                }
+                NeoArtisanAPI.getRecipeRegistry().register(
+                        new CookingPotRecipe(
+                                FarmersDelightRepaper.create(entry.getKey().toString()),
+                                choices,
+                                needBowl,
+                                itemGenerator,
+                                time,
+                                exp
+                        )
+                );
+            } catch (SerializationException e) {
+                FarmersDelightRepaper.getInstance().getLogger().severe("error on reading " + entry.getKey().toString() + " of cooking_pot.yml, " + e);
+            }
+        }
+        FarmersDelightRepaper.getInstance().getLogger().info("Custom CookingPot Recipes loaded");
     }
 
     private static void plantDefault() {
@@ -180,7 +311,7 @@ public final class RecipeRegistrar {
                                         1
                                 )
                         )
-                        .add(Keys.tomato)
+                        .add(new ItemChoice(Keys.tomato))
                         .build()
         );
         NeoArtisanAPI.getRecipeRegistry().register(
@@ -192,7 +323,7 @@ public final class RecipeRegistrar {
                                         1
                                 )
                         )
-                        .add(Keys.rice_panicle)
+                        .add(new ItemChoice(Keys.rice_panicle))
                         .build()
         );
     }
@@ -202,8 +333,8 @@ public final class RecipeRegistrar {
                 ArtisanShapedRecipe.builder()
                         .key(Keys.flint_knife)
                         .set(" A ", " B ")
-                        .add('A', Material.FLINT.getKey())
-                        .add('B', Material.STICK.getKey())
+                        .add('A', new ItemChoice(Material.FLINT.getKey()))
+                        .add('B', new ItemChoice(Material.STICK.getKey()))
                         .resultGenerator(
                                 ItemGenerator.simpleGenerator(
                                         Keys.flint_knife,
@@ -216,8 +347,8 @@ public final class RecipeRegistrar {
                 ArtisanShapedRecipe.builder()
                         .key(Keys.iron_knife)
                         .set(" A ", " B ")
-                        .add('A', Material.IRON_INGOT.getKey())
-                        .add('B', Material.STICK.getKey())
+                        .add('A', new ItemChoice(Material.IRON_INGOT.getKey()))
+                        .add('B', new ItemChoice(Material.STICK.getKey()))
                         .resultGenerator(
                                 ItemGenerator.simpleGenerator(
                                         Keys.iron_knife,
@@ -230,8 +361,8 @@ public final class RecipeRegistrar {
                 ArtisanShapedRecipe.builder()
                         .key(Keys.golden_knife)
                         .set(" A ", " B ")
-                        .add('A', Material.GOLD_INGOT.getKey())
-                        .add('B', Material.STICK.getKey())
+                        .add('A', new ItemChoice(Material.GOLD_INGOT.getKey()))
+                        .add('B', new ItemChoice(Material.STICK.getKey()))
                         .resultGenerator(
                                 ItemGenerator.simpleGenerator(
                                         Keys.golden_knife,
@@ -244,8 +375,8 @@ public final class RecipeRegistrar {
                 ArtisanShapedRecipe.builder()
                         .key(Keys.diamond_knife)
                         .set(" A ", " B ")
-                        .add('A', Material.DIAMOND.getKey())
-                        .add('B', Material.STICK.getKey())
+                        .add('A', new ItemChoice(Material.DIAMOND.getKey()))
+                        .add('B', new ItemChoice(Material.STICK.getKey()))
                         .resultGenerator(
                                 ItemGenerator.simpleGenerator(
                                         Keys.golden_knife,
@@ -261,10 +392,10 @@ public final class RecipeRegistrar {
                 ArtisanShapedRecipe.builder()
                         .key(Keys.cooking_pot)
                         .set("ABA", "CDC", "CCC")
-                        .add('A', Material.BRICK.getKey())
-                        .add('B', Material.WOODEN_SHOVEL.getKey())
-                        .add('C', Material.IRON_INGOT.getKey())
-                        .add('D', Material.WATER_BUCKET.getKey())
+                        .add('A', new ItemChoice(Material.BRICK.getKey()))
+                        .add('B', new ItemChoice(Material.WOODEN_SHOVEL.getKey()))
+                        .add('C', new ItemChoice(Material.IRON_INGOT.getKey()))
+                        .add('D', new ItemChoice(Material.WATER_BUCKET.getKey()))
                         .resultGenerator(ItemGenerator.simpleGenerator(Keys.cooking_pot, 1))
                         .build()
         );
@@ -278,8 +409,8 @@ public final class RecipeRegistrar {
                         ArtisanShapedRecipe.builder()
                                 .key(FarmersDelightRepaper.create(Keys.cutting_board.getKey() + "_" + i))
                                 .set("ABB", "ABB")
-                                .add('A', Material.STICK.getKey())
-                                .add('B', material.getKey())
+                                .add('A', new ItemChoice(Material.STICK.getKey()))
+                                .add('B', new ItemChoice(material.getKey()))
                                 .resultGenerator(ItemGenerator.simpleGenerator(Keys.cutting_board, 1))
                                 .build()
                 );

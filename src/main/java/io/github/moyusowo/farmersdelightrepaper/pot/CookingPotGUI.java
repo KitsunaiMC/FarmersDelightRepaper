@@ -7,6 +7,7 @@ import io.github.moyusowo.farmersdelightrepaper.resource.TranslatableText;
 import io.github.moyusowo.neoartisanapi.api.NeoArtisanAPI;
 import io.github.moyusowo.neoartisanapi.api.block.gui.ArtisanBlockGUI;
 import io.github.moyusowo.neoartisanapi.api.persistence.type.ItemStackDataType;
+import io.github.moyusowo.neoartisanapi.api.recipe.ArtisanRecipe;
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.*;
 import org.bukkit.block.BlockFace;
@@ -17,8 +18,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class CookingPotGUI extends ArtisanBlockGUI {
 
@@ -52,14 +55,13 @@ public class CookingPotGUI extends ArtisanBlockGUI {
             @Override
             public void run() {
                 final int timeValue = getArtisanBlockData().getPersistentDataContainer().getOrDefault(time, PersistentDataType.INTEGER, 0);
-                final CookingPotRecipe r = getInventoryRecipe();
-                final CookingPotGenerator g = CookingPotRecipe.matches(r);
+                final Optional<CookingPotRecipe> recipe = getInventoryRecipe();
                 final ItemStack res = inventory.getItem(resultSlot);
                 final boolean isBurningValue = getArtisanBlockData().getPersistentDataContainer().getOrDefault(isBurning, PersistentDataType.BOOLEAN, false);
-                if (isBurningValue && g != null && (res == null || (g.generate().isSimilar(res) && g.generate().getAmount() + res.getAmount() <= res.getMaxStackSize()))) {
-                    if (timeValue < g.time()) {
+                if (isBurningValue && recipe.isPresent() && (res == null || (recipe.get().getResultGenerator().generate().isSimilar(res) && recipe.get().getResultGenerator().generate().getAmount() + res.getAmount() <= res.getMaxStackSize()))) {
+                    if (timeValue < recipe.get().getTime()) {
                         getArtisanBlockData().getPersistentDataContainer().set(time, PersistentDataType.INTEGER, timeValue + 1);
-                        getArtisanBlockData().getPersistentDataContainer().set(progress, PersistentDataType.INTEGER, (int) ((double) timeValue / (double) g.time() * 20.0));
+                        getArtisanBlockData().getPersistentDataContainer().set(progress, PersistentDataType.INTEGER, (int) ((double) timeValue / (double) recipe.get().getTime() * 20.0));
                     } else {
                         getArtisanBlockData().getPersistentDataContainer().remove(progress);
                         getArtisanBlockData().getPersistentDataContainer().remove(time);
@@ -73,8 +75,8 @@ public class CookingPotGUI extends ArtisanBlockGUI {
                         if (bowl != null) {
                             bowl.setAmount(bowl.getAmount() - 1);
                         }
-                        inventory.setItem(resultSlot, g.generate());
-                        getArtisanBlockData().getPersistentDataContainer().set(expSave, PersistentDataType.FLOAT, g.exp());
+                        inventory.setItem(resultSlot, recipe.get().getResultGenerator().generate());
+                        getArtisanBlockData().getPersistentDataContainer().set(expSave, PersistentDataType.FLOAT, recipe.get().getExp());
                     }
                 } else {
                     getArtisanBlockData().getPersistentDataContainer().remove(progress);
@@ -266,17 +268,25 @@ public class CookingPotGUI extends ArtisanBlockGUI {
         };
     }
 
-    private CookingPotRecipe getInventoryRecipe() {
+    private Optional<CookingPotRecipe> getInventoryRecipe() {
         ItemStack bowl = inventory.getItem(bowlSlot);
-        boolean hasBowl = bowl != null && (!bowl.isEmpty());
-        return new CookingPotRecipe(
-                hasBowl,
-                NeoArtisanAPI.getItemRegistry().getRegistryId(inventory.getItem(itemSlot.get(0))),
-                NeoArtisanAPI.getItemRegistry().getRegistryId(inventory.getItem(itemSlot.get(1))),
-                NeoArtisanAPI.getItemRegistry().getRegistryId(inventory.getItem(itemSlot.get(2))),
-                NeoArtisanAPI.getItemRegistry().getRegistryId(inventory.getItem(itemSlot.get(3))),
-                NeoArtisanAPI.getItemRegistry().getRegistryId(inventory.getItem(itemSlot.get(4))),
-                NeoArtisanAPI.getItemRegistry().getRegistryId(inventory.getItem(itemSlot.get(5)))
-        );
+        final ItemStack[] matrix = new ItemStack[] {
+                inventory.getItem(itemSlot.get(0)),
+                inventory.getItem(itemSlot.get(1)),
+                inventory.getItem(itemSlot.get(2)),
+                inventory.getItem(itemSlot.get(3)),
+                inventory.getItem(itemSlot.get(4)),
+                inventory.getItem(itemSlot.get(5)),
+                bowl
+        };
+        final Collection<ArtisanRecipe> cookingRecipes = NeoArtisanAPI.getRecipeRegistry().getRecipes(CookingPotRecipe.TYPE);
+        for (ArtisanRecipe recipe : cookingRecipes) {
+            if (recipe instanceof CookingPotRecipe cookingPotRecipe) {
+                if (cookingPotRecipe.matches(matrix)) {
+                    return Optional.of(cookingPotRecipe);
+                }
+            }
+        }
+        return Optional.empty();
     }
 }

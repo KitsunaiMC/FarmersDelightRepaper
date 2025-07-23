@@ -1,90 +1,128 @@
 package io.github.moyusowo.farmersdelightrepaper.pot;
 
-import io.github.moyusowo.farmersdelightrepaper.FarmersDelightRepaper;
-import io.github.moyusowo.farmersdelightrepaper.config.ConfigUtil;
-import io.github.moyusowo.farmersdelightrepaper.config.CookingPotConfig;
-import io.github.moyusowo.neoartisanapi.api.item.ArtisanItem;
+import io.github.moyusowo.neoartisanapi.api.NeoArtisanAPI;
+import io.github.moyusowo.neoartisanapi.api.item.ItemGenerator;
+import io.github.moyusowo.neoartisanapi.api.recipe.ArtisanRecipe;
+import io.github.moyusowo.neoartisanapi.api.recipe.choice.Choice;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.spongepowered.configurate.CommentedConfigurationNode;
-import org.spongepowered.configurate.serialize.SerializationException;
+import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Unmodifiable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
-public final class CookingPotRecipe {
+public class CookingPotRecipe implements ArtisanRecipe {
+    public static final NamespacedKey TYPE = new NamespacedKey("farmersdelightrepaper", "cooking_pot");
 
-    private static final Map<CookingPotRecipe, CookingPotGenerator> recipe = new HashMap<>();
-
-    public static void initOnLoad() {
-        final CommentedConfigurationNode topNode = ConfigUtil.readYml("recipes/cooking_pot.yml");
-        for (Map.Entry<Object, CommentedConfigurationNode> entry : topNode.childrenMap().entrySet()) {
-            try {
-                CookingPotConfig config = entry.getValue().get(CookingPotConfig.class);
-                if (config == null) throw new SerializationException("why the hell is null?");
-                final List<NamespacedKey> key = config.getKeys();
-                final NamespacedKey itemGenerator = config.getItemGeneratorId();
-                final Integer amount = config.getAmount();
-                final Integer time = config.getTime();
-                final Float exp = config.getExp();
-                final boolean needBowl = config.needBowl;
-                if (key == null) throw new SerializationException("You should correctly fill item ids!");
-                if (itemGenerator == null || amount == null || exp == null) throw new SerializationException("You should correctly fill all result params!");
-                if (time == null) throw new SerializationException("You should fill a valid time value!");
-                recipe.put(
-                        new CookingPotRecipe(
-                                needBowl,
-                                key.toArray(new NamespacedKey[0])
-                        ),
-                        new CookingPotGenerator(
-                                amount, itemGenerator, time, exp
-                        )
-                );
-            } catch (SerializationException e) {
-                FarmersDelightRepaper.getInstance().getLogger().severe("error on reading " + entry.getKey().toString() + " of cooking_pot.yml, " + e);
-            }
-        }
-        FarmersDelightRepaper.getInstance().getLogger().info("Custom CookingPot Recipes loaded");
-    }
-
-    private final List<NamespacedKey> items;
+    private final NamespacedKey key;
+    private final List<Choice> inputs;
     private final boolean needBowl;
+    private final ItemGenerator itemGenerator;
+    private final int time;
+    private final float exp;
 
-    CookingPotRecipe(boolean needBowl, NamespacedKey... items) {
+    public CookingPotRecipe(NamespacedKey key, List<Choice> inputs, boolean needBowl, ItemGenerator itemGenerator, int time, float exp) {
+        this.key = key;
+        this.inputs = new ArrayList<>(inputs);
         this.needBowl = needBowl;
-        this.items = new ArrayList<>();
-        this.items.addAll(Arrays.stream(items).filter(item -> (!(item == null || item.equals(ArtisanItem.EMPTY)))).toList());
-        this.items.sort((k1, k2) -> String.CASE_INSENSITIVE_ORDER.compare(k1.asString(), k2.asString()));
+        this.itemGenerator = itemGenerator;
+        this.time = time;
+        this.exp = exp;
     }
 
-    static CookingPotGenerator matches(
-            CookingPotRecipe r
-    ) {
-        return recipe.getOrDefault(r, null);
+
+    @Override
+    public @NotNull NamespacedKey getKey() {
+        return key;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (items.size() != ((CookingPotRecipe) o).items.size()) return false;
-        if (needBowl != ((CookingPotRecipe) o).needBowl) return false;
-        for (int i = 0; i < items.size(); i++) {
-            if (!items.get(i).equals(((CookingPotRecipe) o).items.get(i))) return false;
+    public @NotNull NamespacedKey getType() {
+        return TYPE;
+    }
+
+    @Override
+    public @Unmodifiable @NotNull List<Choice> getInputs() {
+        return Collections.unmodifiableList(inputs);
+    }
+
+    @Override
+    public @Unmodifiable @NotNull List<ItemGenerator> getResultGenerators() {
+        return List.of(itemGenerator);
+    }
+
+    @NotNull
+    public ItemGenerator getResultGenerator() {
+        return itemGenerator;
+    }
+
+    public boolean needBowl() {
+        return needBowl;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public float getExp() {
+        return exp;
+    }
+
+    @Override
+    public boolean matches(ItemStack @NotNull [] originalItemStacks) {
+        if (originalItemStacks.length != 7) return false;
+        if (NeoArtisanAPI.getItemRegistry().getRegistryId(originalItemStacks[6]).equals(Material.BOWL.getKey()) && !needBowl) return false;
+        if (!NeoArtisanAPI.getItemRegistry().getRegistryId(originalItemStacks[6]).equals(Material.BOWL.getKey()) && needBowl) return false;
+        List<ItemStack> itemStacks = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            if (originalItemStacks[i] != null && !originalItemStacks[i].isEmpty()) {
+                itemStacks.add(originalItemStacks[i]);
+            }
+        }
+        if (itemStacks.size() != inputs.size()) return false;
+        int size = itemStacks.size();
+        final List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            graph.add(new ArrayList<>());
+        }
+        for (int itemId = 0; itemId < size; itemId++) {
+            final ItemStack itemStack = itemStacks.get(itemId);
+            for (int slotId = 0; slotId < size; slotId++) {
+                final Choice choice = inputs.get(slotId);
+                if (choice.matches(itemStack)) {
+                    graph.get(itemId).add(slotId);
+                }
+            }
+        }
+        final int[] slotMatches = new int[size];
+        Arrays.fill(slotMatches, -1);
+        final int[] itemMatches = new int[size];
+        Arrays.fill(itemMatches, -1);
+        boolean[] visited;
+        for (int slotId = 0; slotId < size; slotId++) {
+            visited = new boolean[size];
+            if (!findMatchForSlot(slotId, graph, slotMatches, itemMatches, visited)) {
+                return false;
+            }
         }
         return true;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(items, needBowl);
+    private static boolean findMatchForSlot(int slotId, final List<List<Integer>> graph, final int[] slotMatches, final int[] itemMatches, final boolean[] visited) {
+        for (int itemId = 0; itemId < graph.size(); itemId++) {
+            if (graph.get(itemId).contains(slotId) && !visited[itemId]) {
+                visited[itemId] = true;
+                if (itemMatches[itemId] == -1 || findMatchForSlot(itemMatches[itemId], graph, slotMatches, itemMatches, visited)) {
+                    slotMatches[slotId] = itemId;
+                    itemMatches[itemId] = slotId;
+                    return true;
+                }
+            }
+        }
+        return false;
     }
-
-    @Override
-    public String toString() {
-        return "CookingPotRecipe: {items=" + items.toString() + " ,needBowl=" + needBowl + "}";
-    }
-
-    public boolean isEmpty() {
-        return items.isEmpty();
-    }
-
 }

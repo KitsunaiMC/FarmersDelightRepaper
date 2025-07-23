@@ -19,7 +19,7 @@ public class CookingPotConfig {
     private final int time;
 
     @Setting(value = "items")
-    private final List<String> items;
+    private final List<List<String>> items;
 
     @Setting(value = "result")
     private final Result result;
@@ -45,13 +45,16 @@ public class CookingPotConfig {
 
         public Result() {
             id = "";
-            amount = Integer.MIN_VALUE;
+            amount = -Integer.MAX_VALUE;
         }
     }
 
-    public @Nullable NamespacedKey getItemGeneratorId() {
+    public @Nullable ItemGenerator getItemGenerator() {
         if (result.id.isEmpty()) return null;
-        return NamespacedKey.fromString(result.id, FarmersDelightRepaper.getInstance());
+        final NamespacedKey key = NamespacedKey.fromString(result.id, FarmersDelightRepaper.getInstance());
+        if (key == null) return null;
+        if (result.amount <= 0) return null;
+        return ItemGenerator.simpleGenerator(key, result.amount);
     }
 
     public @Nullable Float getExp() {
@@ -59,17 +62,16 @@ public class CookingPotConfig {
         return exp;
     }
 
-    public @Nullable Integer getAmount() {
-        if (result.amount <= 0) return null;
-        return result.amount;
-    }
-
-    public @Nullable List<NamespacedKey> getKeys() {
+    public @Nullable List<List<NamespacedKey>> getKeys() {
         if (items.isEmpty()) return null;
-        List<NamespacedKey> keys = new ArrayList<>();
-        items.forEach(
-                item -> keys.add(NamespacedKey.fromString(item, FarmersDelightRepaper.getInstance()))
-        );
+        List<List<NamespacedKey>> keys = new ArrayList<>();
+        for (List<String> choices : items) {
+            final List<NamespacedKey> k = new ArrayList<>();
+            for (String choice : choices) {
+                k.add(NamespacedKey.fromString(choice, FarmersDelightRepaper.getInstance()));
+            }
+            keys.add(k);
+        }
         return keys;
     }
 

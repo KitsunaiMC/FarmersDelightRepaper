@@ -7,10 +7,13 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 import org.spongepowered.configurate.objectmapping.meta.Setting;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @ConfigSerializable
 public final class FurnaceLikeConfig {
     @Setting(value = "item")
-    private final String item;
+    private final List<String> item;
 
     @Setting(value = "exp")
     private final float exp;
@@ -22,9 +25,9 @@ public final class FurnaceLikeConfig {
     private final Result result;
 
     public FurnaceLikeConfig() {
-        item = "";
-        exp = Float.MIN_VALUE;
-        time = Integer.MIN_VALUE;
+        item = new ArrayList<>();
+        exp = -Float.MAX_VALUE;
+        time = -Integer.MAX_VALUE;
         result = new Result();
     }
 
@@ -50,9 +53,13 @@ public final class FurnaceLikeConfig {
         return ItemGenerator.simpleGenerator(key, result.amount);
     }
 
-    public @Nullable NamespacedKey getKey() {
+    public @Nullable List<NamespacedKey> getKeys() {
         if (item.isEmpty()) return null;
-        return NamespacedKey.fromString(item, FarmersDelightRepaper.getInstance());
+        List<NamespacedKey> keys = new ArrayList<>();
+        for (String s : item) {
+            keys.add(NamespacedKey.fromString(s, FarmersDelightRepaper.getInstance()));
+        }
+        return keys;
     }
 
     public @Nullable Integer getTime() {

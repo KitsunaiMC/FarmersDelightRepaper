@@ -13,13 +13,13 @@ import java.util.List;
 @ConfigSerializable
 public final class CuttingBoardConfig {
     @Setting(value = "item")
-    private final String id;
+    private final List<String> id;
 
     @Setting(value = "results")
     private final List<Result> results;
 
     public CuttingBoardConfig() {
-        id = "";
+        id = new ArrayList<>();
         results = new ArrayList<>();
     }
 
@@ -37,7 +37,7 @@ public final class CuttingBoardConfig {
         }
     }
 
-    public @Nullable List<ItemGenerator> getItemGenerator() {
+    public @Nullable List<ItemGenerator> getItemGenerators() {
         if (results.isEmpty()) return null;
         final List<ItemGenerator> generators = new ArrayList<>();
         for (Result result : results) {
@@ -50,8 +50,12 @@ public final class CuttingBoardConfig {
         return generators;
     }
 
-    public @Nullable NamespacedKey getKey() {
+    public @Nullable List<NamespacedKey> getKeys() {
         if (id.isEmpty()) return null;
-        return NamespacedKey.fromString(id, FarmersDelightRepaper.getInstance());
+        List<NamespacedKey> keys = new ArrayList<>();
+        for (String s : id) {
+            keys.add(NamespacedKey.fromString(s, FarmersDelightRepaper.getInstance()));
+        }
+        return keys;
     }
 }

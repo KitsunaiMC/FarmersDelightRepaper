@@ -1,7 +1,6 @@
 package io.github.moyusowo.farmersdelightrepaper;
 
 import io.github.moyusowo.farmersdelightrepaper.board.CuttingBoardBehavior;
-import io.github.moyusowo.farmersdelightrepaper.pot.CookingPotRecipe;
 import io.github.moyusowo.farmersdelightrepaper.registrar.BlockRegistrar;
 import io.github.moyusowo.farmersdelightrepaper.registrar.ItemRegistrar;
 import io.github.moyusowo.farmersdelightrepaper.registrar.RecipeRegistrar;
@@ -44,8 +43,6 @@ public final class FarmersDelightRepaper extends JavaPlugin {
                 Bukkit.getPluginManager().disablePlugin(this);
             }
         }
-        CuttingBoardBehavior.initOnLoad();
-        CookingPotRecipe.initOnLoad();
     }
 
     @Override

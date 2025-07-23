@@ -1,15 +1,12 @@
 package io.github.moyusowo.farmersdelightrepaper.board;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Multimap;
 import io.github.moyusowo.farmersdelightrepaper.FarmersDelightRepaper;
-import io.github.moyusowo.farmersdelightrepaper.config.ConfigUtil;
-import io.github.moyusowo.farmersdelightrepaper.config.CuttingBoardConfig;
 import io.github.moyusowo.farmersdelightrepaper.resource.Keys;
 import io.github.moyusowo.farmersdelightrepaper.resource.SoundKey;
 import io.github.moyusowo.neoartisanapi.api.NeoArtisanAPI;
 import io.github.moyusowo.neoartisanapi.api.block.event.ArtisanBlockPlaceEvent;
 import io.github.moyusowo.neoartisanapi.api.item.ItemGenerator;
+import io.github.moyusowo.neoartisanapi.api.recipe.ArtisanRecipe;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.*;
@@ -20,45 +17,21 @@ import org.bukkit.entity.ItemDisplay;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Transformation;
 import org.bukkit.util.Vector;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
-import org.spongepowered.configurate.CommentedConfigurationNode;
-import org.spongepowered.configurate.serialize.SerializationException;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public final class CuttingBoardBehavior implements Listener {
 
-    private static final Multimap<NamespacedKey, ItemGenerator> cuttingBoardRecipe = ArrayListMultimap.create();
     private static final String entityTag = "cutting_board_display";
     private static final Vector offset = new Vector(0.5, 0.0625, 0.5);
 
     private CuttingBoardBehavior() {}
-
-    public static void initOnLoad() {
-        final CommentedConfigurationNode topNode = ConfigUtil.readYml("recipes/cutting_board.yml");
-        for (Map.Entry<Object, CommentedConfigurationNode> entry : topNode.childrenMap().entrySet()) {
-            try {
-                CuttingBoardConfig config = entry.getValue().get(CuttingBoardConfig.class);
-                if (config == null) throw new SerializationException("why the hell is null?");
-                final NamespacedKey key = config.getKey();
-                final List<ItemGenerator> itemGenerators = config.getItemGenerator();
-                if (key == null) throw new SerializationException("You should correctly fill item id!");
-                if (itemGenerators == null) throw new SerializationException("You should correctly fill all result params!");
-                cuttingBoardRecipe.putAll(key, itemGenerators);
-            } catch (SerializationException e) {
-                FarmersDelightRepaper.getInstance().getLogger().severe("error on reading " + entry.getKey().toString() + " of cutting_board.yml, " + e);
-            }
-        }
-        FarmersDelightRepaper.getInstance().getLogger().info("Custom CuttingBoard Recipes loaded");
-    }
 
     private static ItemDisplay getItemDisplay(Block block) {
         for (Entity entity : block.getWorld().getNearbyEntities(block.getLocation().add(offset), 0.01, 0.01, 0.01)) {
@@ -130,9 +103,10 @@ public final class CuttingBoardBehavior implements Listener {
                         1.0f
                 );
             } else if (Keys.knife.contains(NeoArtisanAPI.getItemRegistry().getRegistryId(event.getItem()))) {
-                if (cuttingBoardRecipe.containsKey(NeoArtisanAPI.getItemRegistry().getRegistryId(itemDisplay.getItemStack()))) {
+                Optional<CuttingBoardRecipe> recipe = findMatch(itemDisplay.getItemStack());
+                if (recipe.isPresent()) {
                     event.setCancelled(true);
-                    Collection<ItemGenerator> itemGenerators = cuttingBoardRecipe.get(NeoArtisanAPI.getItemRegistry().getRegistryId(itemDisplay.getItemStack()));
+                    List<ItemGenerator> itemGenerators = recipe.get().getResultGenerators();
                     for (ItemGenerator itemGenerator : itemGenerators) {
                         event.getClickedBlock().getWorld().dropItemNaturally(
                                 event.getClickedBlock().getLocation().toBlockLocation(),
@@ -161,6 +135,18 @@ public final class CuttingBoardBehavior implements Listener {
                 }
             }
         }
+    }
+
+    private static Optional<CuttingBoardRecipe> findMatch(ItemStack itemStack) {
+        final Collection<ArtisanRecipe> cuttingRecipes = NeoArtisanAPI.getRecipeRegistry().getRecipes(CuttingBoardRecipe.TYPE);
+        for (ArtisanRecipe recipe : cuttingRecipes) {
+            if (recipe instanceof CuttingBoardRecipe cuttingBoardRecipe) {
+                if (cuttingBoardRecipe.matches(itemStack)) {
+                    return Optional.of(cuttingBoardRecipe);
+                }
+            }
+        }
+        return Optional.empty();
     }
 
     private static void onBreak(Block block) {

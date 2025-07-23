@@ -1,5 +1,7 @@
 package io.github.moyusowo.farmersdelightrepaper.config;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
 import io.github.moyusowo.farmersdelightrepaper.FarmersDelightRepaper;
 import io.github.moyusowo.neoartisanapi.api.item.ItemGenerator;
 import org.bukkit.NamespacedKey;
@@ -18,7 +20,7 @@ public class ShapedRecipeConfig {
     private List<String> matrix = new ArrayList<>();
 
     @Setting("set")
-    private Map<String, String> ingredientMap = new HashMap<>();
+    private Map<String, List<String>> ingredientMap = new HashMap<>();
 
     @Setting("result")
     private Result result = new Result();
@@ -33,16 +35,20 @@ public class ShapedRecipeConfig {
         };
     }
 
-    public @Nullable Map<Character, NamespacedKey> getIngredientKeys() {
+    public @Nullable Multimap<Character, NamespacedKey> getIngredientKeys() {
         if (ingredientMap == null || ingredientMap.isEmpty()) return null;
-        Map<Character, NamespacedKey> keys = new HashMap<>();
-        ingredientMap.forEach((symbol, itemId) -> {
+        Multimap<Character, NamespacedKey> keys = ArrayListMultimap.create();
+        ingredientMap.forEach((symbol, itemIds) -> {
             if (symbol.length() == 1) {
-                NamespacedKey key = NamespacedKey.fromString(
-                        itemId,
-                        FarmersDelightRepaper.getInstance()
+                itemIds.forEach(
+                        itemId -> {
+                            NamespacedKey key = NamespacedKey.fromString(
+                                    itemId,
+                                    FarmersDelightRepaper.getInstance()
+                            );
+                            if (key != null) keys.put(symbol.charAt(0), key);
+                        }
                 );
-                if (key != null) keys.put(symbol.charAt(0), key);
             }
         });
         if (keys.isEmpty()) return null;

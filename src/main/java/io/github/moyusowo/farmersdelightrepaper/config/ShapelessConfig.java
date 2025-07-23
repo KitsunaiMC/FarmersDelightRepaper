@@ -13,7 +13,7 @@ import java.util.List;
 @ConfigSerializable
 public class ShapelessConfig {
     @Setting(value = "items")
-    private final List<String> items;
+    private final List<List<String>> items;
 
     @Setting(value = "result")
     private final Result result;
@@ -45,12 +45,16 @@ public class ShapelessConfig {
         return ItemGenerator.simpleGenerator(key, result.amount);
     }
 
-    public @Nullable List<NamespacedKey> getKeys() {
+    public @Nullable List<List<NamespacedKey>> getKeys() {
         if (items.isEmpty()) return null;
-        List<NamespacedKey> keys = new ArrayList<>();
-        items.forEach(
-                item -> keys.add(NamespacedKey.fromString(item, FarmersDelightRepaper.getInstance()))
-        );
+        List<List<NamespacedKey>> keys = new ArrayList<>();
+        for (List<String> choices : items) {
+            final List<NamespacedKey> k = new ArrayList<>();
+            for (String choice : choices) {
+                k.add(NamespacedKey.fromString(choice, FarmersDelightRepaper.getInstance()));
+            }
+            keys.add(k);
+        }
         return keys;
     }
 }
