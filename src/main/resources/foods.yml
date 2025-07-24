@@ -118,6 +118,12 @@ cake_slice: #20s speed lacking
   saturation: 0.4
   can_always_eat: false
   item_model: true
+  eat_seconds: 3.6
+  effects:
+    - type: speed
+      duration: 400
+      amplifier: 1
+      chance: 0.85
 apple_pie_slice: #30s speed lacking
   display_name: 苹果派切片
   translatable_text: item.farmersdelightrepaper.apple_pie_slice

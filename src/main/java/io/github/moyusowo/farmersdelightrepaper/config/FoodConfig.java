@@ -1,19 +1,21 @@
 package io.github.moyusowo.farmersdelightrepaper.config;
 
+import io.github.moyusowo.farmersdelightrepaper.FarmersDelightRepaper;
 import io.papermc.paper.datacomponent.item.FoodProperties;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TranslatableComponent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 import org.spongepowered.configurate.objectmapping.meta.Setting;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @ConfigSerializable
 public final class FoodConfig {
@@ -41,15 +43,45 @@ public final class FoodConfig {
     @Setting(value = "tags")
     private final Set<String> tags;
 
+    @Setting(value = "eat_seconds")
+    private final float consumeSeconds;
+
+    @Setting(value = "effects")
+    private final List<EffectConfig> effects;
+
+    @ConfigSerializable
+    public static class EffectConfig {
+        @Setting(value = "type")
+        public final String type;
+
+        @Setting(value = "duration")
+        public final int duration;
+
+        @Setting(value = "amplifier")
+        public final int amplifier;
+
+        @Setting(value = "chance")
+        public final float chance;
+
+        public EffectConfig() {
+            type = "";
+            duration = -Integer.MAX_VALUE;
+            amplifier = -Integer.MAX_VALUE;
+            chance = -Float.MAX_VALUE;
+        }
+    }
+
     public FoodConfig() {
         displayName = "";
         translatableText = "";
         rawMaterial = null;
-        nutrition = Integer.MIN_VALUE;
-        saturation = Float.MIN_VALUE;
+        nutrition = -Integer.MAX_VALUE;
+        saturation = -Float.MAX_VALUE;
+        consumeSeconds = 1.6f;
         canAlwaysEat = false;
         itemModel = "false";
         tags = new HashSet<>();
+        effects = new ArrayList<>();
     }
 
     private @Nullable TranslatableComponent getTranslatable() {
@@ -84,4 +116,26 @@ public final class FoodConfig {
         return tags;
     }
 
+    public float getConsumeSeconds() {
+        return consumeSeconds;
+    }
+
+    public Map<PotionEffect, Float> getEffects() {
+        final Map<PotionEffect, Float> potionEffects = new HashMap<>();
+        effects.forEach(
+                effect -> {
+                    FarmersDelightRepaper.getInstance().getLogger().info(effect.type.toLowerCase());
+                    PotionEffectType type = Registry.EFFECT.get(NamespacedKey.minecraft(effect.type.toLowerCase()));
+                    if (type == null) {
+                        FarmersDelightRepaper.getInstance().getLogger().severe("no such potion type: " + effect.type.toLowerCase());
+                        return;
+                    }
+                    potionEffects.put(
+                            type.createEffect(effect.duration, effect.amplifier),
+                            effect.chance
+                    );
+                }
+        );
+        return potionEffects;
+    }
 }

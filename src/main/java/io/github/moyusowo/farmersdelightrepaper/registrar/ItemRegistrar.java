@@ -11,11 +11,10 @@ import io.papermc.paper.datacomponent.item.FoodProperties;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.potion.PotionEffect;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.serialize.SerializationException;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -36,6 +35,8 @@ public final class ItemRegistrar {
                 final FoodProperties foodProperties = foodConfig.getFood();
                 final String itemModel = foodConfig.getItemModel();
                 final Set<String> tags = foodConfig.getTags();
+                final float eatTime = foodConfig.getConsumeSeconds();
+                final Map<PotionEffect, Float> effects = foodConfig.getEffects();
                 final NamespacedKey key;
                 if (itemModel == null) key = null;
                 else if (itemModel.isEmpty()) key = FarmersDelightRepaper.create(entry.getKey().toString());
@@ -51,7 +52,9 @@ public final class ItemRegistrar {
                                 .foodProperty(
                                         foodProperties.nutrition(),
                                         foodProperties.saturation(),
-                                        foodProperties.canAlwaysEat()
+                                        foodProperties.canAlwaysEat(),
+                                        effects,
+                                        eatTime
                                 )
                                 .itemModel(key)
                                 .tags(tags)
