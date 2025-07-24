@@ -16,7 +16,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Collection;
 import java.util.List;
@@ -50,101 +49,86 @@ public class CookingPotGUI extends ArtisanBlockGUI {
         super(FarmersDelightRepaper.getInstance(), 45, TranslatableText.container_cooking_pot, location);
     }
 
-    private BukkitRunnable generateCookingTask() {
-        return new BukkitRunnable() {
-            @Override
-            public void run() {
-                final int timeValue = getArtisanBlockData().getPersistentDataContainer().getOrDefault(time, PersistentDataType.INTEGER, 0);
-                final Optional<CookingPotRecipe> recipe = getInventoryRecipe();
-                final ItemStack res = inventory.getItem(resultSlot);
-                final boolean isBurningValue = getArtisanBlockData().getPersistentDataContainer().getOrDefault(isBurning, PersistentDataType.BOOLEAN, false);
-                if (isBurningValue && recipe.isPresent() && (res == null || (recipe.get().getResultGenerator().generate().isSimilar(res) && recipe.get().getResultGenerator().generate().getAmount() + res.getAmount() <= res.getMaxStackSize()))) {
-                    if (timeValue < recipe.get().getTime()) {
-                        getArtisanBlockData().getPersistentDataContainer().set(time, PersistentDataType.INTEGER, timeValue + 1);
-                        getArtisanBlockData().getPersistentDataContainer().set(progress, PersistentDataType.INTEGER, (int) ((double) timeValue / (double) recipe.get().getTime() * 20.0));
-                    } else {
-                        getArtisanBlockData().getPersistentDataContainer().remove(progress);
-                        getArtisanBlockData().getPersistentDataContainer().remove(time);
-                        for (int i = 0; i < 6; i++) {
-                            final ItemStack itemStack = inventory.getItem(itemSlot.get(i));
-                            if (itemStack != null) {
-                                itemStack.setAmount(itemStack.getAmount() - 1);
-                            }
-                        }
-                        final ItemStack bowl = inventory.getItem(bowlSlot);
-                        if (bowl != null) {
-                            bowl.setAmount(bowl.getAmount() - 1);
-                        }
-                        inventory.setItem(resultSlot, recipe.get().getResultGenerator().generate());
-                        getArtisanBlockData().getPersistentDataContainer().set(expSave, PersistentDataType.FLOAT, recipe.get().getExp());
-                    }
-                } else {
-                    getArtisanBlockData().getPersistentDataContainer().remove(progress);
-                    getArtisanBlockData().getPersistentDataContainer().remove(time);
-                }
-            }
-        };
-    }
-
-    private BukkitRunnable generateSoundTask() {
-        return new BukkitRunnable() {
-            @Override
-            public void run() {
-                final boolean isBurningValue = getArtisanBlockData().getPersistentDataContainer().getOrDefault(isBurning, PersistentDataType.BOOLEAN, false);
-                final int progressValue = getArtisanBlockData().getPersistentDataContainer().getOrDefault(progress, PersistentDataType.INTEGER, 0);
-                if (isBurningValue) {
-                    if (progressValue > 0) {
-                        location.getWorld().playSound(
-                                Sound.sound().type(SoundKey.cooking_pot_boil_soup)
-                                        .source(Sound.Source.BLOCK)
-                                        .pitch(1.0f)
-                                        .volume(1.5f)
-                                        .build(),
-                                location.x(),
-                                location.y(),
-                                location.z()
-                        );
-                    } else {
-                        location.getWorld().playSound(
-                                Sound.sound().type(SoundKey.cooking_pot_boil)
-                                        .source(Sound.Source.BLOCK)
-                                        .pitch(1.0f)
-                                        .volume(1.5f)
-                                        .build(),
-                                location.x(),
-                                location.y(),
-                                location.z()
-                        );
+    private void cookingTask() {
+        final int timeValue = getArtisanBlockData().getPersistentDataContainer().getOrDefault(time, PersistentDataType.INTEGER, 0);
+        final Optional<CookingPotRecipe> recipe = getInventoryRecipe();
+        final ItemStack res = inventory.getItem(resultSlot);
+        final boolean isBurningValue = getArtisanBlockData().getPersistentDataContainer().getOrDefault(isBurning, PersistentDataType.BOOLEAN, false);
+        if (isBurningValue && recipe.isPresent() && (res == null || (recipe.get().getResultGenerator().generate().isSimilar(res) && recipe.get().getResultGenerator().generate().getAmount() + res.getAmount() <= res.getMaxStackSize()))) {
+            if (timeValue < recipe.get().getTime()) {
+                getArtisanBlockData().getPersistentDataContainer().set(time, PersistentDataType.INTEGER, timeValue + 1);
+                getArtisanBlockData().getPersistentDataContainer().set(progress, PersistentDataType.INTEGER, (int) ((double) timeValue / (double) recipe.get().getTime() * 20.0));
+            } else {
+                getArtisanBlockData().getPersistentDataContainer().remove(progress);
+                getArtisanBlockData().getPersistentDataContainer().remove(time);
+                for (int i = 0; i < 6; i++) {
+                    final ItemStack itemStack = inventory.getItem(itemSlot.get(i));
+                    if (itemStack != null) {
+                        itemStack.setAmount(itemStack.getAmount() - 1);
                     }
                 }
+                final ItemStack bowl = inventory.getItem(bowlSlot);
+                if (bowl != null) {
+                    bowl.setAmount(bowl.getAmount() - 1);
+                }
+                inventory.setItem(resultSlot, recipe.get().getResultGenerator().generate());
+                getArtisanBlockData().getPersistentDataContainer().set(expSave, PersistentDataType.FLOAT, recipe.get().getExp());
             }
-        };
+        } else {
+            getArtisanBlockData().getPersistentDataContainer().remove(progress);
+            getArtisanBlockData().getPersistentDataContainer().remove(time);
+        }
     }
 
-    private BukkitRunnable generateBurningTask() {
-        return new BukkitRunnable() {
-            @Override
-            public void run() {
-                if (location.getBlock().getRelative(BlockFace.DOWN).getType() == Material.CAMPFIRE ||
-                    location.getBlock().getRelative(BlockFace.DOWN).getType() == Material.FIRE) {
-                    getArtisanBlockData().getPersistentDataContainer().set(isBurning, PersistentDataType.BOOLEAN, true);
-                    location.getWorld().spawnParticle(
-                            Particle.DUST,
-                            location.clone().add(0.5, 0.6, 0.5),
-                            2,
-                            0.10, 0.05, 0.10,
-                            0.05, // 上升速度
-                            new Particle.DustOptions(Color.fromARGB(255, 255, 255, 255), 0.5f)
-                    );
-                    final int progressValue = getArtisanBlockData().getPersistentDataContainer().getOrDefault(progress, PersistentDataType.INTEGER, 0);
-                    inventory.setItem(0, NeoArtisanAPI.getItemRegistry().getItemStack(Keys.cooking_pot_gui_fire_progress.get(progressValue)));
-                } else {
-                    getArtisanBlockData().getPersistentDataContainer().set(isBurning, PersistentDataType.BOOLEAN, false);
-                    final int progressValue = getArtisanBlockData().getPersistentDataContainer().getOrDefault(progress, PersistentDataType.INTEGER, 0);
-                    inventory.setItem(0, NeoArtisanAPI.getItemRegistry().getItemStack(Keys.cooking_pot_gui_progress.get(progressValue)));
-                }
+    private void soundTask() {
+        final boolean isBurningValue = getArtisanBlockData().getPersistentDataContainer().getOrDefault(isBurning, PersistentDataType.BOOLEAN, false);
+        final int progressValue = getArtisanBlockData().getPersistentDataContainer().getOrDefault(progress, PersistentDataType.INTEGER, 0);
+        if (isBurningValue) {
+            if (progressValue > 0) {
+                location.getWorld().playSound(
+                        Sound.sound().type(SoundKey.cooking_pot_boil_soup)
+                                .source(Sound.Source.BLOCK)
+                                .pitch(1.0f)
+                                .volume(1.5f)
+                                .build(),
+                        location.x(),
+                        location.y(),
+                        location.z()
+                );
+            } else {
+                location.getWorld().playSound(
+                        Sound.sound().type(SoundKey.cooking_pot_boil)
+                                .source(Sound.Source.BLOCK)
+                                .pitch(1.0f)
+                                .volume(1.5f)
+                                .build(),
+                        location.x(),
+                        location.y(),
+                        location.z()
+                );
             }
-        };
+        }
+    }
+
+    private void burningTask() {
+        final Material material = location.getBlock().getRelative(BlockFace.DOWN).getType();
+        if (material == Material.CAMPFIRE) {
+            getArtisanBlockData().getPersistentDataContainer().set(isBurning, PersistentDataType.BOOLEAN, true);
+            location.getWorld().spawnParticle(
+                    Particle.DUST,
+                    location.clone().add(0.5, 0.6, 0.5),
+                    2,
+                    0.10, 0.05, 0.10,
+                    0.05, // 上升速度
+                    new Particle.DustOptions(Color.fromARGB(255, 255, 255, 255), 0.5f)
+            );
+            final int progressValue = getArtisanBlockData().getPersistentDataContainer().getOrDefault(progress, PersistentDataType.INTEGER, 0);
+            inventory.setItem(0, NeoArtisanAPI.getItemRegistry().getItemStack(Keys.cooking_pot_gui_fire_progress.get(progressValue)));
+        } else {
+            getArtisanBlockData().getPersistentDataContainer().set(isBurning, PersistentDataType.BOOLEAN, false);
+            final int progressValue = getArtisanBlockData().getPersistentDataContainer().getOrDefault(progress, PersistentDataType.INTEGER, 0);
+            inventory.setItem(0, NeoArtisanAPI.getItemRegistry().getItemStack(Keys.cooking_pot_gui_progress.get(progressValue)));
+        }
     }
 
     @Override
@@ -177,10 +161,10 @@ public class CookingPotGUI extends ArtisanBlockGUI {
         }
         inventory.setItem(bowlSlot, getArtisanBlockData().getPersistentDataContainer().getOrDefault(bowl, ItemStackDataType.ITEM_STACK, ItemStack.empty()));
         inventory.setItem(resultSlot, getArtisanBlockData().getPersistentDataContainer().getOrDefault(product, ItemStackDataType.ITEM_STACK, ItemStack.empty()));
-        addLifecycleTask(generateSoundTask(), 0L, 20L * 4, false);
-        addLifecycleTask(generateBurningTask(), 0L, 1L, false);
-        addLifecycleTask(generateSavingTask(), 20L, 1L, false);
-        addLifecycleTask(generateCookingTask(), 0L, 1L, false);
+        addLifecycleTask(this::soundTask, 0L, 20L * 4, false, false);
+        addLifecycleTask(this::burningTask, 0L, 1L, false, false);
+        addLifecycleTask(this::savingTask, 20L, 1L, false, false);
+        addLifecycleTask(this::cookingTask, 0L, 1L, false, false);
     }
 
     @Override
@@ -244,28 +228,15 @@ public class CookingPotGUI extends ArtisanBlockGUI {
         }
     }
 
-    private BukkitRunnable generateSavingTask() {
-        return new BukkitRunnable() {
-            private void saveItems() {
-                for (int i = 0; i < itemSlot.size(); i++) {
-                    ItemStack itemStack = inventory.getItem(itemSlot.get(i));
-                    if (itemStack != null) getArtisanBlockData().getPersistentDataContainer().set(items[i], ItemStackDataType.ITEM_STACK, itemStack);
-                    else getArtisanBlockData().getPersistentDataContainer().remove(items[i]);
-                }
-            }
-
-            private void saveBowl() {
-                ItemStack itemStack = inventory.getItem(bowlSlot);
-                if (itemStack != null) getArtisanBlockData().getPersistentDataContainer().set(bowl, ItemStackDataType.ITEM_STACK, itemStack.clone());
-                else getArtisanBlockData().getPersistentDataContainer().remove(bowl);
-            }
-
-            @Override
-            public void run() {
-                saveBowl();
-                saveItems();
-            }
-        };
+    private void savingTask() {
+        ItemStack bowlStack = inventory.getItem(bowlSlot);
+        if (bowlStack != null) getArtisanBlockData().getPersistentDataContainer().set(bowl, ItemStackDataType.ITEM_STACK, bowlStack.clone());
+        else getArtisanBlockData().getPersistentDataContainer().remove(bowl);
+        for (int i = 0; i < itemSlot.size(); i++) {
+            ItemStack itemStack = inventory.getItem(itemSlot.get(i));
+            if (itemStack != null) getArtisanBlockData().getPersistentDataContainer().set(items[i], ItemStackDataType.ITEM_STACK, itemStack);
+            else getArtisanBlockData().getPersistentDataContainer().remove(items[i]);
+        }
     }
 
     private Optional<CookingPotRecipe> getInventoryRecipe() {
