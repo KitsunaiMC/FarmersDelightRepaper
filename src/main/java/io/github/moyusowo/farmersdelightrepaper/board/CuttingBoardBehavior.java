@@ -19,9 +19,11 @@ import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Transformation;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
@@ -60,7 +62,7 @@ public final class CuttingBoardBehavior implements Listener {
         itemDisplay.setTransformation(transformation);
         itemDisplay.addScoreboardTag(entityTag);
         itemDisplay.setPersistent(true);
-        event.getPlacedArtisanBlockData().getLifecycleTaskManager().addTerminateRunnable(() -> onBreak(event.getBlock()));
+        event.getPlacedArtisanBlockData().getLifecycleTaskManager().addTerminateRunnable(itemDisplay::remove);
     }
 
     /*
@@ -73,10 +75,12 @@ public final class CuttingBoardBehavior implements Listener {
     public void onInteract(PlayerInteractEvent event) {
         if (event.useInteractedBlock() == Event.Result.DENY || event.useItemInHand() == Event.Result.DENY) return;
         if (event.getClickedBlock() == null) return;
+        if (event.getHand() != EquipmentSlot.HAND) return;
         if (!Storages.BLOCK.isArtisanBlock(event.getClickedBlock())) return;
         if (!Storages.BLOCK.getArtisanBlockData(event.getClickedBlock()).blockId().equals(Keys.cutting_board)) return;
         ItemDisplay itemDisplay = getItemDisplay(event.getClickedBlock());
         if (itemDisplay == null) return;
+        FarmersDelightRepaper.getInstance().getLogger().info("1");
         if (event.getAction().isLeftClick()) {
             if (!itemDisplay.getItemStack().isEmpty()) {
                 event.setCancelled(true);
@@ -88,13 +92,51 @@ public final class CuttingBoardBehavior implements Listener {
                         itemStack
                 );
             }
-        } else if (event.getItem() != null && event.getAction().isRightClick()) {
-            if (itemDisplay.getItemStack().isEmpty()) {
+        } else if (!event.getPlayer().getInventory().getItemInMainHand().isEmpty() && event.getAction().isRightClick()) {
+            final ItemStack offHandItem = event.getPlayer().getInventory().getItemInOffHand();
+            final ItemStack mainHandItem = event.getPlayer().getInventory().getItemInMainHand();
+            final Optional<CuttingBoardRecipe> offHandRecipe = findMatch(offHandItem);
+            if (Keys.knife.contains(Registries.ITEM.getRegistryId(mainHandItem)) && offHandRecipe.isPresent()) {
                 event.setCancelled(true);
-                ItemStack itemStack = event.getItem().clone();
+                final int amount;
+                if (event.getPlayer().getGameMode() != GameMode.CREATIVE) {
+                    Integer damage = mainHandItem.getDataOrDefault(DataComponentTypes.DAMAGE, 0);
+                    Integer maxDamage = mainHandItem.getData(DataComponentTypes.MAX_DAMAGE);
+                    if (maxDamage == null) return;
+                    else amount = Math.min(maxDamage - damage, offHandItem.getAmount());
+                } else {
+                    amount = offHandItem.getAmount();
+                }
+                List<ItemGenerator> itemGenerators = offHandRecipe.get().getResultGenerators();
+                for (int i = 0; i < amount; i++) {
+                    for (ItemGenerator itemGenerator : itemGenerators) {
+                        event.getClickedBlock().getWorld().dropItemNaturally(
+                                event.getClickedBlock().getLocation().toBlockLocation(),
+                                itemGenerator.generate()
+                        );
+                    }
+                }
+                if (event.getPlayer().getGameMode() != GameMode.CREATIVE) {
+                    offHandItem.setAmount(offHandItem.getAmount() - amount);
+                    Integer damage = mainHandItem.getDataOrDefault(DataComponentTypes.DAMAGE, 0);
+                    mainHandItem.setData(DataComponentTypes.DAMAGE, damage + amount);
+                }
+                event.getClickedBlock().getWorld().playSound(
+                        net.kyori.adventure.sound.Sound.sound().type(SoundKey.cutting_board_knife_cut)
+                                .source(Sound.Source.BLOCK)
+                                .pitch(1.0f)
+                                .volume(1.5f)
+                                .build(),
+                        event.getClickedBlock().getX(),
+                        event.getClickedBlock().getY(),
+                        event.getClickedBlock().getZ()
+                );
+            } else if (itemDisplay.getItemStack().isEmpty()) {
+                event.setCancelled(true);
+                ItemStack itemStack = mainHandItem.clone();
                 itemStack.setAmount(1);
                 if (event.getPlayer().getGameMode() != GameMode.CREATIVE) {
-                    event.getItem().setAmount(event.getItem().getAmount() - 1);
+                    mainHandItem.setAmount(mainHandItem.getAmount() - 1);
                 }
                 itemDisplay.setItemStack(itemStack);
                 event.getClickedBlock().getWorld().playSound(
@@ -103,7 +145,7 @@ public final class CuttingBoardBehavior implements Listener {
                         1.0f,
                         1.0f
                 );
-            } else if (Keys.knife.contains(Registries.ITEM.getRegistryId(event.getItem()))) {
+            } else if (Keys.knife.contains(Registries.ITEM.getRegistryId(mainHandItem))) {
                 Optional<CuttingBoardRecipe> recipe = findMatch(itemDisplay.getItemStack());
                 if (recipe.isPresent()) {
                     event.setCancelled(true);
@@ -116,11 +158,11 @@ public final class CuttingBoardBehavior implements Listener {
                     }
                     itemDisplay.setItemStack(null);
                     if (event.getPlayer().getGameMode() != GameMode.CREATIVE) {
-                        Integer damage = event.getItem().getData(DataComponentTypes.DAMAGE);
+                        Integer damage = mainHandItem.getData(DataComponentTypes.DAMAGE);
                         if (damage == null) {
-                            event.getItem().setData(DataComponentTypes.DAMAGE, 1);
+                            mainHandItem.setData(DataComponentTypes.DAMAGE, 1);
                         } else {
-                            event.getItem().setData(DataComponentTypes.DAMAGE, damage + 1);
+                            mainHandItem.setData(DataComponentTypes.DAMAGE, damage + 1);
                         }
                     }
                     event.getClickedBlock().getWorld().playSound(
@@ -138,7 +180,9 @@ public final class CuttingBoardBehavior implements Listener {
         }
     }
 
-    private static Optional<CuttingBoardRecipe> findMatch(ItemStack itemStack) {
+    private static Optional<CuttingBoardRecipe> findMatch(@Nullable ItemStack itemStack1) {
+        if (itemStack1 == null || itemStack1.isEmpty()) return Optional.empty();
+        ItemStack itemStack = itemStack1.clone();
         final Collection<ArtisanRecipe> cuttingRecipes = Registries.RECIPE.getRecipes(CuttingBoardRecipe.TYPE);
         for (ArtisanRecipe recipe : cuttingRecipes) {
             if (recipe instanceof CuttingBoardRecipe cuttingBoardRecipe) {
@@ -148,18 +192,5 @@ public final class CuttingBoardBehavior implements Listener {
             }
         }
         return Optional.empty();
-    }
-
-    private static void onBreak(Block block) {
-        ItemDisplay itemDisplay = getItemDisplay(block);
-        if (itemDisplay == null) return;
-        ItemStack itemStack = itemDisplay.getItemStack();
-        if (!itemStack.isEmpty()) {
-            block.getWorld().dropItemNaturally(
-                    block.getLocation().add(0, 0.5, 0),
-                    itemStack
-            );
-        }
-        itemDisplay.remove();
     }
 }
