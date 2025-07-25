@@ -1,9 +1,9 @@
 package io.github.moyusowo.farmersdelightrepaper.pot;
 
-import io.github.moyusowo.neoartisanapi.api.NeoArtisanAPI;
 import io.github.moyusowo.neoartisanapi.api.item.ItemGenerator;
 import io.github.moyusowo.neoartisanapi.api.recipe.ArtisanRecipe;
 import io.github.moyusowo.neoartisanapi.api.recipe.choice.Choice;
+import io.github.moyusowo.neoartisanapi.api.registry.Registries;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -75,8 +75,8 @@ public class CookingPotRecipe implements ArtisanRecipe {
     @Override
     public boolean matches(ItemStack @NotNull [] originalItemStacks) {
         if (originalItemStacks.length != 7) return false;
-        if (NeoArtisanAPI.getItemRegistry().getRegistryId(originalItemStacks[6]).equals(Material.BOWL.getKey()) && !needBowl) return false;
-        if (!NeoArtisanAPI.getItemRegistry().getRegistryId(originalItemStacks[6]).equals(Material.BOWL.getKey()) && needBowl) return false;
+        if (Registries.ITEM.getRegistryId(originalItemStacks[6]).equals(Material.BOWL.getKey()) && !needBowl) return false;
+        if (!Registries.ITEM.getRegistryId(originalItemStacks[6]).equals(Material.BOWL.getKey()) && needBowl) return false;
         List<ItemStack> itemStacks = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             if (originalItemStacks[i] != null && !originalItemStacks[i].isEmpty()) {

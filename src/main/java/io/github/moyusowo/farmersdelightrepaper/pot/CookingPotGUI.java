@@ -4,10 +4,10 @@ import io.github.moyusowo.farmersdelightrepaper.FarmersDelightRepaper;
 import io.github.moyusowo.farmersdelightrepaper.resource.Keys;
 import io.github.moyusowo.farmersdelightrepaper.resource.SoundKey;
 import io.github.moyusowo.farmersdelightrepaper.resource.TranslatableText;
-import io.github.moyusowo.neoartisanapi.api.NeoArtisanAPI;
 import io.github.moyusowo.neoartisanapi.api.block.gui.ArtisanBlockGUI;
-import io.github.moyusowo.neoartisanapi.api.persistence.type.ItemStackDataType;
 import io.github.moyusowo.neoartisanapi.api.recipe.ArtisanRecipe;
+import io.github.moyusowo.neoartisanapi.api.registry.Registries;
+import io.github.moyusowo.neoartisanapi.api.util.ItemStackDataType;
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.*;
 import org.bukkit.block.BlockFace;
@@ -123,11 +123,11 @@ public class CookingPotGUI extends ArtisanBlockGUI {
                     new Particle.DustOptions(Color.fromARGB(255, 255, 255, 255), 0.5f)
             );
             final int progressValue = getArtisanBlockData().getPersistentDataContainer().getOrDefault(progress, PersistentDataType.INTEGER, 0);
-            inventory.setItem(0, NeoArtisanAPI.getItemRegistry().getItemStack(Keys.cooking_pot_gui_fire_progress.get(progressValue)));
+            inventory.setItem(0, Registries.ITEM.getItemStack(Keys.cooking_pot_gui_fire_progress.get(progressValue)));
         } else {
             getArtisanBlockData().getPersistentDataContainer().set(isBurning, PersistentDataType.BOOLEAN, false);
             final int progressValue = getArtisanBlockData().getPersistentDataContainer().getOrDefault(progress, PersistentDataType.INTEGER, 0);
-            inventory.setItem(0, NeoArtisanAPI.getItemRegistry().getItemStack(Keys.cooking_pot_gui_progress.get(progressValue)));
+            inventory.setItem(0, Registries.ITEM.getItemStack(Keys.cooking_pot_gui_progress.get(progressValue)));
         }
     }
 
@@ -155,7 +155,7 @@ public class CookingPotGUI extends ArtisanBlockGUI {
 
     @Override
     protected void init() {
-        inventory.setItem(0, NeoArtisanAPI.getItemRegistry().getItemStack(Keys.cooking_pot_gui_1));
+        inventory.setItem(0, Registries.ITEM.getItemStack(Keys.cooking_pot_gui_1));
         for (int i = 0; i < items.length; i++) {
             inventory.setItem(itemSlot.get(i), getArtisanBlockData().getPersistentDataContainer().getOrDefault(items[i], ItemStackDataType.ITEM_STACK, ItemStack.empty()));
         }
@@ -250,7 +250,7 @@ public class CookingPotGUI extends ArtisanBlockGUI {
                 inventory.getItem(itemSlot.get(5)),
                 bowl
         };
-        final Collection<ArtisanRecipe> cookingRecipes = NeoArtisanAPI.getRecipeRegistry().getRecipes(CookingPotRecipe.TYPE);
+        final Collection<ArtisanRecipe> cookingRecipes = Registries.RECIPE.getRecipes(CookingPotRecipe.TYPE);
         for (ArtisanRecipe recipe : cookingRecipes) {
             if (recipe instanceof CookingPotRecipe cookingPotRecipe) {
                 if (cookingPotRecipe.matches(matrix)) {

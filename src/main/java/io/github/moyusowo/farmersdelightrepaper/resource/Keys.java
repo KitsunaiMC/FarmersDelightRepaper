@@ -13,18 +13,9 @@ public final class Keys {
         rice = FarmersDelightRepaper.create("rice"),
         cabbage = FarmersDelightRepaper.create("cabbage"),
         rice_panicle = FarmersDelightRepaper.create("rice_panicle"),
-        tomato_sauce = FarmersDelightRepaper.create("tomato_sauce"),
-        raw_pasta = FarmersDelightRepaper.create("raw_pasta"),
-        pumpkin_slice = FarmersDelightRepaper.create("pumpkin_slice"),
         cabbage_leaf = FarmersDelightRepaper.create("cabbage_leaf"),
         tomato_seed = FarmersDelightRepaper.create("tomato_seed"),
-        cabbage_seed = FarmersDelightRepaper.create("cabbage_seed"),
-        minced_beef = FarmersDelightRepaper.create("minced_beef"),
-        raw_chicken_cuts = FarmersDelightRepaper.create("raw_chicken_cuts"),
-        raw_cod_slice = FarmersDelightRepaper.create("raw_cod_slice"),
-        raw_salmon_slice = FarmersDelightRepaper.create("raw_salmon_slice"),
-        wheat_dough = FarmersDelightRepaper.create("wheat_dough"),
-        raw_bacon = FarmersDelightRepaper.create("raw_bacon");
+        cabbage_seed = FarmersDelightRepaper.create("cabbage_seed");
 
     public static final NamespacedKey cooking_pot = FarmersDelightRepaper.create("cooking_pot"),
         cutting_board = FarmersDelightRepaper.create("cutting_board");

@@ -2,8 +2,8 @@ package io.github.moyusowo.farmersdelightrepaper.wild;
 
 import io.github.moyusowo.farmersdelightrepaper.FarmersDelightRepaper;
 import io.github.moyusowo.farmersdelightrepaper.resource.Keys;
-import io.github.moyusowo.neoartisanapi.api.NeoArtisanAPI;
 import io.github.moyusowo.neoartisanapi.api.block.data.ArtisanBlockData;
+import io.github.moyusowo.neoartisanapi.api.block.storage.Storages;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -53,7 +53,7 @@ public final class GeneratorListener implements Listener {
                 }
                 if (limitedRegion.getBiome(x, y, z) == Biome.BEACH && limitedRegion.getBlockState(x, y, z).getType() == Material.SAND) {
                     limitedRegion.setBlockData(x, y + 1, z, Material.DEAD_BUSH.createBlockData());
-                    NeoArtisanAPI.getArtisanBlockStorage().setArtisanBlockData(
+                    Storages.BLOCK.setArtisanBlockData(
                             worldInfo.getUID(),
                             x,
                             y + 1,
@@ -82,7 +82,7 @@ public final class GeneratorListener implements Listener {
                 }
                 if (BiomeTemperature.warmBiomes.contains(limitedRegion.getBiome(x, y, z)) && limitedRegion.getBlockState(x, y, z).getType() == Material.GRASS_BLOCK) {
                     limitedRegion.setBlockData(x, y + 1, z, Material.DEAD_BUSH.createBlockData());
-                    NeoArtisanAPI.getArtisanBlockStorage().setArtisanBlockData(
+                    Storages.BLOCK.setArtisanBlockData(
                             worldInfo.getUID(),
                             x,
                             y + 1,
@@ -111,7 +111,7 @@ public final class GeneratorListener implements Listener {
                 }
                 if (BiomeTemperature.hotBiomes.contains(limitedRegion.getBiome(x, y, z)) && limitedRegion.getBlockState(x, y, z).getType() == Material.GRASS_BLOCK) {
                     limitedRegion.setBlockData(x, y + 1, z, Material.DEAD_BUSH.createBlockData());
-                    NeoArtisanAPI.getArtisanBlockStorage().setArtisanBlockData(
+                    Storages.BLOCK.setArtisanBlockData(
                             worldInfo.getUID(),
                             x,
                             y + 1,
@@ -140,7 +140,7 @@ public final class GeneratorListener implements Listener {
                 }
                 if ((limitedRegion.getBiome(x, y, z) == Biome.JUNGLE || limitedRegion.getBiome(x, y, z) == Biome.SWAMP) && limitedRegion.getBlockState(x, y, z).getType() == Material.GRASS_BLOCK) {
                     limitedRegion.setBlockData(x, y + 1, z, Material.DEAD_BUSH.createBlockData());
-                    NeoArtisanAPI.getArtisanBlockStorage().setArtisanBlockData(
+                    Storages.BLOCK.setArtisanBlockData(
                             worldInfo.getUID(),
                             x,
                             y + 1,
@@ -160,7 +160,7 @@ public final class GeneratorListener implements Listener {
                         }
                     }
                     limitedRegion.setBlockData(x, y + 1, z, Material.DEAD_BUSH.createBlockData());
-                    NeoArtisanAPI.getArtisanBlockStorage().setArtisanBlockData(
+                    Storages.BLOCK.setArtisanBlockData(
                             worldInfo.getUID(),
                             x,
                             y + 1,

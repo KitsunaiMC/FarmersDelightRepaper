@@ -6,13 +6,13 @@ import io.github.moyusowo.farmersdelightrepaper.board.CuttingBoardRecipe;
 import io.github.moyusowo.farmersdelightrepaper.config.*;
 import io.github.moyusowo.farmersdelightrepaper.pot.CookingPotRecipe;
 import io.github.moyusowo.farmersdelightrepaper.resource.Keys;
-import io.github.moyusowo.neoartisanapi.api.NeoArtisanAPI;
 import io.github.moyusowo.neoartisanapi.api.item.ItemGenerator;
 import io.github.moyusowo.neoartisanapi.api.recipe.*;
 import io.github.moyusowo.neoartisanapi.api.recipe.choice.Choice;
 import io.github.moyusowo.neoartisanapi.api.recipe.choice.ItemChoice;
 import io.github.moyusowo.neoartisanapi.api.recipe.choice.MultiChoice;
 import io.github.moyusowo.neoartisanapi.api.recipe.choice.TagChoice;
+import io.github.moyusowo.neoartisanapi.api.registry.Registries;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.spongepowered.configurate.CommentedConfigurationNode;
@@ -65,7 +65,7 @@ public final class RecipeRegistrar {
                     }
                     builder.add(new MultiChoice(c));
                 }
-                NeoArtisanAPI.getRecipeRegistry().register(
+                Registries.RECIPE.register(
                         builder.build()
                 );
             } catch (SerializationException e) {
@@ -97,7 +97,7 @@ public final class RecipeRegistrar {
                         choices.add(new ItemChoice(key));
                     }
                 }
-                NeoArtisanAPI.getRecipeRegistry().register(
+                Registries.RECIPE.register(
                         ArtisanFurnaceRecipe.builder()
                                 .key(FarmersDelightRepaper.create(entry.getKey().toString()))
                                 .resultGenerator(itemGenerator)
@@ -135,7 +135,7 @@ public final class RecipeRegistrar {
                         choices.add(new ItemChoice(key));
                     }
                 }
-                NeoArtisanAPI.getRecipeRegistry().register(
+                Registries.RECIPE.register(
                         ArtisanCampfireRecipe.builder()
                                 .key(FarmersDelightRepaper.create(entry.getKey().toString()))
                                 .resultGenerator(itemGenerator)
@@ -173,7 +173,7 @@ public final class RecipeRegistrar {
                         choices.add(new ItemChoice(key));
                     }
                 }
-                NeoArtisanAPI.getRecipeRegistry().register(
+                Registries.RECIPE.register(
                         ArtisanSmokingRecipe.builder()
                                 .key(FarmersDelightRepaper.create(entry.getKey().toString()))
                                 .resultGenerator(itemGenerator)
@@ -215,7 +215,7 @@ public final class RecipeRegistrar {
                     }
                     builder.add(c, new MultiChoice(choices));
                 }
-                NeoArtisanAPI.getRecipeRegistry().register(builder.build());
+                Registries.RECIPE.register(builder.build());
             } catch (SerializationException e) {
                 FarmersDelightRepaper.getInstance().getLogger().severe("error on reading " + entry.getKey().toString() + " of smoker.yml, " + e);
             }
@@ -243,7 +243,7 @@ public final class RecipeRegistrar {
                             }
                         }
                 );
-                NeoArtisanAPI.getRecipeRegistry().register(
+                Registries.RECIPE.register(
                         new CuttingBoardRecipe(
                                 NamespacedKey.fromString(entry.getKey().toString(), FarmersDelightRepaper.getInstance()),
                                 new MultiChoice(choices),
@@ -284,7 +284,7 @@ public final class RecipeRegistrar {
                     }
                     choices.add(new MultiChoice(c));
                 }
-                NeoArtisanAPI.getRecipeRegistry().register(
+                Registries.RECIPE.register(
                         new CookingPotRecipe(
                                 FarmersDelightRepaper.create(entry.getKey().toString()),
                                 choices,
@@ -302,7 +302,7 @@ public final class RecipeRegistrar {
     }
 
     private static void plantDefault() {
-        NeoArtisanAPI.getRecipeRegistry().register(
+        Registries.RECIPE.register(
                 ArtisanShapelessRecipe.builder()
                         .key(Keys.tomato_seed)
                         .resultGenerator(
@@ -314,7 +314,7 @@ public final class RecipeRegistrar {
                         .add(new ItemChoice(Keys.tomato))
                         .build()
         );
-        NeoArtisanAPI.getRecipeRegistry().register(
+        Registries.RECIPE.register(
                 ArtisanShapelessRecipe.builder()
                         .key(Keys.rice)
                         .resultGenerator(
@@ -329,7 +329,7 @@ public final class RecipeRegistrar {
     }
 
     private static void knifeDefault() {
-        NeoArtisanAPI.getRecipeRegistry().register(
+        Registries.RECIPE.register(
                 ArtisanShapedRecipe.builder()
                         .key(Keys.flint_knife)
                         .set(" A ", " B ")
@@ -343,7 +343,7 @@ public final class RecipeRegistrar {
                         )
                         .build()
         );
-        NeoArtisanAPI.getRecipeRegistry().register(
+        Registries.RECIPE.register(
                 ArtisanShapedRecipe.builder()
                         .key(Keys.iron_knife)
                         .set(" A ", " B ")
@@ -357,7 +357,7 @@ public final class RecipeRegistrar {
                         )
                         .build()
         );
-        NeoArtisanAPI.getRecipeRegistry().register(
+        Registries.RECIPE.register(
                 ArtisanShapedRecipe.builder()
                         .key(Keys.golden_knife)
                         .set(" A ", " B ")
@@ -371,7 +371,7 @@ public final class RecipeRegistrar {
                         )
                         .build()
         );
-        NeoArtisanAPI.getRecipeRegistry().register(
+        Registries.RECIPE.register(
                 ArtisanShapedRecipe.builder()
                         .key(Keys.diamond_knife)
                         .set(" A ", " B ")
@@ -388,7 +388,7 @@ public final class RecipeRegistrar {
     }
 
     private static void cookingPotDefault() {
-        NeoArtisanAPI.getRecipeRegistry().register(
+        Registries.RECIPE.register(
                 ArtisanShapedRecipe.builder()
                         .key(Keys.cooking_pot)
                         .set("ABA", "CDC", "CCC")
@@ -405,7 +405,7 @@ public final class RecipeRegistrar {
         int i = 0;
         for (Material material : Material.values()) {
             if (material.name().endsWith("_PLANKS")) {
-                NeoArtisanAPI.getRecipeRegistry().register(
+                Registries.RECIPE.register(
                         ArtisanShapedRecipe.builder()
                                 .key(FarmersDelightRepaper.create(Keys.cutting_board.getKey() + "_" + i))
                                 .set("ABB", "ABB")

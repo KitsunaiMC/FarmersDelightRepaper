@@ -2,7 +2,6 @@ package io.github.moyusowo.farmersdelightrepaper.registrar;
 
 import io.github.moyusowo.farmersdelightrepaper.pot.CookingPotGUI;
 import io.github.moyusowo.farmersdelightrepaper.resource.Keys;
-import io.github.moyusowo.neoartisanapi.api.NeoArtisanAPI;
 import io.github.moyusowo.neoartisanapi.api.block.block.ArtisanCropBlock;
 import io.github.moyusowo.neoartisanapi.api.block.block.ArtisanSimpleBlock;
 import io.github.moyusowo.neoartisanapi.api.block.state.ArtisanCropState;
@@ -14,6 +13,7 @@ import io.github.moyusowo.neoartisanapi.api.block.state.appearance.crop.SugarCan
 import io.github.moyusowo.neoartisanapi.api.block.state.appearance.crop.TripwireAppearance;
 import io.github.moyusowo.neoartisanapi.api.block.util.SoundProperty;
 import io.github.moyusowo.neoartisanapi.api.item.ItemGenerator;
+import io.github.moyusowo.neoartisanapi.api.registry.Registries;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 
@@ -30,7 +30,7 @@ public final class BlockRegistrar {
     }
 
     private static void block() {
-        NeoArtisanAPI.getBlockRegistry().register(
+        Registries.BLOCK.register(
                 ArtisanSimpleBlock.builder()
                         .blockId(Keys.cooking_pot)
                         .placeSound(
@@ -61,7 +61,7 @@ public final class BlockRegistrar {
                         .blockEntity()
                         .build()
         );
-        NeoArtisanAPI.getBlockRegistry().register(
+        Registries.BLOCK.register(
                 ArtisanSimpleBlock.builder()
                         .blockId(Keys.cutting_board)
                         .state(
@@ -90,7 +90,7 @@ public final class BlockRegistrar {
     }
 
     private static void crop() {
-        NeoArtisanAPI.getBlockRegistry().register(
+        Registries.BLOCK.register(
                 ArtisanCropBlock.builder()
                         .blockId(Keys.onion)
                         .placeSound(
@@ -168,7 +168,7 @@ public final class BlockRegistrar {
                         .boneMealMaxGrowth(1)
                         .build()
         );
-        NeoArtisanAPI.getBlockRegistry().register(
+        Registries.BLOCK.register(
                 ArtisanCropBlock.builder()
                         .blockId(Keys.cabbage)
                         .placeSound(
@@ -311,7 +311,7 @@ public final class BlockRegistrar {
                         .boneMealMaxGrowth(3)
                         .build()
         );
-        NeoArtisanAPI.getBlockRegistry().register(
+        Registries.BLOCK.register(
                 ArtisanCropBlock.builder()
                         .blockId(Keys.tomato)
                         .placeSound(SoundProperty.of(Sound.ITEM_CROP_PLANT))
@@ -359,7 +359,7 @@ public final class BlockRegistrar {
     }
 
     private static void wildCrop() {
-        NeoArtisanAPI.getBlockRegistry().register(
+        Registries.BLOCK.register(
                 ArtisanSimpleBlock.builder()
                         .blockId(Keys.wild_cabbages)
                         .state(
@@ -374,7 +374,7 @@ public final class BlockRegistrar {
                         .placeSound(SoundProperty.of(Sound.ITEM_CROP_PLANT))
                         .build()
         );
-        NeoArtisanAPI.getBlockRegistry().register(
+        Registries.BLOCK.register(
                 ArtisanSimpleBlock.builder()
                         .blockId(Keys.wild_onions)
                         .state(
@@ -389,7 +389,7 @@ public final class BlockRegistrar {
                         .placeSound(SoundProperty.of(Sound.ITEM_CROP_PLANT))
                         .build()
         );
-        NeoArtisanAPI.getBlockRegistry().register(
+        Registries.BLOCK.register(
                 ArtisanSimpleBlock.builder()
                         .blockId(Keys.wild_rice)
                         .state(
@@ -404,7 +404,7 @@ public final class BlockRegistrar {
                         .placeSound(SoundProperty.of(Sound.ITEM_CROP_PLANT))
                         .build()
         );
-        NeoArtisanAPI.getBlockRegistry().register(
+        Registries.BLOCK.register(
                 ArtisanSimpleBlock.builder()
                         .blockId(Keys.wild_tomatoes)
                         .state(

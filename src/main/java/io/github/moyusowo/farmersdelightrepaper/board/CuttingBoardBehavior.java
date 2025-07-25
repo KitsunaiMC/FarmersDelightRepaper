@@ -3,10 +3,11 @@ package io.github.moyusowo.farmersdelightrepaper.board;
 import io.github.moyusowo.farmersdelightrepaper.FarmersDelightRepaper;
 import io.github.moyusowo.farmersdelightrepaper.resource.Keys;
 import io.github.moyusowo.farmersdelightrepaper.resource.SoundKey;
-import io.github.moyusowo.neoartisanapi.api.NeoArtisanAPI;
 import io.github.moyusowo.neoartisanapi.api.block.event.ArtisanBlockPlaceEvent;
+import io.github.moyusowo.neoartisanapi.api.block.storage.Storages;
 import io.github.moyusowo.neoartisanapi.api.item.ItemGenerator;
 import io.github.moyusowo.neoartisanapi.api.recipe.ArtisanRecipe;
+import io.github.moyusowo.neoartisanapi.api.registry.Registries;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.*;
@@ -34,7 +35,7 @@ public final class CuttingBoardBehavior implements Listener {
     private CuttingBoardBehavior() {}
 
     private static ItemDisplay getItemDisplay(Block block) {
-        for (Entity entity : block.getWorld().getNearbyEntities(block.getLocation().add(offset), 0.01, 0.01, 0.01)) {
+        for (Entity entity : block.getLocation().add(offset).getNearbyEntities(0.01, 0.01, 0.01)) {
             if (entity.getType() == EntityType.ITEM_DISPLAY && entity.getScoreboardTags().contains(entityTag)) {
                 return (ItemDisplay) entity;
             }
@@ -72,8 +73,8 @@ public final class CuttingBoardBehavior implements Listener {
     public void onInteract(PlayerInteractEvent event) {
         if (event.useInteractedBlock() == Event.Result.DENY || event.useItemInHand() == Event.Result.DENY) return;
         if (event.getClickedBlock() == null) return;
-        if (!NeoArtisanAPI.getArtisanBlockStorage().isArtisanBlock(event.getClickedBlock())) return;
-        if (!NeoArtisanAPI.getArtisanBlockStorage().getArtisanBlockData(event.getClickedBlock()).blockId().equals(Keys.cutting_board)) return;
+        if (!Storages.BLOCK.isArtisanBlock(event.getClickedBlock())) return;
+        if (!Storages.BLOCK.getArtisanBlockData(event.getClickedBlock()).blockId().equals(Keys.cutting_board)) return;
         ItemDisplay itemDisplay = getItemDisplay(event.getClickedBlock());
         if (itemDisplay == null) return;
         if (event.getAction().isLeftClick()) {
@@ -102,7 +103,7 @@ public final class CuttingBoardBehavior implements Listener {
                         1.0f,
                         1.0f
                 );
-            } else if (Keys.knife.contains(NeoArtisanAPI.getItemRegistry().getRegistryId(event.getItem()))) {
+            } else if (Keys.knife.contains(Registries.ITEM.getRegistryId(event.getItem()))) {
                 Optional<CuttingBoardRecipe> recipe = findMatch(itemDisplay.getItemStack());
                 if (recipe.isPresent()) {
                     event.setCancelled(true);
@@ -138,7 +139,7 @@ public final class CuttingBoardBehavior implements Listener {
     }
 
     private static Optional<CuttingBoardRecipe> findMatch(ItemStack itemStack) {
-        final Collection<ArtisanRecipe> cuttingRecipes = NeoArtisanAPI.getRecipeRegistry().getRecipes(CuttingBoardRecipe.TYPE);
+        final Collection<ArtisanRecipe> cuttingRecipes = Registries.RECIPE.getRecipes(CuttingBoardRecipe.TYPE);
         for (ArtisanRecipe recipe : cuttingRecipes) {
             if (recipe instanceof CuttingBoardRecipe cuttingBoardRecipe) {
                 if (cuttingBoardRecipe.matches(itemStack)) {
