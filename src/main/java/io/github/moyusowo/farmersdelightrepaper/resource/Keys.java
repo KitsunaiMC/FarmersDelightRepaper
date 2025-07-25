@@ -31,10 +31,6 @@ public final class Keys {
         wild_rice = FarmersDelightRepaper.create("wild_rice"),
         wild_tomatoes = FarmersDelightRepaper.create("wild_tomatoes");
 
-    public static final Set<NamespacedKey> knife = Set.of(
-        flint_knife, iron_knife,golden_knife, diamond_knife, netherite_knife
-    );
-
     public static final NamespacedKey cooking_pot_gui_1 = FarmersDelightRepaper.create("cooking_pot_gui_1"),
             cooking_pot_gui_2 = FarmersDelightRepaper.create("cooking_pot_gui_2"),
             cooking_pot_gui_progress_1 = FarmersDelightRepaper.create("cooking_pot_gui_progress_1"),

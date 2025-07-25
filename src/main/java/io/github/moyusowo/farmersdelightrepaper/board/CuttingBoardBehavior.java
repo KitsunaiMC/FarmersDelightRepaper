@@ -80,7 +80,6 @@ public final class CuttingBoardBehavior implements Listener {
         if (!Storages.BLOCK.getArtisanBlockData(event.getClickedBlock()).blockId().equals(Keys.cutting_board)) return;
         ItemDisplay itemDisplay = getItemDisplay(event.getClickedBlock());
         if (itemDisplay == null) return;
-        FarmersDelightRepaper.getInstance().getLogger().info("1");
         if (event.getAction().isLeftClick()) {
             if (!itemDisplay.getItemStack().isEmpty()) {
                 event.setCancelled(true);
@@ -96,7 +95,7 @@ public final class CuttingBoardBehavior implements Listener {
             final ItemStack offHandItem = event.getPlayer().getInventory().getItemInOffHand();
             final ItemStack mainHandItem = event.getPlayer().getInventory().getItemInMainHand();
             final Optional<CuttingBoardRecipe> offHandRecipe = findMatch(offHandItem);
-            if (Keys.knife.contains(Registries.ITEM.getRegistryId(mainHandItem)) && offHandRecipe.isPresent()) {
+            if (Registries.ITEM.getTagsByItemStack(mainHandItem).contains("knife") && offHandRecipe.isPresent()) {
                 event.setCancelled(true);
                 final int amount;
                 if (event.getPlayer().getGameMode() != GameMode.CREATIVE) {
@@ -145,7 +144,7 @@ public final class CuttingBoardBehavior implements Listener {
                         1.0f,
                         1.0f
                 );
-            } else if (Keys.knife.contains(Registries.ITEM.getRegistryId(mainHandItem))) {
+            } else if (Registries.ITEM.getTagsByItemStack(mainHandItem).contains("knife")) {
                 Optional<CuttingBoardRecipe> recipe = findMatch(itemDisplay.getItemStack());
                 if (recipe.isPresent()) {
                     event.setCancelled(true);

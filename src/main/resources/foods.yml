@@ -7,9 +7,9 @@ tomato_sauce:
   can_always_eat: false
   item_model: true
   tags:
-  - tomato_sauce
-  - bowled
-  - sauce
+    - tomato_sauce
+    - bowled
+    - sauce
 raw_pasta:
   display_name: 生意面
   translatable_text: item.farmersdelightrepaper.raw_pasta
@@ -19,8 +19,8 @@ raw_pasta:
   can_always_eat: false
   item_model: true
   tags:
-  - pasta
-  - raw_pasta
+    - pasta
+    - raw_pasta
 pumpkin_slice:
   display_name: 南瓜片
   translatable_text: item.farmersdelightrepaper.pumpkin_slice
@@ -30,10 +30,10 @@ pumpkin_slice:
   can_always_eat: false
   item_model: true
   tags:
-  - pumpkin
-  - vegetable
-  - slice
-  - cutted_vegetable
+    - pumpkin
+    - vegetable
+    - slice
+    - cutted_vegetable
 minced_beef:
   display_name: 牛肉馅
   translatable_text: item.farmersdelightrepaper.minced_beef
@@ -43,12 +43,12 @@ minced_beef:
   can_always_eat: false
   item_model: true
   tags:
-  - beef
-  - raw_beef
-  - cabbage_roll_ingredient
-  - cutted_meat
-  - raw
-  - meat
+    - beef
+    - raw_beef
+    - cabbage_roll_ingredient
+    - cutted_meat
+    - raw
+    - meat
 raw_chicken_cuts:
   display_name: 生鸡肉丁
   translatable_text: item.farmersdelightrepaper.chicken_cuts
@@ -58,12 +58,12 @@ raw_chicken_cuts:
   can_always_eat: false
   item_model: true
   tags:
-  - chicken
-  - raw_chicken
-  - cabbage_roll_ingredient
-  - cutted_meat
-  - raw
-  - meat
+    - chicken
+    - raw_chicken
+    - cabbage_roll_ingredient
+    - cutted_meat
+    - raw
+    - meat
 raw_cod_slice:
   display_name: 生鳕鱼片
   translatable_text: item.farmersdelightrepaper.cod_slice
@@ -73,13 +73,13 @@ raw_cod_slice:
   can_always_eat: false
   item_model: true
   tags:
-  - cod
-  - raw_cod
-  - cabbage_roll_ingredient
-  - cutted_fish
-  - raw
-  - fish
-  - seafood
+    - cod
+    - raw_cod
+    - cabbage_roll_ingredient
+    - cutted_fish
+    - raw
+    - fish
+    - seafood
 raw_salmon_slice:
   display_name: 生鲑鱼片
   translatable_text: item.farmersdelightrepaper.salmon_slice
@@ -89,13 +89,13 @@ raw_salmon_slice:
   can_always_eat: false
   item_model: true
   tags:
-  - salmon
-  - raw_salmon
-  - cabbage_roll_ingredient
-  - cutted_fish
-  - raw
-  - fish
-  - seafood
+    - salmon
+    - raw_salmon
+    - cabbage_roll_ingredient
+    - cutted_fish
+    - raw
+    - fish
+    - seafood
 wheat_dough:
   display_name: 面团
   translatable_text: item.farmersdelightrepaper.wheat_dough
@@ -105,8 +105,8 @@ wheat_dough:
   can_always_eat: false
   item_model: true
   tags:
-  - wheat_dough
-  - dough
+    - wheat_dough
+    - dough
 raw_bacon:
   display_name: 生培根
   translatable_text: item.farmersdelightrepaper.bacon
@@ -116,12 +116,12 @@ raw_bacon:
   can_always_eat: false
   item_model: true
   tags:
-  - porkchop
-  - raw_porkchop
-  - cabbage_roll_ingredient
-  - cutted_meat
-  - raw
-  - meat
+    - porkchop
+    - raw_porkchop
+    - cabbage_roll_ingredient
+    - cutted_meat
+    - raw
+    - meat
 fried_egg:
   display_name: 煎鸡蛋
   translatable_text: item.farmersdelightrepaper.fried_egg
@@ -131,8 +131,8 @@ fried_egg:
   can_always_eat: false
   item_model: true
   tags:
-  - cooked_eggs
-  - chicken_egg
+    - cooked_eggs
+    - chicken_egg
 beef_patty:
   display_name: 牛肉饼
   translatable_text: item.farmersdelightrepaper.beef_patty
@@ -142,11 +142,11 @@ beef_patty:
   can_always_eat: false
   item_model: true
   tags:
-  - beef
-  - cooked_beef
-  - cutted_meat
-  - cooked
-  - meat
+    - beef
+    - cooked_beef
+    - cutted_meat
+    - cooked
+    - meat
 cooked_cod_slice:
   display_name: 熟鳕鱼片
   translatable_text: item.farmersdelightrepaper.cooked_cod_slice
@@ -156,12 +156,12 @@ cooked_cod_slice:
   can_always_eat: false
   item_model: true
   tags:
-  - cod
-  - cooked_cod
-  - cutted_fish
-  - cooked
-  - fish
-  - seafood
+    - cod
+    - cooked_cod
+    - cutted_fish
+    - cooked
+    - fish
+    - seafood
 cooked_salmon_slice:
   display_name: 熟鲑鱼片
   translatable_text: item.farmersdelightrepaper.cooked_salmon_slice
@@ -171,12 +171,12 @@ cooked_salmon_slice:
   can_always_eat: false
   item_model: true
   tags:
-  - salmon
-  - cooked_salmon
-  - cutted_fish
-  - cooked
-  - fish
-  - seafood
+    - salmon
+    - cooked_salmon
+    - cutted_fish
+    - cooked
+    - fish
+    - seafood
 pie_crust:
   display_name: 馅饼酥皮
   translatable_text: item.farmersdelightrepaper.pie_crust
@@ -186,8 +186,8 @@ pie_crust:
   can_always_eat: false
   item_model: true
   tags:
-  - pie_crust
-  - pie_ingredient
+    - pie_crust
+    - pie_ingredient
 cake_slice: #20s speed lacking
   display_name: 蛋糕切片
   translatable_text: item.farmersdelightrepaper.cake_slice
@@ -203,10 +203,10 @@ cake_slice: #20s speed lacking
       amplifier: 1
       chance: 0.85
   tags:
-  - cake
-  - slice
-  - egg_and_milk_cake
-  - baking
+    - cake
+    - slice
+    - egg_and_milk_cake
+    - baking
 apple_pie_slice: #30s speed lacking
   display_name: 苹果派切片
   translatable_text: item.farmersdelightrepaper.apple_pie_slice
@@ -216,10 +216,10 @@ apple_pie_slice: #30s speed lacking
   can_always_eat: false
   item_model: true
   tags:
-  - pie
-  - slice
-  - apple_pie
-  - baking
+    - pie
+    - slice
+    - apple_pie
+    - baking
 sweet_berry_cheesecake_slice: #30s speed lacking
   display_name: 甜浆果芝士派切片
   translatable_text: item.farmersdelightrepaper.sweet_berry_cheesecake_slice
@@ -229,10 +229,10 @@ sweet_berry_cheesecake_slice: #30s speed lacking
   can_always_eat: false
   item_model: true
   tags:
-  - pie
-  - slice
-  - sweet_berry_cheesecake
-  - baking
+    - pie
+    - slice
+    - sweet_berry_cheesecake
+    - baking
 chocolate_pie_slice: #30s speed lacking
   display_name: 巧克力派切片
   translatable_text: item.farmersdelightrepaper.chocolate_pie_slice
@@ -242,10 +242,10 @@ chocolate_pie_slice: #30s speed lacking
   can_always_eat: false
   item_model: true
   tags:
-  - pie
-  - slice
-  - chocolate_pie
-  - baking
+    - pie
+    - slice
+    - chocolate_pie
+    - baking
 sweet_berry_cookie:
   display_name: 甜浆果曲奇
   translatable_text: item.farmersdelightrepaper.sweet_berry_cookie
@@ -255,9 +255,9 @@ sweet_berry_cookie:
   can_always_eat: false
   item_model: true
   tags:
-  - cookie
-  - sweet_berry_cookie
-  - baking
+    - cookie
+    - sweet_berry_cookie
+    - baking
 honey_cookie:
   display_name: 蜂蜜曲奇
   translatable_text: item.farmersdelightrepaper.honey_cookie
@@ -267,9 +267,9 @@ honey_cookie:
   can_always_eat: false
   item_model: true
   tags:
-  - cookie
-  - honey_cookie
-  - baking
+    - cookie
+    - honey_cookie
+    - baking
 mixed_salad:
   display_name: 混合沙拉
   translatable_text: item.farmersdelightrepaper.mixed_salad
@@ -279,7 +279,7 @@ mixed_salad:
   can_always_eat: false
   item_model: true
   tags:
-  - salad
+    - salad
 barbecue_stick:
   display_name: 烧烤串
   translatable_text: item.farmersdelightrepaper.barbecue_stick
@@ -297,7 +297,7 @@ egg_sandwich:
   can_always_eat: false
   item_model: true
   tags:
-  - sandwich
+    - sandwich
 chicken_sandwich:
   display_name: 鸡肉三明治
   translatable_text: item.farmersdelightrepaper.chicken_sandwich
@@ -307,7 +307,7 @@ chicken_sandwich:
   can_always_eat: false
   item_model: true
   tags:
-  - sandwich
+    - sandwich
 hamburger: #力量I
   display_name: 汉堡包
   translatable_text: item.farmersdelightrepaper.hamburger
@@ -333,7 +333,7 @@ stuffed_potato:
   can_always_eat: false
   item_model: true
   tags:
-  - stuffed
+    - stuffed
 stuffed_pumpkin: #舒适
   display_name: 碗装填馅南瓜
   translatable_text: item.farmersdelightrepaper.stuffed_pumpkin
@@ -343,8 +343,8 @@ stuffed_pumpkin: #舒适
   can_always_eat: false
   item_model: true
   tags:
-  - stuffed
-  - bowled
+    - stuffed
+    - bowled
 cooked_rice: #舒适
   display_name: 米饭
   translatable_text: item.farmersdelightrepaper.cooked_rice
@@ -354,8 +354,8 @@ cooked_rice: #舒适
   can_always_eat: false
   item_model: true
   tags:
-  - rice
-  - bowled
+    - rice
+    - bowled
 beef_stew: #舒适
   display_name: 牛肉炖
   translatable_text: item.farmersdelightrepaper.beef_stew
@@ -365,9 +365,9 @@ beef_stew: #舒适
   can_always_eat: false
   item_model: true
   tags:
-  - stew
-  - soup
-  - bowled
+    - stew
+    - soup
+    - bowled
 chicken_soup: #舒适
   display_name: 鸡肉汤
   translatable_text: item.farmersdelightrepaper.chicken_soup
@@ -377,8 +377,8 @@ chicken_soup: #舒适
   can_always_eat: false
   item_model: true
   tags:
-  - soup
-  - bowled
+    - soup
+    - bowled
 vegetable_soup: #舒适
   display_name: 蔬菜汤
   translatable_text: item.farmersdelightrepaper.vegetable_soup
@@ -388,8 +388,8 @@ vegetable_soup: #舒适
   can_always_eat: false
   item_model: true
   tags:
-  - soup
-  - bowled
+    - soup
+    - bowled
 fish_stew:
   display_name: 鱼肉炖
   translatable_text: item.farmersdelightrepaper.fish_stew
@@ -399,9 +399,9 @@ fish_stew:
   can_always_eat: false
   item_model: true
   tags:
-  - stew
-  - soup
-  - bowled
+    - stew
+    - soup
+    - bowled
 fried_rice: #滋养
   display_name: 炒饭
   translatable_text: item.farmersdelightrepaper.fried_rice
@@ -411,7 +411,7 @@ fried_rice: #滋养
   can_always_eat: false
   item_model: true
   tags:
-  - bowled
+    - bowled
 pumpkin_soup: #舒适
   display_name: 南瓜汤
   translatable_text: item.farmersdelightrepaper.pumpkin_soup
@@ -421,8 +421,8 @@ pumpkin_soup: #舒适
   can_always_eat: false
   item_model: true
   tags:
-  - soup
-  - bowled
+    - soup
+    - bowled
 baked_cod_stew: #舒适
   display_name: 烘焙鳕鱼炖
   translatable_text: item.farmersdelightrepaper.baked_cod_stew
@@ -432,9 +432,9 @@ baked_cod_stew: #舒适
   can_always_eat: false
   item_model: true
   tags:
-  - stew
-  - soup
-  - bowled
+    - stew
+    - soup
+    - bowled
 honey_glazed_ham: #滋养
   display_name: 盘装蜜汁火腿
   translatable_text: item.farmersdelightrepaper.honey_glazed_ham
@@ -444,7 +444,7 @@ honey_glazed_ham: #滋养
   can_always_eat: false
   item_model: true
   tags:
-  - bowled
+    - bowled
 pasta_with_meatballs: #滋养
   display_name: 肉丸意面
   translatable_text: item.farmersdelightrepaper.pasta_with_meatballs
@@ -454,7 +454,7 @@ pasta_with_meatballs: #滋养
   can_always_eat: false
   item_model: true
   tags:
-  - pasta_dish
+    - pasta_dish
 pasta_with_mutton_chop: #滋养
   display_name: 羊排意面
   translatable_text: item.farmersdelightrepaper.pasta_with_mutton_chop
@@ -464,7 +464,7 @@ pasta_with_mutton_chop: #滋养
   can_always_eat: false
   item_model: true
   tags:
-  - pasta_dish
+    - pasta_dish
 vegetable_noodles: #滋养
   display_name: 蔬菜面
   translatable_text: item.farmersdelightrepaper.vegetable_noodles
@@ -474,7 +474,7 @@ vegetable_noodles: #滋养
   can_always_eat: false
   item_model: true
   tags:
-  - pasta_dish
+    - pasta_dish
 steak_and_potatoes: #滋养
   display_name: 牛排配土豆
   translatable_text: item.farmersdelightrepaper.steak_and_potatoes
@@ -500,7 +500,7 @@ squid_ink_pasta: #滋养
   can_always_eat: false
   item_model: true
   tags:
-  - pasta_dish
+    - pasta_dish
 grilled_salmon: #滋养
   display_name: 香烤鲑鱼
   translatable_text: item.farmersdelightrepaper.grilled_salmon
@@ -518,11 +518,11 @@ cooked_chicken_cuts:
   can_always_eat: false
   item_model: true
   tags:
-  - chicken
-  - cooked_chicken
-  - cutted_meat
-  - cooked
-  - meat
+    - chicken
+    - cooked_chicken
+    - cutted_meat
+    - cooked
+    - meat
 cooked_bacon:
   display_name: 熟培根
   translatable_text: item.farmersdelightrepaper.cooked_bacon
@@ -532,11 +532,11 @@ cooked_bacon:
   can_always_eat: false
   item_model: true
   tags:
-  - porkchop
-  - cooked_porkchop
-  - cutted_meat
-  - cooked
-  - meat
+    - porkchop
+    - cooked_porkchop
+    - cutted_meat
+    - cooked
+    - meat
 melon_popsicle:
   display_name: 西瓜冰棍
   translatable_text: item.farmersdelightrepaper.melon_popsicle
@@ -546,7 +546,7 @@ melon_popsicle:
   can_always_eat: true
   item_model: true
   tags:
-  - popsicle
+    - popsicle
 fruit_salad: #生命恢复
   display_name: 水果沙拉
   translatable_text: item.farmersdelightrepaper.fruit_salad
@@ -556,7 +556,7 @@ fruit_salad: #生命恢复
   can_always_eat: false
   item_model: true
   tags:
-  - salad
+    - salad
 bacon_sandwich:
   display_name: 培根三明治
   translatable_text: item.farmersdelightrepaper.bacon_sandwich
@@ -582,12 +582,12 @@ mutton_chops:
   can_always_eat: false
   item_model: true
   tags:
-  - mutton
-  - raw_mutton
-  - cabbage_roll_ingredient
-  - cutted_meat
-  - cooked
-  - meat
+    - mutton
+    - raw_mutton
+    - cabbage_roll_ingredient
+    - cutted_meat
+    - cooked
+    - meat
 cooked_mutton_chops:
   display_name: 熟羊排
   translatable_text: item.farmersdelightrepaper.cooked_mutton_chops
@@ -597,11 +597,11 @@ cooked_mutton_chops:
   can_always_eat: false
   item_model: true
   tags:
-  - mutton
-  - cooked_mutton
-  - cutted_meat
-  - cooked
-  - meat
+    - mutton
+    - cooked_mutton
+    - cutted_meat
+    - cooked
+    - meat
 mutton_wrap: #滋养
   display_name: 羊肉卷饼
   translatable_text: item.farmersdelightrepaper.mutton_wrap
@@ -627,7 +627,7 @@ noodle_soup:
   can_always_eat: false
   item_model: true
   tags:
-  - pasta_dish
+    - pasta_dish
 bacon_and_eggs: #滋养
   display_name: 培根鸡蛋
   translatable_text: item.farmersdelightrepaper.bacon_and_eggs
@@ -653,7 +653,7 @@ salmon_roll:
   can_always_eat: false
   item_model: true
   tags:
-  - sushi
+    - sushi
 cod_roll:
   display_name: 鳕鱼寿司
   translatable_text: item.farmersdelightrepaper.cod_roll
@@ -663,7 +663,7 @@ cod_roll:
   can_always_eat: false
   item_model: true
   tags:
-  - sushi
+    - sushi
 kelp_roll:
   display_name: 海带寿司卷
   translatable_text: item.farmersdelightrepaper.kelp_roll
@@ -673,7 +673,7 @@ kelp_roll:
   can_always_eat: false
   item_model: true
   tags:
-  - sushi_roll
+    - sushi_roll
 kelp_roll_slice:
   display_name: 海带寿司
   translatable_text: item.farmersdelightrepaper.kelp_roll_slice
@@ -683,7 +683,7 @@ kelp_roll_slice:
   can_always_eat: false
   item_model: true
   tags:
-  - sushi
+    - sushi
 bone_broth: #舒适
   display_name: 大骨汤
   translatable_text: item.farmersdelightrepaper.bone_broth
@@ -693,8 +693,8 @@ bone_broth: #舒适
   can_always_eat: false
   item_model: true
   tags:
-  - soup
-  - bowled
+    - soup
+    - bowled
 mushroom_rice: #滋养
   display_name: 蘑菇饭
   translatable_text: item.farmersdelightrepaper.mushroom_rice
@@ -704,4 +704,4 @@ mushroom_rice: #滋养
   can_always_eat: false
   item_model: true
   tags:
-  - bowled
+    - bowled

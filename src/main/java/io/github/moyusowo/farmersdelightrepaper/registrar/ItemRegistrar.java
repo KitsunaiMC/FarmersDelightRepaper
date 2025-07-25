@@ -80,6 +80,13 @@ public final class ItemRegistrar {
                         )
                         .itemModel(Keys.onion)
                         .blockId(Keys.onion)
+                        .tags(
+                                Set.of(
+                                        "vegetable",
+                                        "crop",
+                                        "onion"
+                                )
+                        )
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -93,6 +100,13 @@ public final class ItemRegistrar {
                                 false
                         )
                         .itemModel(Keys.tomato)
+                        .tags(
+                                Set.of(
+                                        "vegetable",
+                                        "crop",
+                                        "tomato"
+                                )
+                        )
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -101,6 +115,12 @@ public final class ItemRegistrar {
                         .displayName(TranslatableText.rice)
                         .rawMaterial(Material.WHEAT)
                         .itemModel(Keys.rice)
+                        .tags(
+                                Set.of(
+                                        "crop",
+                                        "raw_rice"
+                                )
+                        )
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -114,6 +134,14 @@ public final class ItemRegistrar {
                                 false
                         )
                         .itemModel(Keys.cabbage)
+                        .tags(
+                                Set.of(
+                                        "vegetable",
+                                        "crop",
+                                        "cabbage",
+                                        "salad_ingredients"
+                                )
+                        )
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -122,6 +150,13 @@ public final class ItemRegistrar {
                         .displayName(TranslatableText.rice_panicle)
                         .rawMaterial(Material.WHEAT)
                         .itemModel(Keys.rice_panicle)
+                        .tags(
+                                Set.of(
+                                        "crop",
+                                        "rice_panicle",
+                                        "plant"
+                                )
+                        )
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -135,6 +170,14 @@ public final class ItemRegistrar {
                                 false
                         )
                         .itemModel(Keys.cabbage_leaf)
+                        .tags(
+                                Set.of(
+                                        "vegetable",
+                                        "cutted_vegetable",
+                                        "cabbage",
+                                        "salad_ingredients"
+                                )
+                        )
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -144,6 +187,12 @@ public final class ItemRegistrar {
                         .rawMaterial(Material.WHEAT)
                         .itemModel(Keys.tomato_seed)
                         .blockId(Keys.tomato)
+                        .tags(
+                                Set.of(
+                                        "tomato_seeds",
+                                        "seed"
+                                )
+                        )
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -153,6 +202,12 @@ public final class ItemRegistrar {
                         .rawMaterial(Material.WHEAT)
                         .itemModel(Keys.cabbage_seed)
                         .blockId(Keys.cabbage)
+                        .tags(
+                                Set.of(
+                                        "cabbage_seeds",
+                                        "seed"
+                                )
+                        )
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -180,6 +235,7 @@ public final class ItemRegistrar {
                         .displayName(TranslatableText.flint_knife)
                         .itemModel(Keys.flint_knife)
                         .maxDurability(131)
+                        .tags(Set.of("knife"))
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -189,6 +245,7 @@ public final class ItemRegistrar {
                         .displayName(TranslatableText.iron_knife)
                         .itemModel(Keys.iron_knife)
                         .maxDurability(250)
+                        .tags(Set.of("knife"))
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -198,6 +255,7 @@ public final class ItemRegistrar {
                         .displayName(TranslatableText.gold_knife)
                         .itemModel(Keys.golden_knife)
                         .maxDurability(32)
+                        .tags(Set.of("knife"))
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -207,6 +265,7 @@ public final class ItemRegistrar {
                         .displayName(TranslatableText.diamond_knife)
                         .itemModel(Keys.diamond_knife)
                         .maxDurability(1561)
+                        .tags(Set.of("knife"))
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -216,6 +275,7 @@ public final class ItemRegistrar {
                         .displayName(TranslatableText.netherite_knife)
                         .itemModel(Keys.netherite_knife)
                         .maxDurability(2031)
+                        .tags(Set.of("knife"))
                         .build()
         );
     }
