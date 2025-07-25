@@ -12,7 +12,7 @@ pumpkin_slice_1:
   item: minecraft:pumpkin
   results:
     - id: pumpkin_slice
-      amount: 1
+      amount: 4
 minced_beef_1:
   item: minecraft:beef
   results:
@@ -95,4 +95,14 @@ kelp_roll_slice_1:
   item: kelp_roll
   results:
     - id: kelp_roll_slice
+      amount: 1
+minced_melon_1:
+  item: minecraft:melon
+  results:
+    - id: minecraft:melon_slice
+      amount: 9
+raw_rice_1:
+  item: rice_panicle
+  results:
+    - id: rice
       amount: 1
