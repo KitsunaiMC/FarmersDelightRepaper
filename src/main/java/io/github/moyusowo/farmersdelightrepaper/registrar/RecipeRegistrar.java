@@ -379,7 +379,7 @@ public final class RecipeRegistrar {
                         .add('B', new ItemChoice(Material.STICK.getKey()))
                         .resultGenerator(
                                 ItemGenerator.simpleGenerator(
-                                        Keys.golden_knife,
+                                        Keys.diamond_knife,
                                         1
                                 )
                         )
