@@ -705,3 +705,16 @@ mushroom_rice: #滋养
   item_model: true
   tags:
     - bowled
+nether_salad:
+  display_name: 下界沙拉
+  translatable_text: item.farmersdelightrepaper.nether_salad
+  raw_material: MUSHROOM_STEW
+  nutrition: 5
+  saturation: 4
+  can_always_eat: false
+  item_model: true
+  effects:
+    - type: nausea
+      duration: 240
+      amplifier: 0
+      chance: 0.3

@@ -250,7 +250,7 @@ public class CookingPotGUI extends ArtisanBlockGUI {
                 inventory.getItem(itemSlot.get(5)),
                 bowl
         };
-        final Collection<ArtisanRecipe> cookingRecipes = Registries.RECIPE.getRecipes(CookingPotRecipe.TYPE);
+        final Collection<ArtisanRecipe> cookingRecipes = Registries.RECIPE.getRecipesByType(CookingPotRecipe.TYPE);
         for (ArtisanRecipe recipe : cookingRecipes) {
             if (recipe instanceof CookingPotRecipe cookingPotRecipe) {
                 if (cookingPotRecipe.matches(matrix)) {

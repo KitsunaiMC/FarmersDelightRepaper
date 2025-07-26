@@ -3,7 +3,7 @@ package io.github.moyusowo.farmersdelightrepaper.board;
 import io.github.moyusowo.farmersdelightrepaper.FarmersDelightRepaper;
 import io.github.moyusowo.farmersdelightrepaper.resource.Keys;
 import io.github.moyusowo.farmersdelightrepaper.resource.SoundKey;
-import io.github.moyusowo.neoartisanapi.api.block.event.ArtisanBlockPlaceEvent;
+import io.github.moyusowo.neoartisanapi.api.block.event.common.ArtisanBlockPlaceEvent;
 import io.github.moyusowo.neoartisanapi.api.block.storage.Storages;
 import io.github.moyusowo.neoartisanapi.api.item.ItemGenerator;
 import io.github.moyusowo.neoartisanapi.api.recipe.ArtisanRecipe;
@@ -182,7 +182,7 @@ public final class CuttingBoardBehavior implements Listener {
     private static Optional<CuttingBoardRecipe> findMatch(@Nullable ItemStack itemStack1) {
         if (itemStack1 == null || itemStack1.isEmpty()) return Optional.empty();
         ItemStack itemStack = itemStack1.clone();
-        final Collection<ArtisanRecipe> cuttingRecipes = Registries.RECIPE.getRecipes(CuttingBoardRecipe.TYPE);
+        final Collection<ArtisanRecipe> cuttingRecipes = Registries.RECIPE.getRecipesByType(CuttingBoardRecipe.TYPE);
         for (ArtisanRecipe recipe : cuttingRecipes) {
             if (recipe instanceof CuttingBoardRecipe cuttingBoardRecipe) {
                 if (cuttingBoardRecipe.matches(itemStack)) {

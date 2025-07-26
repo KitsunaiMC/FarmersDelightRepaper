@@ -152,7 +152,7 @@ fruit_salad_1:
     - minecraft:melon_slice
     - minecraft:melon_slice
     - minecraft:sweet_berries
-    - minecraft:sweer_berries
+    - minecraft:sweet_berries
     - pumpkin_slice
     - minecraft:bowl
   result:
