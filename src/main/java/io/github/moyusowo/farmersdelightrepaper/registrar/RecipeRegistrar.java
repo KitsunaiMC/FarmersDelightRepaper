@@ -402,19 +402,18 @@ public final class RecipeRegistrar {
     }
 
     private static void cuttingBoardDefault() {
-        int i = 0;
+        final ArtisanShapedRecipe.Builder builder = ArtisanShapedRecipe.builder()
+                .key(FarmersDelightRepaper.create(Keys.cutting_board.getKey()))
+                .set("ABB", "ABB")
+                .add('A', new ItemChoice(Material.STICK.getKey()))
+                .resultGenerator(ItemGenerator.simpleGenerator(Keys.cutting_board, 1));
+        final List<Choice> choices = new ArrayList<>();
         for (Material material : Material.values()) {
             if (material.name().endsWith("_PLANKS")) {
-                Registries.RECIPE.register(
-                        ArtisanShapedRecipe.builder()
-                                .key(FarmersDelightRepaper.create(Keys.cutting_board.getKey() + "_" + i))
-                                .set("ABB", "ABB")
-                                .add('A', new ItemChoice(Material.STICK.getKey()))
-                                .add('B', new ItemChoice(material.getKey()))
-                                .resultGenerator(ItemGenerator.simpleGenerator(Keys.cutting_board, 1))
-                                .build()
-                );
+                choices.add(new ItemChoice(material.getKey()));
             }
         }
+        builder.add('B', new MultiChoice(choices));
+        Registries.RECIPE.register(builder.build());
     }
 }

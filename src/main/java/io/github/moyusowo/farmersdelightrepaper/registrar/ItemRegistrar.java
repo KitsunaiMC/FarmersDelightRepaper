@@ -1,16 +1,23 @@
 package io.github.moyusowo.farmersdelightrepaper.registrar;
 
 import io.github.moyusowo.farmersdelightrepaper.FarmersDelightRepaper;
+import io.github.moyusowo.farmersdelightrepaper.board.CuttingBoardRecipe;
 import io.github.moyusowo.farmersdelightrepaper.config.ConfigUtil;
 import io.github.moyusowo.farmersdelightrepaper.config.FoodConfig;
+import io.github.moyusowo.farmersdelightrepaper.guide.CookingGuideGenerator;
+import io.github.moyusowo.farmersdelightrepaper.guide.CuttingGuideGenerator;
+import io.github.moyusowo.farmersdelightrepaper.pot.CookingPotRecipe;
 import io.github.moyusowo.farmersdelightrepaper.resource.Keys;
 import io.github.moyusowo.farmersdelightrepaper.resource.TranslatableText;
 import io.github.moyusowo.neoartisanapi.api.item.ArtisanItem;
 import io.github.moyusowo.neoartisanapi.api.registry.Registries;
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.FoodProperties;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.serialize.SerializationException;
@@ -25,6 +32,8 @@ public final class ItemRegistrar {
     public static void initOnEnable() {
         registerPlantItem();
         registerGUI();
+        registerCategory();
+        registerGuideGenerator();
         final CommentedConfigurationNode topNode = ConfigUtil.readYml("foods.yml");
         for (Map.Entry<Object, CommentedConfigurationNode> entry : topNode.childrenMap().entrySet()) {
             try {
@@ -58,6 +67,7 @@ public final class ItemRegistrar {
                                 )
                                 .itemModel(key)
                                 .tags(tags)
+                                .category(Keys.category_food)
                                 .build()
                 );
             } catch (SerializationException e) {
@@ -65,6 +75,24 @@ public final class ItemRegistrar {
             }
         }
         FarmersDelightRepaper.getInstance().getLogger().info("Custom Item Configs loaded");
+    }
+
+    private static void registerCategory() {
+        Registries.RECIPE.setCategory(Keys.category_food, () -> {
+            final ItemStack icon = Registries.ITEM.getItemStack(Keys.tomato);
+            icon.setData(DataComponentTypes.ITEM_NAME, MiniMessage.miniMessage().deserialize("<yellow>农夫乐事 - 食物</yellow>"));
+            return icon;
+        });
+        Registries.RECIPE.setCategory(Keys.category_tool, () -> {
+            final ItemStack icon = Registries.ITEM.getItemStack(Keys.diamond_knife);
+            icon.setData(DataComponentTypes.ITEM_NAME, MiniMessage.miniMessage().deserialize("<yellow>农夫乐事 - 工具</yellow>"));
+            return icon;
+        });
+    }
+
+    private static void registerGuideGenerator() {
+        Registries.RECIPE.setGuide(CookingPotRecipe.TYPE, new CookingGuideGenerator());
+        Registries.RECIPE.setGuide(CuttingBoardRecipe.TYPE, new CuttingGuideGenerator());
     }
 
     private static void registerPlantItem() {
@@ -87,6 +115,7 @@ public final class ItemRegistrar {
                                         "onion"
                                 )
                         )
+                        .category(Keys.category_food)
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -100,6 +129,7 @@ public final class ItemRegistrar {
                                 false
                         )
                         .itemModel(Keys.tomato)
+                        .category(Keys.category_food)
                         .tags(
                                 Set.of(
                                         "vegetable",
@@ -121,6 +151,7 @@ public final class ItemRegistrar {
                                         "raw_rice"
                                 )
                         )
+                        .category(Keys.category_food)
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -142,6 +173,7 @@ public final class ItemRegistrar {
                                         "salad_ingredients"
                                 )
                         )
+                        .category(Keys.category_food)
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -157,6 +189,7 @@ public final class ItemRegistrar {
                                         "plant"
                                 )
                         )
+                        .category(Keys.category_food)
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -178,6 +211,7 @@ public final class ItemRegistrar {
                                         "salad_ingredients"
                                 )
                         )
+                        .category(Keys.category_food)
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -193,6 +227,7 @@ public final class ItemRegistrar {
                                         "seed"
                                 )
                         )
+                        .category(Keys.category_food)
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -208,6 +243,7 @@ public final class ItemRegistrar {
                                         "seed"
                                 )
                         )
+                        .category(Keys.category_food)
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -217,6 +253,7 @@ public final class ItemRegistrar {
                         .displayName(TranslatableText.cooking_pot)
                         .blockId(Keys.cooking_pot)
                         .itemModel(Keys.cooking_pot)
+                        .category(Keys.category_tool)
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -226,6 +263,7 @@ public final class ItemRegistrar {
                         .displayName(TranslatableText.cutting_board)
                         .blockId(Keys.cutting_board)
                         .itemModel(Keys.cutting_board)
+                        .category(Keys.category_tool)
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -236,6 +274,7 @@ public final class ItemRegistrar {
                         .itemModel(Keys.flint_knife)
                         .maxDurability(131)
                         .tags(Set.of("knife"))
+                        .category(Keys.category_tool)
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -246,6 +285,7 @@ public final class ItemRegistrar {
                         .itemModel(Keys.iron_knife)
                         .maxDurability(250)
                         .tags(Set.of("knife"))
+                        .category(Keys.category_tool)
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -256,6 +296,7 @@ public final class ItemRegistrar {
                         .itemModel(Keys.golden_knife)
                         .maxDurability(32)
                         .tags(Set.of("knife"))
+                        .category(Keys.category_tool)
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -266,6 +307,7 @@ public final class ItemRegistrar {
                         .itemModel(Keys.diamond_knife)
                         .maxDurability(1561)
                         .tags(Set.of("knife"))
+                        .category(Keys.category_tool)
                         .build()
         );
         Registries.ITEM.registerItem(
@@ -276,6 +318,7 @@ public final class ItemRegistrar {
                         .itemModel(Keys.netherite_knife)
                         .maxDurability(2031)
                         .tags(Set.of("knife"))
+                        .category(Keys.category_tool)
                         .build()
         );
     }

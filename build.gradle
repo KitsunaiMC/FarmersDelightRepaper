@@ -5,11 +5,11 @@ plugins {
 }
 
 group = 'io.github.moyusowo'
-version = '0.9.0-alpha'
+version = '1.0.0-rc.1'
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
-    compileOnly('com.github.MoYuSOwO:NeoArtisan:8a388a3aad:api')
+    compileOnly('com.github.MoYuSOwO:NeoArtisan:v1.0.0-rc.1:api')
     implementation 'org.spongepowered:configurate-core:4.1.2'
     implementation 'org.spongepowered:configurate-yaml:4.1.2'
 }

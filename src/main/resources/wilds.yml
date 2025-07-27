@@ -1,0 +1,14 @@
+worlds:
+  - world
+wild_cabbages:
+  min: 0 # 区块内最小随机坐标次数（包含）
+  max: 3 # 区块内最大随机坐标次数（不包含）
+wild_onions:
+  min: 0
+  max: 3
+wild_tomatoes:
+  min: 0
+  max: 3
+wild_rice:
+  min: 0
+  max: 2

@@ -4,6 +4,7 @@ import io.github.moyusowo.farmersdelightrepaper.board.CuttingBoardBehavior;
 import io.github.moyusowo.farmersdelightrepaper.registrar.BlockRegistrar;
 import io.github.moyusowo.farmersdelightrepaper.registrar.ItemRegistrar;
 import io.github.moyusowo.farmersdelightrepaper.registrar.RecipeRegistrar;
+import io.github.moyusowo.farmersdelightrepaper.wild.GeneratorConfig;
 import io.github.moyusowo.farmersdelightrepaper.wild.GeneratorListener;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -52,6 +53,7 @@ public final class FarmersDelightRepaper extends JavaPlugin {
         ItemRegistrar.initOnEnable();
         RecipeRegistrar.initOnEnable();
         BlockRegistrar.initOnEnable();
+        GeneratorConfig.initOnEnable();
         GeneratorListener.initOnEnable();
     }
 

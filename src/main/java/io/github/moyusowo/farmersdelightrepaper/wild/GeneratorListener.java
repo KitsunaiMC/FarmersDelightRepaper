@@ -28,22 +28,21 @@ public final class GeneratorListener implements Listener {
 
     @EventHandler
     public void onServerLoad(ServerLoadEvent event) {
-        World world = Bukkit.getWorld("world");
-        if (world != null) {
-            world.getPopulators().add(new WildOnionsPopulator());
-            world.getPopulators().add(new WildCabbagesPopulator());
-            world.getPopulators().add(new WildTomatoesPopulator());
-            world.getPopulators().add(new WildRicePopulator());
-            FarmersDelightRepaper.getInstance().getLogger().info("successfully register Block Populator");
-        } else {
-            FarmersDelightRepaper.getInstance().getLogger().severe("Fail to register Block Populator");
-        }
+        GeneratorConfig.worlds.forEach(
+                world -> {
+                    world.getPopulators().add(new WildOnionsPopulator());
+                    world.getPopulators().add(new WildCabbagesPopulator());
+                    world.getPopulators().add(new WildTomatoesPopulator());
+                    world.getPopulators().add(new WildRicePopulator());
+                    FarmersDelightRepaper.getInstance().getLogger().info("successfully register Block Populator at world: " + world.getName());
+                }
+        );
     }
 
     private static final class WildCabbagesPopulator extends BlockPopulator {
         @Override
         public void populate(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ, @NotNull LimitedRegion limitedRegion) {
-            final int size = random.nextInt(0, 3);
+            final int size = random.nextInt(GeneratorConfig.wildCabbages.min, GeneratorConfig.wildCabbages.max);
             label: for (int i = 0; i < size; i++) {
                 final int x = (chunkX << 4) + random.nextInt(0, 16), z = (chunkZ << 4) + random.nextInt(0, 16);
                 int y = limitedRegion.getHighestBlockYAt(x, z);
@@ -72,7 +71,7 @@ public final class GeneratorListener implements Listener {
     private static final class WildOnionsPopulator extends BlockPopulator {
         @Override
         public void populate(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ, @NotNull LimitedRegion limitedRegion) {
-            final int size = random.nextInt(0, 3);
+            final int size = random.nextInt(GeneratorConfig.wildOnions.min, GeneratorConfig.wildOnions.max);
             label: for (int i = 0; i < size; i++) {
                 final int x = (chunkX << 4) + random.nextInt(0, 16), z = (chunkZ << 4) + random.nextInt(0, 16);
                 int y = limitedRegion.getHighestBlockYAt(x, z);
@@ -101,7 +100,7 @@ public final class GeneratorListener implements Listener {
     private static final class WildTomatoesPopulator extends BlockPopulator {
         @Override
         public void populate(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ, @NotNull LimitedRegion limitedRegion) {
-            final int size = random.nextInt(0, 3);
+            final int size = random.nextInt(GeneratorConfig.wildTomatoes.min, GeneratorConfig.wildTomatoes.max);
             label: for (int i = 0; i < size; i++) {
                 final int x = (chunkX << 4) + random.nextInt(0, 16), z = (chunkZ << 4) + random.nextInt(0, 16);
                 int y = limitedRegion.getHighestBlockYAt(x, z);
@@ -130,7 +129,7 @@ public final class GeneratorListener implements Listener {
     private static final class WildRicePopulator extends BlockPopulator {
         @Override
         public void populate(@NotNull WorldInfo worldInfo, @NotNull Random random, int chunkX, int chunkZ, @NotNull LimitedRegion limitedRegion) {
-            final int size = random.nextInt(0, 2);
+            final int size = random.nextInt(GeneratorConfig.wildRice.min, GeneratorConfig.wildRice.max);
             label: for (int i = 0; i < size; i++) {
                 final int x = (chunkX << 4) + random.nextInt(0, 16), z = (chunkZ << 4) + random.nextInt(0, 16);
                 int y = limitedRegion.getHighestBlockYAt(x, z);
