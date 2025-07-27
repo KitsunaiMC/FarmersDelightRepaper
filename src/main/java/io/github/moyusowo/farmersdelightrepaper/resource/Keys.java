@@ -31,6 +31,9 @@ public final class Keys {
         wild_rice = FarmersDelightRepaper.create("wild_rice"),
         wild_tomatoes = FarmersDelightRepaper.create("wild_tomatoes");
 
+    public static final NamespacedKey category_food = FarmersDelightRepaper.create("category/food"),
+        category_tool = FarmersDelightRepaper.create("category/tool");
+
     public static final NamespacedKey cooking_pot_gui_1 = FarmersDelightRepaper.create("cooking_pot_gui_1"),
             cooking_pot_gui_2 = FarmersDelightRepaper.create("cooking_pot_gui_2"),
             cooking_pot_gui_progress_1 = FarmersDelightRepaper.create("cooking_pot_gui_progress_1"),
