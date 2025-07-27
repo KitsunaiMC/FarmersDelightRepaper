@@ -3,7 +3,7 @@
 ![License](https://img.shields.io/badge/License-GPLv3-blue)
 ![Status](https://img.shields.io/badge/Status-Alpha-red)
 
-[English](README.md)
+[English](README_EN.md)
 
 一个基于 PaperAPI + NeoArtisan 框架和客户端资源包实现的 [农夫乐事mod](https://modrinth.com/mod/farmers-delight) 复刻项目，完全通过服务端技术实现原版模组功能。
 
