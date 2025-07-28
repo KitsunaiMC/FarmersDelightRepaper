@@ -1,69 +1,54 @@
-Here's the English translation of your README.md:
+# FarmersDelightRePaper – Farmer’s Delight for Paper
+
+![License](https://img.shields.io/badge/License-GPL%20v3-blue) ![Status](https://img.shields.io/badge/Status-Release%20Candidate-green)
+
+[中文 →](./README.md)
+
+> Drop the **Paper 1.21.4+ jar + resource pack** and start farming—**zero NMS, zero fuss**.
 
 ---
 
-# FarmersDelightRePaper - Farmer's Delight Paper Rewrite
+## 🚀 One-Click Farm
 
-![License](https://img.shields.io/badge/License-GPLv3-blue)
-![Status](https://img.shields.io/badge/Status-Alpha-red)
+| What you need        | How to install                                                                                                                                                           |
+|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Paper 1.21.4+ server | Drop `FarmersDelightRePaper.jar` + [`NeoArtisan`](https://github.com/KitsunaiMC/NeoArtisan) + [`PacketEvents`](https://github.com/KitsunaiMC/NeoArtisan) into `plugins/` |
+| Client resource pack | Place `resourcePack.zip` in `resourcepacks/` or set `resource-pack=` in `server.properties`                                                                              |
+| Join the game        | Spawn, plant onions, toss salads—no extra steps!                                                                                                                         |
 
-[中文](README.md)
+---
 
-A faithful recreation of the [Farmer's Delight mod](https://modrinth.com/mod/farmers-delight) implemented using PaperAPI + NeoArtisan framework and client-side resource packs, delivering full mod functionality through server-side technology.
+## ✅ Ready to Play
+- **Full crop set**: onions, cabbages, tomatoes—growth, bonemeal, drops all vanilla-accurate
+- **Kitchen trinity**: Cooking Pot GUI, Cutting Board interaction, knife durability
+- **100+ recipes**: sandwiches, salads, pumpkin soup, steaks—taste just like the mod
+- **Wild spawns**: onions, cabbages, tomatoes and rice generate naturally
+- **Config friendly**: works out of the box; tweak drop rates, food values, recipes in `config.yml`
 
-> 🟨 This project requires [NeoArtisan](https://github.com/KitsunaiMC/NeoArtisan) as a dependency plugin
+---
 
-## ✨ Core Features
+## 📦 Resource Pack
+- **Required**: models, textures, sounds included
+- **Vanilla-friendly**: stacks with other packs without breaking vanilla look
 
-- **Pure Server-Side Implementation**: Only requires client resource packs + Paper server plugin
-- **Protocol-Level Magic**: Uses data packs and chunk manipulation to trick clients into rendering custom blocks
-- **Perfect Compatibility**: Block behavior layer built on PaperAPI without NMS dependencies
-- **Modular Architecture**: Easy to extend
+---
 
-## 📜 License
+## 🚧 Still Cooking
+- [ ] Rice & rice-product line
+- [ ] Full knife & cutting board interaction
+- [ ] All building blocks, containers & decorations from the original mod
+- [ ] More hidden easter eggs
 
-This project is licensed under **GNU General Public License v3.0**:
-- Freedom to use and modify
-- Derivative works must be open source
-- Cannot be distributed as part of closed-source commercial software
+---
 
-Full license text available at [LICENSE](LICENSE).
+## 🤝 Contribute
+- Found a bug / want a new dish → open an [Issue](https://github.com/KitsunaiMC/FarmersDelightRepaper/issues)
+- Recipe tweak / PR → fork, run `./gradlew check`, submit
+- Any questions → [MoYuOwO@outlook.com](mailto:MoYuOwO@outlook.com)
 
-## 🚧 Development Progress
+---
 
-**Current Version Features**:
-- [x] Basic crop system(onion, cabbage, tomato)
-- [x] Block and item management
-- [x] Corresponding client resource pack
-- [x] Cooking pot recipes and GUI
-- [x] Cutting board recipes (basic implementation)
-- [x] Partial crafting recipes
-- [x] Added config files for configurable items in food and recipes
-- [x] Added Generator to generate wild crop
-- [x] Add almost all food and their recipes from original mod (maybe something would be different)
-
-**TODO List**:
-- [ ] Add remaining items and recipes from original mod (doing...)
-- [ ] Improve crop system, add rice crop
-- [ ] Enhance knife and cutting board behaviors
-- [ ] ~~Find bugs~~ Write unit tests
-
-> ⚠️ Warning: This project is still in development - not production ready!
-
-## 🤝 Contributing
-
-We welcome contributions through:
-1. Pull Requests (please pass `./gradlew check` first)
-2. Technical discussions in Issues
-3. Documentation improvements
-
-Recommended development environment:
-- JDK 21+
-- Paper 1.21.4+
-- IntelliJ IDEA
-
-## 💬 Communication
-
-Feel free to:
-- Open an Issue
-- Email me at [MoYuOwO@outlook.com](mailto:MoYuOwO@outlook.com)
+> Bring Farmer’s Delight to your server in **three steps**:
+> 1. Drop the plugin
+> 2. Enable the resource pack
+> 3. Start cooking!

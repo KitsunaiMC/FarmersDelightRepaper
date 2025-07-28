@@ -1,64 +1,53 @@
-# FarmersDelightRePaper - 农夫乐事 Paper 重置版
+# FarmersDelightRePaper – 农夫乐事 Paper 复刻版
 
-![License](https://img.shields.io/badge/License-GPLv3-blue)
-![Status](https://img.shields.io/badge/Status-Alpha-red)
+![License](https://img.shields.io/badge/License-GPL%20v3-blue) ![Status](https://img.shields.io/badge/Status-Release%20Candidate-green)
 
-[English](README_EN.md)
+[English →](./README_EN.md)
 
-一个基于 PaperAPI + NeoArtisan 框架和客户端资源包实现的 [农夫乐事mod](https://modrinth.com/mod/farmers-delight) 复刻项目，完全通过服务端技术实现原版模组功能。
+> 把原版《农夫乐事》搬进 **Paper 1.21.4+** 服务端，**零 NMS**，**零魔改**——把 jar 和资源包一起扔进去就能开饭。
 
-> 🟨 本项目基于 [NeoArtisan](https://github.com/KitsunaiMC/NeoArtisan) 实现，需要将其加载作为前置插件方可使用
+---
 
-## ✨ 核心特性
+## ✨ 一键开农场
+| 你需要               | 怎么做                                                                                      |
+|-------------------|------------------------------------------------------------------------------------------|
+| Paper 1.21.4+ 服务端 | 把 `FarmersDelightRePaper.jar` 和前置 `NeoArtisan`、`packetevents` 扔进 `plugins/`              |
+| 客户端资源包            | 把 `resourcePack.zip` 放进 `resourcepacks/` 或让服务器在 `server.properties` 里指定 `resource-pack=` |
+| 启动游戏              | 进服后 → 种洋葱、做沙拉、找作物！                                                                       |
 
-- **纯服务端实现**：仅需客户端资源包 + Paper 服务端插件
-- **协议层魔法**：利用数据包和区块操作欺骗客户端渲染自定义方块
-- **完美兼容性**：方块行为层基于 PaperAPI 开发，不依赖 NMS，充分考虑了兼容性
-- **模块化架构**：易于扩展
+---
 
+## 🎯 已经能玩什么
+- ✅ **全套作物**：洋葱、卷心菜、番茄，生长、骨粉、掉落全部还原
+- ✅ **厨房三件套**：厨锅 GUI、砧板交互、刀具耐久
+- ✅ **100+ 食物配方**：三明治、沙拉、南瓜汤、牛排……全部原汁原味
+- ✅ **野外生成**：野生四种作物（洋葱、卷心菜、番茄、水稻）会自然生成在世界中
+- ✅ **配置友好**：开箱即用，默认自带农夫乐事原版 mod 几乎全部作物。如果想定制，食物、掉落权重、配方全部可在配置文件内调整
 
-## 📜 协议说明
+---
 
-本项目采用 **GNU General Public License v3.0** 开源协议:
-- 允许自由使用和修改
-- 要求衍生作品开源
-- 禁止作为闭源商业软件的一部分分发
+## 📦 资源包说明
+- **必须加载**：方块/物品模型、贴图、音效全部放在资源包里
+- **兼容原版**：资源包不会破坏原版材质，可与其他包叠加
 
-完整协议见 [LICENSE](LICENSE) 文件。
+---
 
-## 🚧 开发进度
+## 🚧 还在加料
+- [ ] 水稻、稻米系列
+- [ ] 刀具、砧板完整交互
+- [ ] 原版 mod 的材料、耕地、容器、建筑方块、装饰品等
+- [ ] 更多隐藏小彩蛋
 
-**当前版本功能**:
-- [x] 基础作物系统（洋葱、卷心菜、番茄）
-- [x] 方块和物品管理
-- [x] 对应客户端资源包
-- [x] 厨锅配方及GUI实现
-- [x] 砧板配方及简单实现
-- [x] 部分合成表
-- [x] 对食物、配方中的可配置项增加了配置文件
-- [x] 增加了对野外植物的世界生成
-- [x] 基本添加了原mod的全部食物和合成表（可能有部分不同）
+---
 
-**TODO List**:
-- [ ] 添加原mod的全部物品与物品合成表
-- [ ] 加入水稻，完善作物系统
-- [ ] 完善刀、砧板相关行为
-- [ ] ~~找bug~~ 编写单元测试用例
+## 🤝 一起做饭
+- 发现 bug / 想加新特性 → 开 [Issue](https://github.com/KitsunaiMC/FarmersDelightRepaper/issues)
+- 想改配方 / 提 PR → 直接 fork，跑 `./gradlew check` 后提交
+- 任何疑问 → 邮件 [MoYuOwO@outlook.com](mailto:MoYuOwO@outlook.com)
 
-> ⚠️ 警告：本项目仍处于开发阶段，请勿在生产环境使用！
+---
 
-## 🤝 参与贡献
-
-欢迎通过以下方式参与：
-1. 提交 Pull Request （请先通过 `./gradlew check` 代码审查）
-2. 在 Issues 讨论技术方案
-3. 帮助完善文档
-
-推荐开发环境：
-- JDK 21+
-- Paper 1.21.4+
-- IntelliJ IDEA
-
-## 💬 交流方式
-
-欢迎提交 Issue 或发送邮件给我一起讨论： [MoYuOwO@outlook.com](mailto:MoYuOwO@outlook.com)
+> 把农夫乐事搬进服务器，**只用三步**：
+> 1. 扔插件
+> 2. 启资源包
+> 3. 开吃！
