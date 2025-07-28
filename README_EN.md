@@ -19,7 +19,7 @@
 ---
 
 ## ✅ Ready to Play
-- **Full crop set**: onions, cabbages, tomatoes—growth, bonemeal, drops all vanilla-accurate
+- **Full crop set**: onions, cabbages, tomatoes—growth, bone meal, drops all vanilla-accurate
 - **Kitchen trinity**: Cooking Pot GUI, Cutting Board interaction, knife durability
 - **100+ recipes**: sandwiches, salads, pumpkin soup, steaks—taste just like the mod
 - **Wild spawns**: onions, cabbages, tomatoes and rice generate naturally

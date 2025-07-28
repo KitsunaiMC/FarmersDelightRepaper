@@ -11,7 +11,7 @@
 ## ✨ 一键开农场
 | 你需要               | 怎么做                                                                                      |
 |-------------------|------------------------------------------------------------------------------------------|
-| Paper 1.21.4+ 服务端 | 把 `FarmersDelightRePaper.jar` 和前置 `NeoArtisan`、`packetevents` 扔进 `plugins/`              |
+| Paper 1.21.4+ 服务端 | 把 `FarmersDelightRePaper.jar` 和前置 [`NeoArtisan`](https://github.com/KitsunaiMC/NeoArtisan) + [`PacketEvents`](https://github.com/KitsunaiMC/NeoArtisan) 扔进 `plugins/`              |
 | 客户端资源包            | 把 `resourcePack.zip` 放进 `resourcepacks/` 或让服务器在 `server.properties` 里指定 `resource-pack=` |
 | 启动游戏              | 进服后 → 种洋葱、做沙拉、找作物！                                                                       |
 
