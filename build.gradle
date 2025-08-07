@@ -9,7 +9,7 @@ version = '1.0.0-rc.1'
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
-    compileOnly('com.github.MoYuSOwO:NeoArtisan:v1.0.0-rc.1:api')
+    compileOnly('com.github.MoYuSOwO:NeoArtisan:6d3d500:api')
     implementation 'org.spongepowered:configurate-core:4.1.2'
     implementation 'org.spongepowered:configurate-yaml:4.1.2'
 }

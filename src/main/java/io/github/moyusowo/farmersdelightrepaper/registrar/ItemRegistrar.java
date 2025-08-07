@@ -1,23 +1,16 @@
 package io.github.moyusowo.farmersdelightrepaper.registrar;
 
 import io.github.moyusowo.farmersdelightrepaper.FarmersDelightRepaper;
-import io.github.moyusowo.farmersdelightrepaper.board.CuttingBoardRecipe;
 import io.github.moyusowo.farmersdelightrepaper.config.ConfigUtil;
 import io.github.moyusowo.farmersdelightrepaper.config.FoodConfig;
-import io.github.moyusowo.farmersdelightrepaper.guide.CookingGuideGenerator;
-import io.github.moyusowo.farmersdelightrepaper.guide.CuttingGuideGenerator;
-import io.github.moyusowo.farmersdelightrepaper.pot.CookingPotRecipe;
 import io.github.moyusowo.farmersdelightrepaper.resource.Keys;
 import io.github.moyusowo.farmersdelightrepaper.resource.TranslatableText;
 import io.github.moyusowo.neoartisanapi.api.item.ArtisanItem;
 import io.github.moyusowo.neoartisanapi.api.registry.Registries;
-import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.FoodProperties;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.serialize.SerializationException;
@@ -25,15 +18,13 @@ import org.spongepowered.configurate.serialize.SerializationException;
 import java.util.Map;
 import java.util.Set;
 
-@SuppressWarnings("UnstableApiUsage")
 public final class ItemRegistrar {
     private ItemRegistrar() {}
 
+    @SuppressWarnings("UnstableApiUsage")
     public static void initOnEnable() {
         registerPlantItem();
         registerGUI();
-        registerCategory();
-        registerGuideGenerator();
         final CommentedConfigurationNode topNode = ConfigUtil.readYml("foods.yml");
         for (Map.Entry<Object, CommentedConfigurationNode> entry : topNode.childrenMap().entrySet()) {
             try {
@@ -75,24 +66,6 @@ public final class ItemRegistrar {
             }
         }
         FarmersDelightRepaper.getInstance().getLogger().info("Custom Item Configs loaded");
-    }
-
-    private static void registerCategory() {
-        Registries.RECIPE.setCategory(Keys.category_food, () -> {
-            final ItemStack icon = Registries.ITEM.getItemStack(Keys.tomato);
-            icon.setData(DataComponentTypes.ITEM_NAME, MiniMessage.miniMessage().deserialize("<yellow>农夫乐事 - 食物</yellow>"));
-            return icon;
-        });
-        Registries.RECIPE.setCategory(Keys.category_tool, () -> {
-            final ItemStack icon = Registries.ITEM.getItemStack(Keys.diamond_knife);
-            icon.setData(DataComponentTypes.ITEM_NAME, MiniMessage.miniMessage().deserialize("<yellow>农夫乐事 - 工具</yellow>"));
-            return icon;
-        });
-    }
-
-    private static void registerGuideGenerator() {
-        Registries.RECIPE.setGuide(CookingPotRecipe.TYPE, new CookingGuideGenerator());
-        Registries.RECIPE.setGuide(CuttingBoardRecipe.TYPE, new CuttingGuideGenerator());
     }
 
     private static void registerPlantItem() {

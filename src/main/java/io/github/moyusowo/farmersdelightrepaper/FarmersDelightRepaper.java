@@ -1,9 +1,7 @@
 package io.github.moyusowo.farmersdelightrepaper;
 
 import io.github.moyusowo.farmersdelightrepaper.board.CuttingBoardBehavior;
-import io.github.moyusowo.farmersdelightrepaper.registrar.BlockRegistrar;
-import io.github.moyusowo.farmersdelightrepaper.registrar.ItemRegistrar;
-import io.github.moyusowo.farmersdelightrepaper.registrar.RecipeRegistrar;
+import io.github.moyusowo.farmersdelightrepaper.registrar.*;
 import io.github.moyusowo.farmersdelightrepaper.wild.GeneratorConfig;
 import io.github.moyusowo.farmersdelightrepaper.wild.GeneratorListener;
 import org.bukkit.Bukkit;
@@ -53,8 +51,11 @@ public final class FarmersDelightRepaper extends JavaPlugin {
         ItemRegistrar.initOnEnable();
         RecipeRegistrar.initOnEnable();
         BlockRegistrar.initOnEnable();
+        GuideRegistrar.initOnEnable();
         GeneratorConfig.initOnEnable();
         GeneratorListener.initOnEnable();
+        CommandRegistrar.initOnEnable();
+        getLogger().info("FarmersDelightRepaper loaded successfully.");
     }
 
     @Override
